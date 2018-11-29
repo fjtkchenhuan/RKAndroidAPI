@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.stop_android_log).setOnClickListener(this);
         findViewById(R.id.open_softkeyboard).setOnClickListener(this);
         findViewById(R.id.close_softkeyboard).setOnClickListener(this);
+        findViewById(R.id.set_dormant_interval).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
     }
 
@@ -358,6 +359,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.close_softkeyboard:
                 manager.setSoftKeyboardHidden(true);
+                break;
+            case R.id.set_dormant_interval:
+                manager.setDormantInterval(this,15000);//2147483647
                 break;
             case R.id.get_kernel_log:
                 manager.getKmsgLog("/mnt/sdcard/kernelLog.txt");

@@ -148,6 +148,11 @@ public class Rk3128 extends RK {
 
     }
 
+    @Override
+    public void setDormantInterval(Context context, long time) {
+
+    }
+
     private int getDisplayRot(String value) {
         int index = 0;
         switch (value) {

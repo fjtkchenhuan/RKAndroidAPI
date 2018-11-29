@@ -148,4 +148,11 @@ public class Rk3288_5 extends RK {
             Utils.setValueToProp("persist.sys.softkeyboard","1");
     }
 
+    @Override
+    public void setDormantInterval(Context context,long time) {
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval",time);
+        context.sendBroadcast(intent);
+    }
+
 }

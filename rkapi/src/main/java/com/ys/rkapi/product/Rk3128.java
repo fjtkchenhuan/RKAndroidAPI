@@ -3,6 +3,7 @@ package com.ys.rkapi.product;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
@@ -135,6 +136,7 @@ public class Rk3128 extends RK {
 
     @Override
     public void turnOnHDMI() {
+        Log.d("chenhuan","fffffffffff");
 
     }
 

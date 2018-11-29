@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="easypos.android.cslc.com.api3399.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/bright_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入亮度值(0-100)"/>
+
+        <Button
+            android:id="@+id/set_bright"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置亮度"/>
+
+        <EditText
+            android:id="@+id/rotation_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:hint="请输入屏幕方向（0、90、180、270）"/>
+
+        <Button
+            android:id="@+id/set_rotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置屏幕方向"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置分辨率"/>
+
+        <Button
+            android:id="@+id/ratio0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="1920*1080"/>
+
+        <Button
+            android:id="@+id/ratio1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="1280*800"/>
+
+        <Button
+            android:id="@+id/ratio2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="1366*768"/>
+
+        <Button
+            android:id="@+id/ratio3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="1440*900"/>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/hide_show_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="隐藏或显示导航栏"/>
+
+    <Button
+        android:id="@+id/reboot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="重启"/>
+
+    <Button
+        android:id="@+id/get_net_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="获取信号强度"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/hide_soft_keyboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不显示软键盘"/>
+
+        <Button
+            android:id="@+id/show_soft_keyboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="显示软键盘"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/install_apk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="安装应用"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(将apk放在内置存储根目录，命令为test.apk)"/>
+
+        <Button
+            android:id="@+id/uninstall_apk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="卸载应用"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

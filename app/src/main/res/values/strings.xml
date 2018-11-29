@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">RKAndroidAPI</string>
+
+    <string name="system_info">系统信息</string>
+    <string name="get_api_version">获取API版本</string>
+    <string name="get_device_type">获取当前设备类型</string>
+    <string name="get_android_version">获取安卓版本</string>
+    <string name="get_firmware_size">获取硬件内存大小</string>
+    <string name="get_in_store_size">获取内部存储容量</string>
+    <string name="get_firmware_sdk_version">获取固件SDK版本</string>
+    <string name="get_firmware_kernel_version">获取固件内核版本</string>
+    <string name="get_device_firmware_version">获取设备固件版本号</string>
+    <string name="get_firmware_date">获取固件编译日期</string>
+
+    <string name="shutdown_reboot">关机和重启</string>
+    <string name="shutdown">关机</string>
+    <string name="reboot">重启</string>
+
+    <string name="display">显示</string>
+    <string name="nav_bar_hide_show">隐藏显示导航栏</string>
+    <string name="nav_bar_state">导航栏是否隐藏</string>
+    <string name="nav_bar_slide">打开关闭滑出导航栏</string>
+    <string name="nav_bar_slide_state">滑出导航栏是否打开</string>
+    <string name="notification_bar_slide">打开或关闭滑出通知栏</string>
+    <string name="notification_bar_slide_state">滑出通知栏是否打开</string>
+    <string name="screen_shot">截屏</string>
+    <string name="get_width_height">获取屏幕宽高</string>
+    <string name="change_screen_bright">调节亮度</string>
+    <string name="open_screen_bright">开背光</string>
+    <string name="close_screen_bright">关背光</string>
+    <string name="is_screen_bright_on">背光是否打开</string>
+    <string name="get_brightness">获取背光亮度</string>
+    <string name="open_hdmi">打开HDMI</string>
+    <string name="close_hdmi">关闭HDMI</string>
+    <string name="rotate_90">旋转90度</string>
+    <string name="rotate_0">还原0度</string>
+
+    <string name="install_update">安装升级</string>
+    <string name="update_img">升级固件</string>
+    <string name="recovery">进入recovery模式</string>
+    <string name="silent_install">静默安装</string>
+
+
+    <string name="net">网络</string>
+    <string name="get_eth_statuse">获取以太网是否打开</string>
+    <string name="get_eth_mode">获取以太网模式</string>
+    <string name="get_eth_mac">获取以太网mac地址</string>
+    <string name="set_eth_mac">设置以太网mac地址</string>
+    <string name="get_eth_ip">获取以太网IP</string>
+    <string name="set_eth_ip">设置以太网静态模式192.168.1.125</string>
+    <string name="set_dhcp_eth">设置以太网为动态</string>
+    <string name="open_eth">开以太网</string>
+    <string name="close_eth">关以太网</string>
+    <string name="get_gateway">获取网关</string>
+    <string name="get_mask">获取子网掩码</string>
+    <string name="get_dns1">获取DNS1</string>
+    <string name="get_dns2">获取DNS2</string>
+
+    <string name="storage">存储</string>
+    <string name="externel_sd_path">外置SD卡路径</string>
+    <string name="externel_u_path">U盘路径</string>
+    <string name="uninstall_externel">卸载外部存储</string>
+    <string name="mount_externel">挂载外部存储</string>
+    <string name="read_eeprom">读eeprom</string>
+    <string name="write_eeprom">写eeprom</string>
+    <string name="get_uartPath">获取串口的绝对路径</string>
+
+    <string name="other">其他</string>
+    <string name="set_time">设置时间 2017.3.16 17:44:55</string>
+    <string name="switch_off_time">关闭自动确定时间</string>
+    <string name="switch_on_time">打开自动确定时间</string>
+    <string name="is_auto_time">是否开启自动更新时间</string>
+    <string name="su_order">su命令</string>
+    <string name="net_type">上网类型</string>
+    <string name="screen_num">屏幕数</string>
+    <string name="hdmi">是否有hdmi输出</string>
+
+    <string name="set_volume">设置音量</string>
+</resources>

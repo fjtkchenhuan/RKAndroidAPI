@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/RKAndroidAPI.iml" filepath="$PROJECT_DIR$/RKAndroidAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api3399/api3399.iml" filepath="$PROJECT_DIR$/api3399/api3399.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rkapi/rkapi.iml" filepath="$PROJECT_DIR$/rkapi/rkapi.iml" />
+    </modules>
+  </component>
+</project>

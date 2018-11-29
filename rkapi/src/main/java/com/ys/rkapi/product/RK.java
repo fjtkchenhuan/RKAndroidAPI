@@ -2,6 +2,8 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 
+import com.ys.rkapi.Constant;
+
 import java.io.File;
 
 /**
@@ -47,6 +49,8 @@ public abstract class RK {
     public abstract void turnOffHDMI();
 
     public abstract void setSoftKeyboardHidden(boolean hidden);
+
+    public abstract void setDormantInterval(Context context,long time);
 
     /**
      * 过滤文件路径

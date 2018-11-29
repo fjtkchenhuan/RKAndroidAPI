@@ -706,6 +706,10 @@ public class MyManager {
         RkFactory.getRK().changeScreenLight(mContext,value);
     }
 
+    public void setDormantInterval(Context context,long time) {
+        RkFactory.getRK().setDormantInterval(context,time);
+    }
+
 //获取以太网的IP地址
 //    public String getEthIPAddress() {//ok
 //        return NetUtils.getEthIPAddress();

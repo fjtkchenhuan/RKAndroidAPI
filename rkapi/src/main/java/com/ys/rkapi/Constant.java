@@ -12,6 +12,7 @@ public class Constant {
 
     public final static String SHUTDOWN_ACTION = "android.intent.action.shutdown";
     public final static String REBOOT_ACTION = "android.intent.action.reboot";
+    public final static String DORMANT_INTERVAL = "com.ys.dormant_interval";
 
     // 背光IO
     public final static String A_BACKLIGHT_IO_PATH = "/sys/devices/fb.9/graphics/fb0/pwr_bl";

@@ -136,4 +136,9 @@ public class Rk3288_7 extends RK {
         else
             Utils.setValueToProp("persist.sys.softkeyboard","1");
     }
+
+    @Override
+    public void setDormantInterval(Context context,long time) {
+
+    }
 }

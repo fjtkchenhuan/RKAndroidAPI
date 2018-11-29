@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="rkandroidapi.ys.com.rkandroidapi.MainActivity">
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -436,6 +436,11 @@
             android:id="@+id/close_softkeyboard"
             style="@style/TestButton"
             android:text="隐藏软键盘" />
+
+        <Button
+            android:id="@+id/set_dormant_interval"
+            style="@style/TestButton"
+            android:text="设置休眠时间15s" />
 
        <Button
            android:id="@+id/get_kernel_log"

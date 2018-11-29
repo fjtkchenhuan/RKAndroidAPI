@@ -128,4 +128,9 @@ public class Rk3399 extends RK {
     public void setSoftKeyboardHidden(boolean hidden) {
 
     }
+
+    @Override
+    public void setDormantInterval(Context context,long time) {
+
+    }
 }

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("yuanhang","1111");
+        Log.i("yuanhang","11111");
         setContentView(R.layout.activity_main);
         manager = MyManager.getInstance(this);
         manager.bindAIDLService(this);

@@ -136,8 +136,6 @@ public class Rk3128 extends RK {
 
     @Override
     public void turnOnHDMI() {
-        Log.d("chenhuan","fffffffffff");
-
     }
 
     @Override

@@ -162,6 +162,13 @@ public class MyManager {
         RkFactory.getRK().rotateScreen(context,degree);
     }
 
+    public void setPowerOn(Context context,long powerOnTime) {
+        Intent intent = new Intent("com.ys.setPowerOnTime");
+        intent.putExtra("powerOnTime",powerOnTime);
+        Log.d("chenhuan","powerOnTime = " + powerOnTime);
+        context.sendBroadcast(intent);
+    }
+
 
 
     public boolean getNavBarHideState() {

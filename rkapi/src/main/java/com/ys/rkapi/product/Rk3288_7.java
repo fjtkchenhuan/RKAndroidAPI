@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.ys.rkapi.Constant;
 import com.ys.rkapi.Utils.GPIOUtils;
 import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.Utils;
@@ -139,6 +140,8 @@ public class Rk3288_7 extends RK {
 
     @Override
     public void setDormantInterval(Context context,long time) {
-
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval",time);
+        context.sendBroadcast(intent);
     }
 }

@@ -1,34 +1,19 @@
 package rkandroidapi.ys.com.rkandroidapi;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.wifi.WifiConfiguration;
-import android.net.wifi.WifiManager;
 import android.os.Environment;
-import android.os.SystemClock;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 
 import com.ys.rkapi.MyManager;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.reflect.Method;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -47,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("yuanhang","11111");
         setContentView(R.layout.activity_main);
+
         manager = MyManager.getInstance(this);
         manager.bindAIDLService(this);
 
@@ -148,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     };
+
+
 
     @Override
     public void onClick(View v) {
@@ -362,7 +349,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setSoftKeyboardHidden(true);
                 break;
             case R.id.set_dormant_interval:
-                manager.setDormantInterval(this,15000);//2147483647
+                manager.setDormantInterval(this,2147483647);//2147483647
                 break;
             case R.id.get_kernel_log:
                 manager.getKmsgLog("/mnt/sdcard/kernelLog.txt");
@@ -373,22 +360,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.stop_android_log:
                 manager.stopAndroidLogcat();
-                Intent intent = new Intent();
-                intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.TetherSettings"));
-                startActivity(intent);
                 break;
             default:
                 break;
         }
     }
 
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.d("chenhuan","keycode = " + keyCode);
-        return super.onKeyDown(keyCode, event);
-    }
 
     @Override
     protected void onDestroy() {

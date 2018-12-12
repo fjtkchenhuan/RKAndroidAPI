@@ -59,6 +59,7 @@ public class ScreenUtils {
 
     public static void rotationScreen(String path,String rot) {
         Utils.setValueToProp("persist.sys.displayrot",rot);
+        Log.i("yuanhang",Utils.getValueFromProp("persist.sys.displayrot"));
         int rotate = Integer.parseInt(rot);
         File file = new File(path);
         if(file.exists()){

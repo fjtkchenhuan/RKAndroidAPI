@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String DNS2 = "0.0.0.0";
     private String TFPath;
     private String USBPath;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,7 +180,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.hideNavBar(manager.getNavBarHideState());
                 break;
             case R.id.nav_bar_slide_state:
-                ToastUtils.showToast(this,"滑出导航栏是否打开："+manager.isSlideShowNavBarOpen());
+//                ToastUtils.showToast(this,"滑出导航栏是否打开："+manager.isSlideShowNavBarOpen());
+                    com.ys.rkapi.Utils.Utils.setValueToProp("persist.sys.displayrot","0");
                 break;
             case R.id.nav_bar_slide:
                 manager.setSlideShowNavBar(manager.isSlideShowNavBarOpen());
@@ -200,7 +202,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"Width = " + width + " height = " + height);
                 break;
             case R.id.change_screen_bright:
-                manager.changeScreenLight(50);
+                i =i+10;
+                if (i>100)
+                    i=10;
+                manager.changeScreenLight(i);
                 break;
             case R.id.open_screen_bright:
                 manager.turnOnBackLight();
@@ -250,6 +255,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.set_eth_mac:
                 manager.setEthMacAddress("ee4e592090cf");
+                Log.i("yuanhang",com.ys.rkapi.Utils.Utils.getValueFromProp("persist.sys.displayrot"));
                 ToastUtils.showToast(this,"设置以太网mac地址为ee4e592090cf");
                 break;
             case R.id.get_eth_ip:

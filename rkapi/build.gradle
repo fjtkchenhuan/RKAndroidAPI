@@ -19,6 +19,21 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    task makeJar(type: Copy) {
+//删除存在的
+        delete'build/libs/rkapi.jar'
+//设置拷贝的文件
+       from('build/intermediates/intermediate-jars/release/')
+//打进jar包后的文件目录
+       into('build/libs/')
+//将classes.jar放入build/libs/目录下
+//include ,exclude参数来设置过滤
+//（我们只关心classes.jar这个文件）
+       include('classes.jar')
+//重命名
+        rename ('classes.jar','rkapi.jar')
+    }
+    makeJar.dependsOn(build)
 }
 
 dependencies {

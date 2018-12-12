@@ -711,6 +711,7 @@ public class MyManager {
 
     public void changeScreenLight(int value) {
         RkFactory.getRK().changeScreenLight(mContext,value);
+
     }
 
     public void setDormantInterval(Context context,long time) {

@@ -132,6 +132,10 @@ public class Rk3128 extends RK {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        Intent intent = new Intent("com.ys.set_screen_bright");
+        intent.putExtra("brightValue",value);
+        context.sendBroadcast(intent);
+        Log.i("yuanhang","brightValue");
     }
 
     @Override

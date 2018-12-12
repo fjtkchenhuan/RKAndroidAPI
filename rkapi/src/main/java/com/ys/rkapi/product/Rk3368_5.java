@@ -99,7 +99,7 @@ public class Rk3368_5 extends RK {
     @Override
     public void turnOnBackLight() {
         try {
-            GPIOUtils.writeIntFileUnder7("0",BACKLIGHT_IO_PATH);
+            GPIOUtils.writeIntFileUnder7("1",BACKLIGHT_IO_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

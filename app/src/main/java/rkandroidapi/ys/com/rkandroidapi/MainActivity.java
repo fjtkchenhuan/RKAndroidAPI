@@ -177,14 +177,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"导航栏是否隐藏："+manager.getNavBarHideState());
                 break;
             case R.id.nav_bar_hide_show:
-                manager.hideNavBar(manager.getNavBarHideState());
+                manager.hideNavBar(!manager.getNavBarHideState());
                 break;
             case R.id.nav_bar_slide_state:
-//                ToastUtils.showToast(this,"滑出导航栏是否打开："+manager.isSlideShowNavBarOpen());
-                    com.ys.rkapi.Utils.Utils.setValueToProp("persist.sys.displayrot","0");
+                ToastUtils.showToast(this,"滑出导航栏是否打开："+manager.isSlideShowNavBarOpen());
                 break;
             case R.id.nav_bar_slide:
-                manager.setSlideShowNavBar(manager.isSlideShowNavBarOpen());
+                manager.setSlideShowNavBar(!manager.isSlideShowNavBarOpen());
                 break;
             case R.id.notification_bar_slide_state:
                 ToastUtils.showToast(this,"滑出通知栏是否打开："+manager.isSlideShowNotificationBarOpen());
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.rotateScreen(this,"0");
                 break;
             case R.id.update_img:
-                manager.upgradeSystem("/mnt/media_rw/10C0-C930/Android/update.zip"); ///mnt/media_rw/10C0-C930/update.zip
+                manager.upgradeSystem("/mnt/media_rw/9260-8749/update.zip"); ///mnt/media_rw/10C0-C930/update.zip
                 Log.d("chenhuan","path = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
 //                ToastUtils.showToast(this,"3399和3328，暂未实现");
                 break;

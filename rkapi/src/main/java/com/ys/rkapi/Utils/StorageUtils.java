@@ -75,8 +75,9 @@ public class StorageUtils {
                     if (line.startsWith("/dev/block/vold/")) {
                         String[] lineElements = line.split(" ");
                         String element = lineElements[1];
-                        if (element.contains("USB"))
+                        if (element.contains("USB")||element.contains("media_rw"))
                             mMounts.add(element);
+
                     }
                 }
             }

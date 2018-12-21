@@ -80,9 +80,9 @@ public class Rk3368_5 extends RK {
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
         if (flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
-        else
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
     }
 
     @Override

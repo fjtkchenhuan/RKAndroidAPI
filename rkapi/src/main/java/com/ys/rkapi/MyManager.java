@@ -178,7 +178,7 @@ public class MyManager {
     //设置显示或隐藏导航
     public void hideNavBar(boolean hide) {  // ok
             Intent intent = new Intent();
-            if (hide) {
+            if (!hide) {
                 intent.setAction("android.action.adtv.showNavigationBar");
                 mContext.sendBroadcast(intent);
             } else {

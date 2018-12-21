@@ -67,7 +67,7 @@ public class Rk3288_5 extends RK {
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");

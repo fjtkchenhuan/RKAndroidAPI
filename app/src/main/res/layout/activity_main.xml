@@ -21,7 +21,7 @@
         style="@style/TitleText"
         android:text="@string/system_info" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -63,10 +63,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
             <Button
                 android:id="@+id/get_firmware_kernel_version"
                 style="@style/TestButton"
@@ -81,10 +77,13 @@
                 android:id="@+id/get_firmware_date"
                 style="@style/TestButton"
                 android:text="@string/get_firmware_date" />
-        </LinearLayout>
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/get_cpu_type"
+                style="@style/TestButton"
+                android:text="@string/get_cpu_type" />
 
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
 
 
@@ -92,7 +91,7 @@
         style="@style/TitleText"
         android:text="@string/shutdown_reboot" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -107,13 +106,13 @@
             style="@style/TestButton"
             android:text="@string/reboot" />
 
-    </LinearLayout>
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
     <TextView
         style="@style/TitleText"
         android:text="@string/display" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -155,10 +154,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/screen_shot"
@@ -215,16 +210,15 @@
                 style="@style/TestButton"
                 android:text="@string/rotate_0" />
 
-        </LinearLayout>
 
-    </LinearLayout>
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
 
     <TextView
         style="@style/TitleText"
         android:text="@string/install_update" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -244,13 +238,13 @@
             style="@style/TestButton"
             android:text="@string/silent_install"/>
 
-    </LinearLayout>
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
     <TextView
         style="@style/TitleText"
         android:text="@string/net" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -300,12 +294,8 @@
             style="@style/TestButton"
             android:text="@string/set_dhcp_eth"/>
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+
         <Button
             android:id="@+id/get_gateway"
             style="@style/TestButton"
@@ -325,14 +315,14 @@
             android:id="@+id/get_dns2"
             style="@style/TestButton"
             android:text="@string/get_dns2"/>
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
-    </LinearLayout>
 
     <TextView
         style="@style/TitleText"
         android:text="@string/storage" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -376,13 +366,13 @@
             android:text="@string/get_uartPath"/>
 
 
-    </LinearLayout>
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
     <TextView
         style="@style/TitleText"
         android:text="@string/other" />
 
-    <LinearLayout
+    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -457,7 +447,7 @@
             style="@style/TestButton"
             android:text="停止获取安卓层日志" />
 
-    </LinearLayout>
+    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
 
 

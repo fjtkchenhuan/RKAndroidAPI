@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,10 @@ import android.widget.Toast;
 
 import com.ys.rkapi.MyManager;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.get_firmware_kernel_version).setOnClickListener(this);
         findViewById(R.id.get_device_firmware_version).setOnClickListener(this);
         findViewById(R.id.get_firmware_date).setOnClickListener(this);
+        findViewById(R.id.get_cpu_type).setOnClickListener(this);
         //-----------------------------------------------------------------
         findViewById(R.id.shutdown).setOnClickListener(this);
         findViewById(R.id.reboot).setOnClickListener(this);
@@ -135,7 +141,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
-
+    public String[] getCpuInfo() {
+        String str1 = "/proc/cpuinfo";
+        String str2="";
+        String[] cpuInfo={"",""};
+        String[] arrayOfString;
+        try {
+            FileReader fr = new FileReader(str1);
+            BufferedReader localBufferedReader = new BufferedReader(fr, 8192);
+            str2 = localBufferedReader.readLine();
+            arrayOfString = str2.split("\\s+");
+            for (int i = 2; i < arrayOfString.length; i++) {
+                cpuInfo[0] = cpuInfo[0] + arrayOfString[i] + " ";
+            }
+            str2 = localBufferedReader.readLine();
+            arrayOfString = str2.split("\\s+");
+            cpuInfo[1] += arrayOfString[2];
+            localBufferedReader.close();
+        } catch (IOException e) {
+        }
+        return cpuInfo;
+    }
 
     @Override
     public void onClick(View v) {
@@ -166,6 +192,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.get_firmware_date :
                 ToastUtils.showToast(this,manager.getFirmwareDate());
+                break;
+            case R.id.get_cpu_type:
+                ToastUtils.showToast(this,manager.getCPUType());
                 break;
             case R.id.shutdown:
                 manager.shutdown();

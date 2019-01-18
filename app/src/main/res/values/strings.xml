@@ -11,6 +11,7 @@
     <string name="get_firmware_kernel_version">获取固件内核版本</string>
     <string name="get_device_firmware_version">获取设备固件版本号</string>
     <string name="get_firmware_date">获取固件编译日期</string>
+    <string name="get_cpu_type">获取设备CPU型号</string>
 
     <string name="shutdown_reboot">关机和重启</string>
     <string name="shutdown">关机</string>

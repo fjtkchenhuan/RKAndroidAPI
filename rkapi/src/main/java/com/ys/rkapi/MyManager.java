@@ -96,7 +96,7 @@ public class MyManager {
 
     //获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
     public String getApiVersion() {///ok
-        return "V1.0-20180709";
+        return "V1.0-20190118";
     }
 
     //获取目前设备的型号
@@ -134,6 +134,10 @@ public class MyManager {
         return VersionUtils.getSystemVersionInfo();
     }
 
+    //获取设备CPU型号
+    public String getCPUType() {
+        return VersionUtils.getCpuInfo()[0];
+    }
 
     //获取固件编译的时间
     public String getFirmwareDate() {  // ok

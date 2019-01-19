@@ -52,27 +52,33 @@ public class Rk3288_7 extends RK {
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
     }
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR_LU).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
     }
 
     @Override
     public boolean isSlideShowNotificationBarOpen() {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR_LU).equals("0");
     }
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
     }
 
     @Override
@@ -122,11 +128,13 @@ public class Rk3288_7 extends RK {
     @Override
     public void turnOnHDMI() {
        // Utils.execFor7("busybox echo 0 > " + path);
+        Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
         GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
     }
 
     @Override
     public void turnOffHDMI() {
+        Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
         GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"off");
     }
 

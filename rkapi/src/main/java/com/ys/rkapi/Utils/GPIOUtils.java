@@ -1,6 +1,7 @@
 package com.ys.rkapi.Utils;
 
 
+import android.os.Build;
 import android.util.Log;
 
 import com.ys.rkapi.Constant;
@@ -55,7 +56,13 @@ public class GPIOUtils {
     }
 
     public static boolean isHDMIOut() {
-        File file = new File(Constant.HDMI_STATUS_3399);
+        boolean ishdmi = false;
+        File file = null;
+        String product = VersionUtils.getAndroidModle();
+        if ("22".equals(Build.VERSION.SDK))
+            file = new File(Constant.HDMI_STATUS_3288);
+        else if (product.contains("rk3399"))
+            file = new File(Constant.HDMI_STATUS_3399);
         String str = "";
         try {
             FileInputStream in = new FileInputStream(file);
@@ -72,7 +79,11 @@ public class GPIOUtils {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return str.equals("connected");
+        if  ("22".equals(Build.VERSION.SDK))
+            ishdmi = str.equals("1");
+        else if (product.contains("rk3399"))
+            ishdmi = str.equals("connected");
+        return ishdmi;
     }
 
     public static void writeIntFileUnder7(String str, String path) throws IOException, InterruptedException {

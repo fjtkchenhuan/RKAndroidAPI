@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.os.IBinder;
@@ -96,7 +97,14 @@ public class MyManager {
 
     //获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
     public String getApiVersion() {///ok
-        return "V1.0-20190118";
+        String verName = "";
+        try {
+            verName = mContext.getPackageManager().
+                    getPackageInfo(mContext.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return verName;
     }
 
     //获取目前设备的型号
@@ -157,8 +165,17 @@ public class MyManager {
 
     // 截屏
     // path  存储的绝对路径 如：/mnt/internal_sd/001.jpg
-    public void takeScreenshot(String path) { // ok
-        sendMyBroadcastWithExtra(Constant.SCREENSHOOT_ACTION, Constant.SCREENSHOOT_KEY, path);
+    public boolean takeScreenshot(String path) { // ok
+//        sendMyBroadcastWithExtra(Constant.SCREENSHOOT_ACTION, Constant.SCREENSHOOT_KEY, path);
+        boolean flag = false;
+        if (igetMessage != null) {
+            try {
+                flag = igetMessage.isSuccess(path);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return flag;
     }
 
     // 旋转屏幕
@@ -446,7 +463,7 @@ public class MyManager {
 
     //获取以太网动态IP地址
     public String getDhcpIpAddress() {//ok
-        return NetUtils.getDynamicEthIPAddress();
+        return NetUtils.getDynamicEthIPAddress(mContext);
     }
 
     //以太网使能 OnOff true 连接 false断开

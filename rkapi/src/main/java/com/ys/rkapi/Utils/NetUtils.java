@@ -1,5 +1,6 @@
 package com.ys.rkapi.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -66,9 +67,10 @@ public class NetUtils {
 //    public static String getEthIPAddress(){
 //        return ScreenUtils.getValueFromProp(Constant.ETH_IP_ADDRESS_PROP);
 //    }
-    public static String getDynamicEthIPAddress(){
-        if (VersionUtils.getAndroidModle().equals("rk3288") && Build.VERSION.SDK.equals("25"))
-            return Utils.getValueFromProp("net.ppp0.local-ip");
+    public static String getDynamicEthIPAddress(Context context){
+        if (VersionUtils.getAndroidModle().equals("rk3288") ||VersionUtils.getAndroidModle().equals("rk3368")&& Build.VERSION.SDK.equals("25"))
+//            return Utils.getValueFromProp("net.ppp0.local-ip");
+            return Utils.getEthernet(context);
         else
             return Utils.getValueFromProp(Constant.ETH_IP_ADDRESS_PROP);
     }
@@ -92,7 +94,7 @@ public class NetUtils {
     public static int getNetWorkType(Context context) {
         int netWorkType = -100;
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        @SuppressLint("MissingPermission") NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()) {
             netWorkType = networkInfo.getType();
         }

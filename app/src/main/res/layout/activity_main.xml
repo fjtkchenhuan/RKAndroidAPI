@@ -267,6 +267,7 @@
         <Button
             android:id="@+id/set_eth_mac"
             style="@style/TestButton"
+            android:visibility="gone"
             android:text="@string/set_eth_mac" />
 
         <Button

@@ -68,7 +68,7 @@ public class Rk3128 extends RK {
     public void setSlideShowNavBar(Context context, boolean flag) {
         Intent intent = new Intent("com.ys.slide.systembar");
         intent.putExtra("barMode","navigationbar");
-        intent.putExtra("isSlide",!flag);
+        intent.putExtra("isSlide",flag);
         context.sendBroadcast(intent);
     }
 
@@ -81,7 +81,7 @@ public class Rk3128 extends RK {
     public void setSlideShowNotificationBar(Context context, boolean flag) {
         Intent intent = new Intent("com.ys.slide.systembar");
         intent.putExtra("barMode","notificationbar");
-        intent.putExtra("isSlide",!flag);
+        intent.putExtra("isSlide",flag);
         context.sendBroadcast(intent);
     }
 

@@ -442,6 +442,11 @@
             style="@style/TestButton"
             android:text="设置默认输入法（谷歌拼音）" />
 
+        <Button
+            android:id="@+id/get_default_inputmethod"
+            style="@style/TestButton"
+            android:text="获取当前输入法" />
+
        <Button
            android:id="@+id/get_kernel_log"
            style="@style/TestButton"

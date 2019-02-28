@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.stop_android_log).setOnClickListener(this);
         findViewById(R.id.open_softkeyboard).setOnClickListener(this);
         findViewById(R.id.set_default_inputmethod).setOnClickListener(this);
+        findViewById(R.id.get_default_inputmethod).setOnClickListener(this);
         findViewById(R.id.close_softkeyboard).setOnClickListener(this);
         findViewById(R.id.set_dormant_interval).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
@@ -362,8 +363,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setDormantInterval(this,2147483647);//2147483647
                 break;
             case R.id.set_default_inputmethod:
-                manager.setDefaultInputMethod("com.google.android.inputmethod.pinyin");
-                ToastUtils.showToast(this,"成功设置默认输入法为谷歌拼音输入法");
+                ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
+                        manager.isSetDefaultInputMethodSuccess("com.sohu.inputmethod.sogou"));//com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
+                break;
+            case R.id.get_default_inputmethod:
+                ToastUtils.showToast(this,"当前输入法是:" + manager.getDefaultInputMethod());
                 break;
             case R.id.get_kernel_log:
                 manager.getKmsgLog("/mnt/sdcard/kernelLog.txt");

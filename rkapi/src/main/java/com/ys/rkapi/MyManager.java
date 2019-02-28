@@ -97,14 +97,7 @@ public class MyManager {
 
     //获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
     public String getApiVersion() {///ok
-        String verName = "";
-        try {
-            verName = mContext.getPackageManager().
-                    getPackageInfo(mContext.getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return verName;
+        return "V2.5_20190228";
     }
 
     //获取目前设备的型号
@@ -454,6 +447,8 @@ public class MyManager {
         return staticEthIP;
     }
 
+
+
     //设置动态获取IP
     public void setDhcpIpAddress(Context context) {
         Intent intent = new Intent("com.ys.set_dhcp");
@@ -739,9 +734,34 @@ public class MyManager {
         RkFactory.getRK().setDormantInterval(context,time);
     }
 
-    public void setDefaultInputMethod(String defaultInputMethod) {
-        sendMyBroadcastWithExtra("com.ys.set_default_inputMethod","default_inputMethod",defaultInputMethod);
+    //获取设置默认输入法是否成功
+    public boolean isSetDefaultInputMethodSuccess(String defaultInputMethod) {//ok
+        Log.d(TAG, "获取静态IP");
+        boolean isSuccess = false;
+        if (igetMessage != null) {
+            try {
+                isSuccess = igetMessage.isSetDefaultInputMethodSuccess(defaultInputMethod);
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return isSuccess;
     }
+
+    //获取当前的输入法
+    public String getDefaultInputMethod(){
+        String defaultInputMethod = "";
+        if (igetMessage != null) {
+            try {
+                defaultInputMethod = igetMessage.getDefaultInputMethod();
+            } catch (RemoteException e) {
+                e.printStackTrace();
+            }
+        }
+        return defaultInputMethod;
+    }
+
+
 
 //获取以太网的IP地址
 //    public String getEthIPAddress() {//ok

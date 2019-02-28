@@ -17,4 +17,6 @@ interface IgetMessage {
     String getGateway();
     String getNetMask();
     boolean isSuccess(String path);
+    boolean isSetDefaultInputMethodSuccess(String defaultInputMethod);
+    String getDefaultInputMethod();
 }

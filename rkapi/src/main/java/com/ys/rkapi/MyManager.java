@@ -722,6 +722,10 @@ public class MyManager {
         RkFactory.getRK().setDormantInterval(context,time);
     }
 
+    public void setDefaultInputMethod(String defaultInputMethod) {
+        sendMyBroadcastWithExtra("com.ys.set_default_inputMethod","default_inputMethod",defaultInputMethod);
+    }
+
 //获取以太网的IP地址
 //    public String getEthIPAddress() {//ok
 //        return NetUtils.getEthIPAddress();

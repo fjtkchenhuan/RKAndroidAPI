@@ -66,7 +66,7 @@ public class Rk3368_5 extends RK {
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
@@ -131,12 +131,24 @@ public class Rk3368_5 extends RK {
 
     @Override
     public void turnOnHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3288);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOffHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileUnder7("0",Constant.HDMI_STATUS_3288);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

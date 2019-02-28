@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +14,6 @@ import android.widget.Toast;
 
 import com.ys.rkapi.MyManager;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -198,11 +193,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"滑出通知栏是否打开："+manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.notification_bar_slide:
-                manager.setSlideShowNotificationBar(manager.isSlideShowNotificationBarOpen());
+                manager.setSlideShowNotificationBar(!manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.screen_shot:
-                manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg");
-                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
+                ToastUtils.showToast(this,"截图是否成功"+manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg")+"截图存储在 /mnt/sdcard/001.jpg");
+//                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
                 break;
             case R.id.get_width_height:
                 int width = manager.getDisplayWidth(this);
@@ -391,6 +386,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         unregisterReceiver(mountReceiver);
         super.onDestroy();
     }
-
 
 }

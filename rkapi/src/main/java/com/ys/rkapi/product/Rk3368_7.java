@@ -9,6 +9,9 @@ import com.ys.rkapi.Utils.GPIOUtils;
 import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.Utils;
 
+import java.io.File;
+import java.io.IOException;
+
 /**
  * Created by Administrator on 2018/11/6.
  */
@@ -48,22 +51,28 @@ public class Rk3368_7 extends RK {
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
     }
 
     @Override
     public boolean isSlideShowNotificationBarOpen() {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR_LU).equals("0");
     }
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
     }
 
     @Override
@@ -83,27 +92,32 @@ public class Rk3368_7 extends RK {
 
     @Override
     public void rebootRecovery() {
-
+        Utils.execFor7("reboot recovery");
     }
 
     @Override
     public boolean silentInstallApk(String apkPath) {
-        return false;
+        return Utils.execFor7("pm install -r " + apkPath);
     }
 
     @Override
     public void changeScreenLight(Context context, int value) {
-
+        Intent intent = new Intent("com.ys.set_screen_bright");
+        intent.putExtra("brightValue",value);
+        context.sendBroadcast(intent);
     }
 
     @Override
     public void turnOnHDMI() {
+        Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+        GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
 
     }
 
     @Override
     public void turnOffHDMI() {
-
+        Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+        GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"off");
     }
 
     @Override
@@ -113,6 +127,8 @@ public class Rk3368_7 extends RK {
 
     @Override
     public void setDormantInterval(Context context,long time) {
-
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval",time);
+        context.sendBroadcast(intent);
     }
 }

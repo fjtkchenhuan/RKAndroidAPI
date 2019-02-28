@@ -80,7 +80,7 @@ public class Rk3288_5 extends RK {
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
@@ -132,12 +132,24 @@ public class Rk3288_5 extends RK {
 
     @Override
     public void turnOnHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3288);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOffHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileUnder7("0",Constant.HDMI_STATUS_3288);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

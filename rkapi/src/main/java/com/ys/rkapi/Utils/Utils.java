@@ -1,5 +1,7 @@
 package com.ys.rkapi.Utils;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -40,6 +42,7 @@ public class Utils {
             value = (String) getMethod.invoke(classType, new Object[]{key});
         } catch (Exception e) {
         }
+        Log.i("yuanhang",value);
         return value;
     }
 
@@ -117,4 +120,16 @@ public class Utils {
         execFor7("reboot");
     }
 
+    public static String getEthernet(Context context) {
+        String value = "";
+        try {
+            Class<?> classType = Class.forName("android.net.EthernetManager");
+            Method getMethod = classType.getDeclaredMethod("getIpAddress");
+            @SuppressLint("WrongConstant") Object obj = (context.getSystemService("ethernet"));
+            value = (String) getMethod.invoke(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
 }

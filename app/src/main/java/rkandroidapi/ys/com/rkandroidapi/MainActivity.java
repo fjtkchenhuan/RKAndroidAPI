@@ -196,7 +196,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setSlideShowNotificationBar(!manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.screen_shot:
-                ToastUtils.showToast(this,"截图是否成功"+manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg")+"截图存储在 /mnt/sdcard/001.jpg");
+                manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg");
+                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
 //                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
                 break;
             case R.id.get_width_height:

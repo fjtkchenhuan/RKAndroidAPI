@@ -264,11 +264,7 @@
             style="@style/TestButton"
             android:text="@string/get_eth_mac"/>
 
-        <Button
-            android:id="@+id/set_eth_mac"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="@string/set_eth_mac" />
+
 
         <Button
             android:id="@+id/get_eth_ip"
@@ -316,6 +312,12 @@
             android:id="@+id/get_dns2"
             style="@style/TestButton"
             android:text="@string/get_dns2"/>
+
+        <Button
+            android:id="@+id/set_eth_mac"
+            style="@style/TestButton"
+            android:visibility="gone"
+            android:text="@string/set_eth_mac" />
     </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
 
@@ -337,6 +339,11 @@
             android:id="@+id/externel_u_path"
             style="@style/TestButton"
             android:text="@string/externel_u_path"/>
+
+        <Button
+            android:id="@+id/get_uartPath"
+            style="@style/TestButton"
+            android:text="@string/get_uartPath"/>
 
         <Button
             android:id="@+id/uninstall_externel"
@@ -361,10 +368,7 @@
             style="@style/TestButton"
             android:visibility="gone"
             android:text="@string/write_eeprom"/>
-        <Button
-            android:id="@+id/get_uartPath"
-            style="@style/TestButton"
-            android:text="@string/get_uartPath"/>
+
 
 
     </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>

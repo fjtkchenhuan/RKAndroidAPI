@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/api3399" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/rkapi" />
+            <option value="$PROJECT_DIR$/yface" />
+            <option value="$PROJECT_DIR$/yfaceapi" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

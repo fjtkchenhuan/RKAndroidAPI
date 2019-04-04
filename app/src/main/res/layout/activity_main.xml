@@ -17,6 +17,15 @@
         android:text="RK API Test"
         />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
     <TextView
         style="@style/TitleText"
         android:text="@string/system_info" />
@@ -463,6 +472,9 @@
             android:text="停止获取安卓层日志" />
 
     </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 
 

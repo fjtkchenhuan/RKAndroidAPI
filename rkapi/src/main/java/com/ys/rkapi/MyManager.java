@@ -702,6 +702,12 @@ public class MyManager {
         mContext.sendBroadcast(intent);
     }
 
+    public void setLanguage(String locale) {
+        Intent intent = new Intent("com.ys.set_language");
+        intent.putExtra("language",locale);
+        mContext.sendBroadcast(intent);
+    }
+
     public void getKmsgLog(String path) {
         InputStreamReader reader = null;
         BufferedReader bufferedReader = null;

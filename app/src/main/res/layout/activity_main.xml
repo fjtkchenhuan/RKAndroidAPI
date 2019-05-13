@@ -456,6 +456,11 @@
             style="@style/TestButton"
             android:text="获取当前输入法" />
 
+        <Button
+            android:id="@+id/set_language"
+            style="@style/TestButton"
+            android:text="设置语言为英文" />
+
        <Button
            android:id="@+id/get_kernel_log"
            style="@style/TestButton"

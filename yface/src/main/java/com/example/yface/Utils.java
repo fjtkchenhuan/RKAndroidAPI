@@ -78,7 +78,7 @@ public class Utils {
         BufferedReader errorStream = null;
         try {
             // 申请su权限
-            Process process = Runtime.getRuntime().exec("su");
+            Process process = Runtime.getRuntime().exec("sync");
             dataOutputStream = new DataOutputStream(process.getOutputStream());
             // 执行pm install命令
             String s = command + "\n";

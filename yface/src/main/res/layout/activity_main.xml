@@ -7,296 +7,397 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="USB-OTG" />
-      <Button
-          android:id="@+id/btn1"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn2"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn3"
-          style="@style/Button1"
-          android:text="拉低"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-   </LinearLayout>
+            <LinearLayout style="@style/layout1">
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="USB1" />
-      <Button
-          android:id="@+id/btn4"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn5"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn6"
-          style="@style/Button1"
-          android:text="拉低"/>
+                <TextView
+                    style="@style/TextView1"
+                    android:text="USB-OTG" />
 
-   </LinearLayout>
+                <Button
+                    android:id="@+id/btn1"
+                    style="@style/Button1"
+                    android:text="当前状态" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="USB2" />
-      <Button
-          android:id="@+id/btn7"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn8"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn9"
-          style="@style/Button1"
-          android:text="拉低"/>
+                <Button
+                    android:id="@+id/btn2"
+                    style="@style/Button1"
+                    android:text="拉高" />
 
-   </LinearLayout>
+                <Button
+                    android:id="@+id/btn3"
+                    style="@style/Button1"
+                    android:text="拉低" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="USB3" />
-      <Button
-          android:id="@+id/btn10"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn11"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn12"
-          style="@style/Button1"
-          android:text="拉低"/>
+            </LinearLayout>
 
-   </LinearLayout>
+            <LinearLayout style="@style/layout1">
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="功放控制" />
-      <Button
-          android:id="@+id/btn13"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn14"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn15"
-          style="@style/Button1"
-          android:text="拉低"/>
+                <TextView
+                    style="@style/TextView1"
+                    android:text="USB1" />
 
-   </LinearLayout>
+                <Button
+                    android:id="@+id/btn4"
+                    style="@style/Button1"
+                    android:text="当前状态" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="预留输入io1" />
-      <Button
-          android:id="@+id/btn16"
-          style="@style/Button1"
-          android:text="当前状态"/>
+                <Button
+                    android:id="@+id/btn5"
+                    style="@style/Button1"
+                    android:text="拉高" />
 
+                <Button
+                    android:id="@+id/btn6"
+                    style="@style/Button1"
+                    android:text="拉低" />
 
-   </LinearLayout>
+            </LinearLayout>
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="预留输入io2" />
-      <Button
-          android:id="@+id/btn19"
-          style="@style/Button1"
-          android:text="当前状态"/>
+            <LinearLayout style="@style/layout1">
 
-   </LinearLayout>
+                <TextView
+                    style="@style/TextView1"
+                    android:text="USB2" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="预留输入io3" />
-      <Button
-          android:id="@+id/btn22"
-          style="@style/Button1"
-          android:text="当前状态"/>
+                <Button
+                    android:id="@+id/btn7"
+                    style="@style/Button1"
+                    android:text="当前状态" />
 
-   </LinearLayout>
+                <Button
+                    android:id="@+id/btn8"
+                    style="@style/Button1"
+                    android:text="拉高" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="预留io4" />
-       <Button
-           android:id="@+id/btn17"
-           style="@style/Button1"
-           android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn25"
-          style="@style/Button1"
-          android:text="当前是输入还是输出"/>
-       <Button
-           android:id="@+id/btn20"
-           style="@style/Button1"
-           android:text="设置为输出"/>
-       <Button
-           android:id="@+id/btn21"
-           style="@style/Button1"
-           android:text="设置为输入"/>
+                <Button
+                    android:id="@+id/btn9"
+                    style="@style/Button1"
+                    android:text="拉低" />
 
-      <Button
-          android:id="@+id/btn26"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn27"
-          style="@style/Button1"
-          android:text="拉低"/>
+            </LinearLayout>
 
-   </LinearLayout>
+            <LinearLayout style="@style/layout1">
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="风扇控制" />
-      <Button
-          android:id="@+id/btn28"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn29"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn30"
-          style="@style/Button1"
-          android:text="拉低"/>
+                <TextView
+                    style="@style/TextView1"
+                    android:text="USB3" />
 
-   </LinearLayout>
+                <Button
+                    android:id="@+id/btn10"
+                    style="@style/Button1"
+                    android:text="当前状态" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="红外LED" />
-      <Button
-          android:id="@+id/btn31"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn32"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn33"
-          style="@style/Button1"
-          android:text="拉低"/>
+                <Button
+                    android:id="@+id/btn11"
+                    style="@style/Button1"
+                    android:text="拉高" />
 
-   </LinearLayout>
+                <Button
+                    android:id="@+id/btn12"
+                    style="@style/Button1"
+                    android:text="拉低" />
 
-   <LinearLayout
-       style="@style/layout1">
-      <TextView
-          style="@style/TextView1"
-          android:text="继电器" />
-      <Button
-          android:id="@+id/btn34"
-          style="@style/Button1"
-          android:text="当前状态"/>
-      <Button
-          android:id="@+id/btn35"
-          style="@style/Button1"
-          android:text="拉高"/>
-      <Button
-          android:id="@+id/btn36"
-          style="@style/Button1"
-          android:text="拉低"/>
-   </LinearLayout>
+            </LinearLayout>
 
-   <LinearLayout
-       style="@style/layout1">
-         <TextView
-             style="@style/TextView1"
-             android:text="绿色补光" />
-         <Button
-             android:id="@+id/btn37"
-             style="@style/Button1"
-             android:text="当前状态"/>
-         <Button
-             android:id="@+id/btn38"
-             style="@style/Button1"
-             android:text="拉高"/>
-         <Button
-             android:id="@+id/btn39"
-             style="@style/Button1"
-             android:text="拉低"/>
+            <LinearLayout style="@style/layout1">
 
-      </LinearLayout>
+                <TextView
+                    style="@style/TextView1"
+                    android:text="功放控制" />
 
-   <LinearLayout
-       style="@style/layout1">
-         <TextView
-             style="@style/TextView1"
-             android:text="红色补光" />
-         <Button
-             android:id="@+id/btn40"
-             style="@style/Button1"
-             android:text="当前状态"/>
-         <Button
-             android:id="@+id/btn41"
-             style="@style/Button1"
-             android:text="拉高"/>
-         <Button
-             android:id="@+id/btn42"
-             style="@style/Button1"
-             android:text="拉低"/>
+                <Button
+                    android:id="@+id/btn13"
+                    style="@style/Button1"
+                    android:text="当前状态" />
 
-      </LinearLayout>
+                <Button
+                    android:id="@+id/btn14"
+                    style="@style/Button1"
+                    android:text="拉高" />
 
-   <LinearLayout
-       style="@style/layout1">
-         <TextView
-             style="@style/TextView1"
-             android:text="白色补光" />
-         <Button
-             android:id="@+id/btn43"
-             style="@style/Button1"
-             android:text="当前状态"/>
-         <Button
-             android:id="@+id/btn44"
-             style="@style/Button1"
-             android:text="拉高"/>
-         <Button
-             android:id="@+id/btn45"
-             style="@style/Button1"
-             android:text="拉低"/>
+                <Button
+                    android:id="@+id/btn15"
+                    style="@style/Button1"
+                    android:text="拉低" />
 
-      </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="预留输入io1" />
+
+                <Button
+                    android:id="@+id/btn16"
+                    style="@style/Button1"
+                    android:text="当前状态" />
 
 
-   </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="预留输入io2" />
+
+                <Button
+                    android:id="@+id/btn19"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="预留输入io3" />
+
+                <Button
+                    android:id="@+id/btn22"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="预留io4" />
+
+                <Button
+                    android:id="@+id/btn17"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn25"
+                    style="@style/Button1"
+                    android:text="当前是输入还是输出" />
+
+                <Button
+                    android:id="@+id/btn20"
+                    style="@style/Button1"
+                    android:text="设置为输出" />
+
+                <Button
+                    android:id="@+id/btn21"
+                    style="@style/Button1"
+                    android:text="设置为输入" />
+
+                <Button
+                    android:id="@+id/btn26"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn27"
+                    style="@style/Button1"
+                    android:text="拉低" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="风扇控制" />
+
+                <Button
+                    android:id="@+id/btn28"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn29"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn30"
+                    style="@style/Button1"
+                    android:text="拉低" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="红外LED" />
+
+                <Button
+                    android:id="@+id/btn31"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn32"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn33"
+                    style="@style/Button1"
+                    android:text="拉低" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="继电器" />
+
+                <Button
+                    android:id="@+id/btn34"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn35"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn36"
+                    style="@style/Button1"
+                    android:text="拉低" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="绿色补光" />
+
+                <Button
+                    android:id="@+id/btn37"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn38"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn39"
+                    style="@style/Button1"
+                    android:text="拉低" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="红色补光" />
+
+                <Button
+                    android:id="@+id/btn40"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn41"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn42"
+                    style="@style/Button1"
+                    android:text="拉低" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="白色补光" />
+
+                <Button
+                    android:id="@+id/btn43"
+                    style="@style/Button1"
+                    android:text="当前状态" />
+
+                <Button
+                    android:id="@+id/btn44"
+                    style="@style/Button1"
+                    android:text="拉高" />
+
+                <Button
+                    android:id="@+id/btn45"
+                    style="@style/Button1"
+                    android:text="拉低" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="最大CPU频率" />
+
+                <EditText
+                    android:id="@+id/max_freq"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入设置的最大频率（范围126-1608）" />
+
+                <Button
+                    android:id="@+id/btn46"
+                    style="@style/Button1"
+                    android:text="设置最大CPU频率" />
+
+                <Button
+                    android:id="@+id/btn47"
+                    style="@style/Button1"
+                    android:text="获取最大CPU频率" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/layout1">
+
+                <TextView
+                    style="@style/TextView1"
+                    android:text="最小CPU频率" />
+
+                <EditText
+                    android:id="@+id/min_freq"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入设置的最小频率（范围126-1608）" />
+
+                <Button
+                    android:id="@+id/btn48"
+                    style="@style/Button1"
+                    android:text="设置最小CPU频率" />
+
+                <Button
+                    android:id="@+id/btn49"
+                    style="@style/Button1"
+                    android:text="获取最小CPU频率" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>
 

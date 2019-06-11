@@ -2,7 +2,9 @@ package com.example.yface;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.yfaceapi.GPIOManager;
@@ -11,6 +13,8 @@ import com.example.yfaceapi.GPIOManager;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private GPIOManager gpioManager;
+    private EditText maxEdit;
+    private EditText minEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        maxEdit = findViewById(R.id.max_freq);
+        minEdit = findViewById(R.id.min_freq);
         findViewById(R.id.btn1).setOnClickListener(this);
         findViewById(R.id.btn2).setOnClickListener(this);
         findViewById(R.id.btn3).setOnClickListener(this);
@@ -67,6 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.btn43).setOnClickListener(this);
         findViewById(R.id.btn44).setOnClickListener(this);
         findViewById(R.id.btn45).setOnClickListener(this);
+        findViewById(R.id.btn46).setOnClickListener(this);
+        findViewById(R.id.btn47).setOnClickListener(this);
+        findViewById(R.id.btn48).setOnClickListener(this);
+        findViewById(R.id.btn49).setOnClickListener(this);
 
     }
 
@@ -205,6 +215,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn45:
                 gpioManager.pullDownWhiteLight();
+                break;
+            case R.id.btn46:
+                int max = Integer.parseInt(maxEdit.getText().toString().trim());
+                gpioManager.setMaxFreq(max);
+                break;
+            case R.id.btn47:
+                ToastUtils.showToast(this,"CPU最大频率是 = " + gpioManager.getMaxFreq());
+                break;
+            case R.id.btn48:
+                int min = Integer.parseInt(minEdit.getText().toString().trim());
+                gpioManager.setMinFreq(min);
+                break;
+            case R.id.btn49:
+                ToastUtils.showToast(this,"CPU最小频率是 = " + gpioManager.getMinFreq());
                 break;
                 default:
                     break;

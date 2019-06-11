@@ -13,10 +13,14 @@ public class ToastUtils {
      */  
     public static void showToast(Context context, String message){
         if (toast==null){  
-            toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);  
+            toast = Toast.makeText(context,message,Toast.LENGTH_SHORT);
+
+
         }else {  
             toast.setText(message);  
         }  
         toast.show();//设置新的消息提示  
-     }  
+     }
+
+
 } 

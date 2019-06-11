@@ -97,7 +97,7 @@ public class MyManager {
 
     //获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
     public String getApiVersion() {///ok
-        return "V2.5_20190228";
+        return "V2.5_20190513";
     }
 
     //获取目前设备的型号
@@ -702,9 +702,10 @@ public class MyManager {
         mContext.sendBroadcast(intent);
     }
 
-    public void setLanguage(String locale) {
+    public void setLanguage(String language,String country) {
         Intent intent = new Intent("com.ys.set_language");
-        intent.putExtra("language",locale);
+        intent.putExtra("language",language);
+        intent.putExtra("country",country);
         mContext.sendBroadcast(intent);
     }
 

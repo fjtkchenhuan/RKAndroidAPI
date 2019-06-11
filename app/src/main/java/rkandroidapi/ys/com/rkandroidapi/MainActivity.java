@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.rebootRecovery();
                 break;
             case R.id.silent_install:
-                Log.d("chenhuan","ff = " + manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/weixt.apk"));// /mnt/sdcard/Download
+                Log.d("chenhuan","ff = " + manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/KeyTest.apk"));// /mnt/sdcard/Download
 //                Log.d("chenhuan","path = " + Environment.getExternalStorageDirectory().getPath() +"/test.apk");
 //                manager.silentInstallApk("/mnt/sdcard/Download/sougoushurufa_831.apk");
                 break;
@@ -365,16 +365,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.set_default_inputmethod:
                 ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
-                        manager.isSetDefaultInputMethodSuccess("com.sohu.inputmethod.sogou"));//com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
+                        manager.isSetDefaultInputMethodSuccess("com.android.inputmethod.latin"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
                 break;
             case R.id.get_default_inputmethod:
                 ToastUtils.showToast(this,"当前输入法是:" + manager.getDefaultInputMethod());
                 break;
             case R.id.set_language:
-                manager.setLanguage(Locale.ENGLISH.toString());
+                manager.setLanguage("sl","SI");
                 break;
             case R.id.get_kernel_log:
-                manager.getKmsgLog("/mnt/sdcard/kernelLog.txt");
+                String path1 = Environment.getExternalStorageDirectory().getPath();
+                manager.getKmsgLog(path1 + "/kernelLog.txt");
                 break;
             case R.id.get_android_log:
                 String path = Environment.getExternalStorageDirectory().getPath();

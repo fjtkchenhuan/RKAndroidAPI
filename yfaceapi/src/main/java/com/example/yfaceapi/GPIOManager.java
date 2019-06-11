@@ -1,6 +1,7 @@
 package com.example.yfaceapi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.display.DisplayManager;
 import android.util.Log;
 
@@ -60,6 +61,10 @@ public class GPIOManager {
     private static final String WHITE_LIGHT_3368 = "/sys/devices/platform/misc_power_en/w_led";
     private static final String WHITE_LIGHT_3399 = "/sys/devices/platform/misc_power_en/w_led";
 
+    //CPU频率
+    private static final String SCALING_MAX_FREQ_3288 = "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq";
+    private static final String SCALING_MIN_FREQ_3288 = "/sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq";
+
     private static GPIOManager myManager;
     private boolean isRk3288;
     private boolean isRk3368;
@@ -84,6 +89,9 @@ public class GPIOManager {
             GpioUtils.upgradeRootPermissionForGpioValue(257);
             GpioUtils.upgradeRootPermissionForGpioValue(170);
             GpioUtils.upgradeRootPermissionForGpioValue(14);
+
+            GpioUtils.upgradeRootPermission(SCALING_MAX_FREQ_3288);
+            GpioUtils.upgradeRootPermission(SCALING_MIN_FREQ_3288);
         }else if (isRk3399()) {
             rootGpio(1067);
             rootGpio(1066);
@@ -532,14 +540,38 @@ public class GPIOManager {
             GpioUtils.writeGpioValue(1072,"0");
     }
 
+    public void setMaxFreq(int value) {
+        if (isRk3288) {
+            Utils.writeStringFileFor7(new File(SCALING_MAX_FREQ_3288),(value * 1000) + "");
+        }
+    }
+
+    public void setMinFreq(int value) {
+        if (isRk3288) {
+            Utils.writeStringFileFor7(new File(SCALING_MIN_FREQ_3288),(value * 1000) + "");
+        }
+    }
+
+    public String getMaxFreq() {
+        if (isRk3288) {
+            return Utils.readGpioPG(SCALING_MAX_FREQ_3288);
+        }
+        return "";
+    }
+
+    public String getMinFreq() {
+        if (isRk3288) {
+           return Utils.readGpioPG(SCALING_MIN_FREQ_3288);
+        }
+        return "";
+    }
 
 
-
-    private static String getVersion() {
+    private  String getVersion() {
         return getValueFromProp("ro.build.description").substring(0,6);
     }
 
-    public static String getValueFromProp(String key) {
+    public  String getValueFromProp(String key) {
         String value = "";
         try {
             Class<?> classType = Class.forName("android.os.SystemProperties");
@@ -549,6 +581,8 @@ public class GPIOManager {
         }
         return value;
     }
+
+
 
     private boolean isRk3288() {
         return getVersion().contains("rk3288");

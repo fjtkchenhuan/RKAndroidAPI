@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SecondActivity">
+
+    <Button
+        android:id="@+id/btn50"
+        style="@style/Button1"
+        android:text="sync" />
+
+    <LinearLayout style="@style/layout1"
+        android:visibility="gone">
+        <TextView
+            style="@style/TextView1"
+            android:text="最大CPU频率" />
+        <EditText
+            android:id="@+id/max_freq"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="请输入设置的最大频率（范围126-1608）"/>
+        <Button
+            android:id="@+id/btn46"
+            style="@style/Button1"
+            android:text="设置最大CPU频率" />
+        <Button
+            android:id="@+id/btn47"
+            style="@style/Button1"
+            android:text="获取最大CPU频率" />
+
+    </LinearLayout>
+
+    <LinearLayout style="@style/layout1"
+        android:visibility="gone">
+        <TextView
+            style="@style/TextView1"
+            android:text="最小CPU频率" />
+        <EditText
+            android:id="@+id/min_freq"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="请输入设置的最小频率（范围126-1608）"/>
+        <Button
+            android:id="@+id/btn48"
+            style="@style/Button1"
+            android:text="设置最小CPU频率" />
+        <Button
+            android:id="@+id/btn49"
+            style="@style/Button1"
+            android:text="获取最小CPU频率" />
+
+    </LinearLayout>
+
+</LinearLayout>

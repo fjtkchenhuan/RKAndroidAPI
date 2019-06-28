@@ -160,4 +160,9 @@ public class Rk3368_5 extends RK {
     public void setDormantInterval(Context context,long time) {
 
     }
+
+    @Override
+    public int getCPUTemperature() {
+        return 0;
+    }
 }

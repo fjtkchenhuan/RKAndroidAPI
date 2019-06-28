@@ -2,6 +2,7 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
@@ -105,7 +106,7 @@ public class Rk3288_7 extends RK {
 
     @Override
     public boolean isBackLightOn() {
-         return "1".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH));
+         return "0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH));
     }
 
     @Override
@@ -151,5 +152,13 @@ public class Rk3288_7 extends RK {
         Intent intent = new Intent(Constant.DORMANT_INTERVAL);
         intent.putExtra("time_interval",time);
         context.sendBroadcast(intent);
+    }
+
+    @Override
+    public int getCPUTemperature() {
+        ///sys/class/thermal/thermal_zone0/temp
+        String s = GPIOUtils.readGpioPGForLong("/sys/class/thermal/thermal_zone0/temp");
+        int temp = Integer.parseInt(s.substring(0,5));
+        return (int) (temp/1000);
     }
 }

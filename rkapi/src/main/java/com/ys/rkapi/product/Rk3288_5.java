@@ -167,4 +167,9 @@ public class Rk3288_5 extends RK {
         context.sendBroadcast(intent);
     }
 
+    @Override
+    public int getCPUTemperature() {
+        return 0;
+    }
+
 }

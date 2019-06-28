@@ -476,6 +476,11 @@
             style="@style/TestButton"
             android:text="停止获取安卓层日志" />
 
+        <Button
+            android:id="@+id/get_cpu_temp"
+            style="@style/TestButton"
+            android:text="获取CPU温度" />
+
     </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
         </LinearLayout>
 

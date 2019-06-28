@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.close_softkeyboard).setOnClickListener(this);
         findViewById(R.id.set_dormant_interval).setOnClickListener(this);
         findViewById(R.id.set_language).setOnClickListener(this);
+        findViewById(R.id.get_cpu_temp).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
     }
 
@@ -383,6 +384,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.stop_android_log:
                 manager.stopAndroidLogcat();
+                break;
+            case R.id.get_cpu_temp:
+                ToastUtils.showToast(this,"cpu的温度是" + manager.getCPUTemperature());
                 break;
             default:
                 break;

@@ -180,6 +180,27 @@ public class GPIOUtils {
         }
         return str;
     }
+
+    public static String readGpioPGForLong(String path) {
+        String str = "";
+        File file = new File(path);
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+
+            byte[] buffer = new byte[1024];
+            fileInputStream.read(buffer);
+            fileInputStream.close();
+            str = new String(buffer);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 }
 
 

@@ -133,4 +133,9 @@ public class Rk3399 extends RK {
     public void setDormantInterval(Context context,long time) {
 
     }
+
+    @Override
+    public int getCPUTemperature() {
+        return 0;
+    }
 }

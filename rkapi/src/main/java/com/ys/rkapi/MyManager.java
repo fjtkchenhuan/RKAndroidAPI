@@ -27,6 +27,7 @@ import com.ys.rkapi.Utils.StorageUtils;
 import com.ys.rkapi.Utils.TimeUtils;
 import com.ys.rkapi.Utils.VersionUtils;
 import com.ys.rkapi.Utils.Utils;
+import com.ys.rkapi.product.RK;
 import com.ys.rkapi.product.RkFactory;
 
 import java.io.BufferedReader;
@@ -766,6 +767,11 @@ public class MyManager {
             }
         }
         return defaultInputMethod;
+    }
+
+    //获取CPU温度
+    public int getCPUTemperature() {
+        return RkFactory.getRK().getCPUTemperature();
     }
 
 

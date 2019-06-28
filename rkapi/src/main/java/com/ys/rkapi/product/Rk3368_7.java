@@ -131,4 +131,9 @@ public class Rk3368_7 extends RK {
         intent.putExtra("time_interval",time);
         context.sendBroadcast(intent);
     }
+
+    @Override
+    public int getCPUTemperature() {
+        return 0;
+    }
 }

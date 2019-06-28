@@ -157,6 +157,11 @@ public class Rk3128 extends RK {
 
     }
 
+    @Override
+    public int getCPUTemperature() {
+        return 0;
+    }
+
     private int getDisplayRot(String value) {
         int index = 0;
         switch (value) {

@@ -52,6 +52,8 @@ public abstract class RK {
 
     public abstract void setDormantInterval(Context context,long time);
 
+    public abstract int getCPUTemperature();
+
     /**
      * 过滤文件路径
      *

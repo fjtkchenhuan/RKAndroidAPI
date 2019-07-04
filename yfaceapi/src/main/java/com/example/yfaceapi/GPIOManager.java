@@ -24,7 +24,7 @@ public class GPIOManager {
 
     private static final String USB1_3399 = "/sys/devices/platform/misc_power_en/vbus_drv5";
     private static final String USB2_3399 = "/sys/devices/platform/misc_power_en/vbus_drv4";
-    private static final String USB3_3399 = "/sys/devices/platform/misc_power_en/usb30_5v_en";
+    private static final String USB3_3399 = "/sys/devices/platform/vcc5v0-sys/usb30_5v_en";// /sys/devices/platform/misc_power_en/usb30_5v_en
 
     //功放
     private static final String VOICE_3288 = "/sys/bus/i2c/devices/2-0010/spk";
@@ -97,6 +97,8 @@ public class GPIOManager {
             rootGpio(1066);
             rootGpio(1071);
             rootGpio(1072);
+
+            GpioUtils.upgradeRootPermission(USB3_3399);
         }
     }
 

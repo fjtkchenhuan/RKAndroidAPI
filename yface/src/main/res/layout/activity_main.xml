@@ -142,6 +142,11 @@
                     style="@style/Button1"
                     android:text="当前状态" />
 
+                <TextView
+                    style="@style/TextView1"
+                    android:layout_marginLeft="10dp"
+                    android:text="高电平读取的值是0，低电平是1.预留io1-4均是" />
+
 
             </LinearLayout>
 
@@ -171,43 +176,49 @@
 
             </LinearLayout>
 
-            <LinearLayout style="@style/layout1">
+            <com.example.yface.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/TextView1"
-                    android:text="预留io4" />
+                <LinearLayout style="@style/layout1">
 
-                <Button
-                    android:id="@+id/btn17"
-                    style="@style/Button1"
-                    android:text="当前状态" />
+                    <TextView
+                        style="@style/TextView1"
+                        android:text="预留io4" />
 
-                <Button
-                    android:id="@+id/btn25"
-                    style="@style/Button1"
-                    android:text="当前是输入还是输出" />
+                    <Button
+                        android:id="@+id/btn17"
+                        style="@style/Button1"
+                        android:text="当前状态" />
 
-                <Button
-                    android:id="@+id/btn20"
-                    style="@style/Button1"
-                    android:text="设置为输出" />
+                    <Button
+                        android:id="@+id/btn25"
+                        style="@style/Button1"
+                        android:text="当前是输入还是输出" />
 
-                <Button
-                    android:id="@+id/btn21"
-                    style="@style/Button1"
-                    android:text="设置为输入" />
+                    <Button
+                        android:id="@+id/btn20"
+                        style="@style/Button1"
+                        android:text="设置为输出" />
 
-                <Button
-                    android:id="@+id/btn26"
-                    style="@style/Button1"
-                    android:text="拉高" />
+                    <Button
+                        android:id="@+id/btn21"
+                        style="@style/Button1"
+                        android:text="设置为输入" />
 
-                <Button
-                    android:id="@+id/btn27"
-                    style="@style/Button1"
-                    android:text="拉低" />
+                    <Button
+                        android:id="@+id/btn26"
+                        style="@style/Button1"
+                        android:text="拉高" />
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btn27"
+                        style="@style/Button1"
+                        android:text="拉低" />
+
+                </LinearLayout>
+            </com.example.yface.FlexBoxLayout>
 
             <LinearLayout style="@style/layout1">
 
@@ -346,58 +357,67 @@
 
             </LinearLayout>
 
-            <LinearLayout style="@style/layout1">
+            <com.example.yface.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <TextView
-                    style="@style/TextView1"
-                    android:text="最大CPU频率" />
+                <LinearLayout style="@style/layout1">
 
-                <EditText
-                    android:id="@+id/max_freq"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="请输入设置的最大频率（范围126-1608）" />
+                    <TextView
+                        style="@style/TextView1"
+                        android:text="最大CPU频率" />
 
-                <Button
-                    android:id="@+id/btn46"
-                    style="@style/Button1"
-                    android:text="设置最大CPU频率" />
+                    <EditText
+                        android:id="@+id/max_freq"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入设置的最大频率（范围126-1608）"
+                        android:lines="1" />
 
-                <Button
-                    android:id="@+id/btn47"
-                    style="@style/Button1"
-                    android:text="获取最大CPU频率" />
+                    <Button
+                        android:id="@+id/btn46"
+                        style="@style/Button1"
+                        android:text="设置最大CPU频率" />
 
-            </LinearLayout>
+                    <Button
+                        android:id="@+id/btn47"
+                        style="@style/Button1"
+                        android:text="获取最大CPU频率" />
 
-            <LinearLayout style="@style/layout1">
+                </LinearLayout>
+            </com.example.yface.FlexBoxLayout>
 
-                <TextView
-                    style="@style/TextView1"
-                    android:text="最小CPU频率" />
 
-                <EditText
-                    android:id="@+id/min_freq"
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:hint="请输入设置的最小频率（范围126-1608）" />
+            <com.example.yface.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btn48"
-                    style="@style/Button1"
-                    android:text="设置最小CPU频率" />
+                <LinearLayout style="@style/layout1">
 
-                <Button
-                    android:id="@+id/btn49"
-                    style="@style/Button1"
-                    android:text="获取最小CPU频率" />
+                    <TextView
+                        style="@style/TextView1"
+                        android:text="最小CPU频率" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/min_freq"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:hint="请输入设置的最小频率（范围126-1608）"
+                        android:lines="1" />
 
+                    <Button
+                        android:id="@+id/btn48"
+                        style="@style/Button1"
+                        android:text="设置最小CPU频率" />
+
+                    <Button
+                        android:id="@+id/btn49"
+                        style="@style/Button1"
+                        android:text="获取最小CPU频率" />
+
+                </LinearLayout>
+            </com.example.yface.FlexBoxLayout>
         </LinearLayout>
-
     </ScrollView>
-
-
 </LinearLayout>
 

@@ -1,6 +1,14 @@
 package com.ys.rkapi.product;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+
+import com.ys.rkapi.Constant;
+import com.ys.rkapi.Utils.GPIOUtils;
+import com.ys.rkapi.Utils.Utils;
+
+import java.io.File;
 
 public class Rk3128_7 extends RK {
 
@@ -27,32 +35,44 @@ public class Rk3128_7 extends RK {
 
     @Override
     public void rotateScreen(Context context, String degree) {
-
+        Utils.setValueToProp("persist.sys.displayrot",degree);
+        File file = new File("/sys/devices/platform/ff150000.i2c/i2c-6/6-0050/rotate");
+        if(file.exists()){
+            GPIOUtils.writeStringFileFor7(file, degree);
+        }
+        Utils.reboot();
     }
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_STATUSBAR_STATE_LU).equals("0");
     }
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR_LU).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
     }
 
     @Override
     public boolean isSlideShowNotificationBarOpen() {
-        return false;
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR_LU).equals("0");
     }
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-
+        Log.d("chenhuan","setSlideShowNotificationBar");
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
     }
 
     @Override
@@ -82,7 +102,9 @@ public class Rk3128_7 extends RK {
 
     @Override
     public void changeScreenLight(Context context, int value) {
-
+        Intent intent = new Intent("com.ys.set_screen_bright");
+        intent.putExtra("brightValue",value);
+        context.sendBroadcast(intent);
     }
 
     @Override
@@ -108,6 +130,11 @@ public class Rk3128_7 extends RK {
     @Override
     public int getCPUTemperature() {
         return 0;
+    }
+
+    @Override
+    public void setADBOpen(boolean open) {
+
     }
 
 

@@ -481,6 +481,45 @@
             style="@style/TestButton"
             android:text="获取CPU温度" />
 
+        <Button
+            android:id="@+id/set_adb_open"
+            style="@style/TestButton"
+            android:text="打开adb" />
+
+        <Button
+            android:id="@+id/set_adb_close"
+            style="@style/TestButton"
+            android:text="关闭adb" />
+
+        <Button
+            android:id="@+id/replaceBootanimation"
+            style="@style/TestButton"
+            android:text="替换开机动画" />
+
+        <Button
+            android:id="@+id/openScreenAndVoice"
+            style="@style/TestButton"
+            android:visibility="gone"
+            android:text="打开背光和声音" />
+
+        <Button
+            android:id="@+id/closeScreenAndVoice"
+            style="@style/TestButton"
+            android:visibility="gone"
+            android:text="关闭背光和声音" />
+
+        <Button
+            android:id="@+id/setStandByMode"
+            style="@style/TestButton"
+            android:visibility="gone"
+            android:text="设置待机模式" />
+
+        <Button
+            android:id="@+id/setNormalMode"
+            style="@style/TestButton"
+            android:visibility="gone"
+            android:text="设置正常模式" />
+
     </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
         </LinearLayout>
 

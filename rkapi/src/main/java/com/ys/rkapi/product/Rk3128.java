@@ -162,6 +162,11 @@ public class Rk3128 extends RK {
         return 0;
     }
 
+    @Override
+    public void setADBOpen(boolean open) {
+
+    }
+
     private int getDisplayRot(String value) {
         int index = 0;
         switch (value) {

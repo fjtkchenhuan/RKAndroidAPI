@@ -20,7 +20,7 @@ public class RkFactory {
             return Rk3368_5.INSTANCE;
         } else if (product.contains("rk3288") && "22".equals(Build.VERSION.SDK)) {
             return Rk3288_5.INSTANCE;
-        } else if (product.contains("rk3128")) {
+        } else if (product.contains("rk3128") && "19".equals(Build.VERSION.SDK)) {
             return Rk3128.INSTANCE;
         } else if (product.contains("rk3288") && "25".equals(Build.VERSION.SDK))
             return Rk3288_7.INSTANCE;

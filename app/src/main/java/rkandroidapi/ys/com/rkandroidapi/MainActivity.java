@@ -4,17 +4,17 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 
 import com.ys.rkapi.MyManager;
-
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -30,14 +30,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String TFPath;
     private String USBPath;
     int i = 0;
+    private String externalStoragePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         manager = MyManager.getInstance(this);
         manager.bindAIDLService(this);
+        externalStoragePath = Environment.getExternalStorageDirectory().getPath();
 
         IntentFilter filter = new IntentFilter();
         filter.addAction(Intent.ACTION_MEDIA_MOUNTED);
@@ -124,6 +127,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.set_dormant_interval).setOnClickListener(this);
         findViewById(R.id.set_language).setOnClickListener(this);
         findViewById(R.id.get_cpu_temp).setOnClickListener(this);
+        findViewById(R.id.set_adb_open).setOnClickListener(this);
+        findViewById(R.id.set_adb_close).setOnClickListener(this);
+        findViewById(R.id.replaceBootanimation).setOnClickListener(this);
+        findViewById(R.id.openScreenAndVoice).setOnClickListener(this);
+        findViewById(R.id.closeScreenAndVoice).setOnClickListener(this);
+        findViewById(R.id.setStandByMode).setOnClickListener(this);
+        findViewById(R.id.setNormalMode).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
     }
 
@@ -132,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onReceive(Context context, Intent intent) {
             if ("android.intent.action.MEDIA_MOUNTED".equals(intent.getAction())) {
                 String path = intent.getData().getPath();
-                Log.d("chenhuan","path=" + path);
+                Log.d("chenhuan","externalStoragePath=" + path);
                 if (path.contains("usb"))
                     USBPath = path;
                 else if (path.contains("other"))///storage/0000-0000
@@ -239,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.update_img:
                 manager.upgradeSystem("/mnt/media_rw/9260-8749/update.zip"); ///mnt/media_rw/10C0-C930/update.zip
-                Log.d("chenhuan","path = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
+                Log.d("chenhuan","externalStoragePath = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
 //                ToastUtils.showToast(this,"3399和3328，暂未实现");
                 break;
             case R.id.recovery:
@@ -247,7 +257,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.silent_install:
                 Log.d("chenhuan","ff = " + manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/KeyTest.apk"));// /mnt/sdcard/Download
-//                Log.d("chenhuan","path = " + Environment.getExternalStorageDirectory().getPath() +"/test.apk");
+//                Log.d("chenhuan","externalStoragePath = " + Environment.getExternalStorageDirectory().getPath() +"/test.apk");
 //                manager.silentInstallApk("/mnt/sdcard/Download/sougoushurufa_831.apk");
                 break;
             case R.id.get_eth_status:
@@ -366,27 +376,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.set_default_inputmethod:
                 ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
-                        manager.isSetDefaultInputMethodSuccess("com.android.inputmethod.latin"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
+                        manager.isSetDefaultInputMethodSuccess("com.iflytek.inputmethod/.FlyIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
                 break;
             case R.id.get_default_inputmethod:
                 ToastUtils.showToast(this,"当前输入法是:" + manager.getDefaultInputMethod());
                 break;
             case R.id.set_language:
-                manager.setLanguage("sl","SI");
+                manager.setLanguage("en","US");
                 break;
             case R.id.get_kernel_log:
                 String path1 = Environment.getExternalStorageDirectory().getPath();
                 manager.getKmsgLog(path1 + "/kernelLog.txt");
                 break;
             case R.id.get_android_log:
-                String path = Environment.getExternalStorageDirectory().getPath();
-                manager.getAndroidLogcat(path +"/androidLog.txt");
+                manager.getAndroidLogcat(externalStoragePath +"/androidLog.txt");
                 break;
             case R.id.stop_android_log:
                 manager.stopAndroidLogcat();
                 break;
             case R.id.get_cpu_temp:
                 ToastUtils.showToast(this,"cpu的温度是" + manager.getCPUTemperature());
+                break;
+            case R.id.set_adb_open:
+                manager.setADBOpen(true);
+                break;
+            case R.id.set_adb_close:
+                manager.setADBOpen(false);
+                break;
+            case R.id.replaceBootanimation:
+                manager.replaceBootanimation(externalStoragePath + "/bootanimation.zip");
+                break;
+//            case R.id.openScreenAndVoice:
+//                manager.setScreenAndVoiceOpen(true);
+//                break;
+//            case R.id.closeScreenAndVoice:
+//                manager.setScreenAndVoiceOpen(false);
+//                break;
+//            case R.id.setStandByMode:
+//                manager.setStandByMode();
+//                break;
+            case R.id.setNormalMode:
+//                manager.setNormalMode();
                 break;
             default:
                 break;

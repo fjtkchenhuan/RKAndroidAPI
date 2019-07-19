@@ -54,6 +54,8 @@ public abstract class RK {
 
     public abstract int getCPUTemperature();
 
+    public abstract void setADBOpen(boolean open);
+
     /**
      * 过滤文件路径
      *

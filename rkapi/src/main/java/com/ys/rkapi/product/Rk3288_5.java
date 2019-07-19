@@ -12,6 +12,7 @@ import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.SilentInstallUtils;
 import com.ys.rkapi.Utils.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -170,6 +171,30 @@ public class Rk3288_5 extends RK {
     @Override
     public int getCPUTemperature() {
         return 0;
+    }
+
+    @Override
+    public void setADBOpen(boolean open) {
+        if (open) {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","2");///sys/bus/platform/drivers/usb20_otg/force_usb_mode
+//            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"2");
+            try {
+                GPIOUtils.writeIntFileUnder7("2","/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","1");
+            try {
+                GPIOUtils.writeIntFileUnder7("1","/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

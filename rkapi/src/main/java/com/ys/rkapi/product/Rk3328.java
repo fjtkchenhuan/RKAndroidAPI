@@ -146,4 +146,9 @@ public class Rk3328 extends RK {
     public int getCPUTemperature() {
         return 0;
     }
+
+    @Override
+    public void setADBOpen(boolean open) {
+
+    }
 }

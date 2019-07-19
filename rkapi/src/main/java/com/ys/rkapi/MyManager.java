@@ -31,6 +31,7 @@ import com.ys.rkapi.product.RK;
 import com.ys.rkapi.product.RkFactory;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -774,6 +775,93 @@ public class MyManager {
         return RkFactory.getRK().getCPUTemperature();
     }
 
+    public void setADBOpen(boolean open) {
+        RkFactory.getRK().setADBOpen(open);
+    }
+
+    public void replaceBootanimation(String path) {
+        String[] commands = new String[6];
+        commands[0] = "mount -o rw,remount -t ext4 /system";
+        commands[1] = "rm -rf system/media/bootanimation.zip";
+        commands[2] = "cp  "+ path + " system/media/bootanimation.zip";
+        commands[3] = "chmod 644 system/media/bootanimation.zip";
+        commands[4] = "sync";
+        commands[5] = "mount -o ro,remount -t ext4 /system";
+        for (int i = 0;i < commands.length;i ++)
+           Utils.execFor7(commands[i]);
+        reboot();
+    }
+
+    private void setScreenAndVoiceOpen(boolean open) {
+        if ("25".equals(Build.VERSION.SDK)) {
+            if (open) {
+                GPIOUtils.writeStringFileFor7(new File("/sys/class/backlight/backlight/bl_power"), "0");
+//            GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"),"1");
+            } else {
+                GPIOUtils.writeStringFileFor7(new File("/sys/class/backlight/backlight/bl_power"), "1");
+                GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"), "1");
+            }
+        }else {
+            if (open) {
+                try {
+                    GPIOUtils.writeIntFileUnder7("1","/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                try {
+                    GPIOUtils.writeIntFileUnder7("0","/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                    GPIOUtils.writeIntFileUnder7("1","/sys/bus/i2c/devices/2-0010/spkmode");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private void setStandByMode() {
+        if ("25".equals(Build.VERSION.SDK)) {
+            GPIOUtils.writeStringFileFor7(new File("/sys/class/backlight/backlight/bl_power"), "1");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/green_led"), "0");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/red_led"), "0");
+            GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"), "1");
+        }else {
+            try {
+                GPIOUtils.writeIntFileUnder7("0","/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                GPIOUtils.writeIntFileUnder7("1","/sys/bus/i2c/devices/2-0010/spkmode");
+                GPIOUtils.writeIntFileUnder7("0","/sys/devices/misc_power_en.23/green_led");
+                GPIOUtils.writeIntFileUnder7("0","/sys/devices/misc_power_en.23/red_led");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void setNormalMode() {
+        if ("25".equals(Build.VERSION.SDK)) {
+            GPIOUtils.writeStringFileFor7(new File("/sys/class/backlight/backlight/bl_power"), "0");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/green_led"), "1");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/red_led"), "1");
+//        GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"),"1");
+        }else {
+            try {
+                GPIOUtils.writeIntFileUnder7("1","/sys/devices/fb.8/graphics/fb0/pwr_bl");
+//                GPIOUtils.writeIntFileUnder7("1","/sys/bus/i2c/devices/2-0010/spkmode");
+                GPIOUtils.writeIntFileUnder7("1","/sys/devices/misc_power_en.23/green_led");
+                GPIOUtils.writeIntFileUnder7("1","/sys/devices/misc_power_en.23/red_led");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 //获取以太网的IP地址

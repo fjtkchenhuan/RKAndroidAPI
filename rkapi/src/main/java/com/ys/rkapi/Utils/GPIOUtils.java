@@ -91,11 +91,12 @@ public class GPIOUtils {
         file.setExecutable(true);
         file.setReadable(true);
         file.setWritable(true);
-        if (str.equals("0")) {
-            do_exec("busybox echo 0 > " + path);
-        } else {
-            do_exec("busybox echo 1 > " + path);
-        }
+        do_exec("busybox echo " + str + " >" + path);
+//        if (str.equals("0")) {
+//            do_exec("busybox echo 0 > " + path);
+//        } else {
+//            do_exec("busybox echo 1 > " + path);
+//        }
     }
 
 

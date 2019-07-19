@@ -53,7 +53,7 @@ public class Rk3288_7 extends RK {
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_STATUSBAR_STATE_LU).equals("0");
     }
 
     @Override
@@ -160,5 +160,17 @@ public class Rk3288_7 extends RK {
         String s = GPIOUtils.readGpioPGForLong("/sys/class/thermal/thermal_zone0/temp");
         int temp = Integer.parseInt(s.substring(0,5));
         return (int) (temp/1000);
+    }
+
+    @Override
+    public void setADBOpen(boolean open) {
+        if (open) {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","2");
+            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"2");
+        } else {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","1");
+            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"1");
+        }
+
     }
 }

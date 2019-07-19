@@ -520,6 +520,11 @@
             android:visibility="gone"
             android:text="设置正常模式" />
 
+        <Button
+            android:id="@+id/setDefaultLauncher"
+            style="@style/TestButton"
+            android:text="设置默认Launcher3" />
+
     </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
         </LinearLayout>
 

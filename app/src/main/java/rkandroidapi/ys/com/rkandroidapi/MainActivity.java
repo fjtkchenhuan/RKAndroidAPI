@@ -134,6 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.closeScreenAndVoice).setOnClickListener(this);
         findViewById(R.id.setStandByMode).setOnClickListener(this);
         findViewById(R.id.setNormalMode).setOnClickListener(this);
+        findViewById(R.id.setDefaultLauncher).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
     }
 
@@ -415,8 +416,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            case R.id.setStandByMode:
 //                manager.setStandByMode();
 //                break;
-            case R.id.setNormalMode:
+//            case R.id.setNormalMode:
 //                manager.setNormalMode();
+//                break;
+            case R.id.setDefaultLauncher:
+                manager.setDefaultLauncher("com.android.launcher3/com.android.launcher3.Launcher");
                 break;
             default:
                 break;

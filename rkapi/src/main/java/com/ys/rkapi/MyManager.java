@@ -863,6 +863,12 @@ public class MyManager {
         }
     }
 
+    public void setDefaultLauncher(String packageAndClassName) {
+        Intent intent = new Intent("com.ys.setDefaultLauncher");
+        intent.putExtra("defaultLauncher",packageAndClassName);
+        mContext.sendBroadcast(intent);
+    }
+
 
 //获取以太网的IP地址
 //    public String getEthIPAddress() {//ok

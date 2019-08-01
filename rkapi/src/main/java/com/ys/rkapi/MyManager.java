@@ -295,7 +295,11 @@ public class MyManager {
 
     //重启进入Recovery模式
     public void rebootRecovery() { // ok
-        RkFactory.getRK().rebootRecovery();
+        if ("25".equals(Build.VERSION.SDK)) {
+            Intent intent = new Intent("com.ys.recovery_system");
+            mContext.sendBroadcast(intent);
+        }else
+            RkFactory.getRK().rebootRecovery();
     }
 
     //静默安装APK

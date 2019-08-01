@@ -9,6 +9,7 @@ import com.ys.rkapi.Utils.GPIOUtils;
 import com.ys.rkapi.Utils.Utils;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Rk3128_7 extends RK {
 
@@ -36,7 +37,7 @@ public class Rk3128_7 extends RK {
     @Override
     public void rotateScreen(Context context, String degree) {
         Utils.setValueToProp("persist.sys.displayrot",degree);
-        File file = new File("/sys/devices/platform/ff150000.i2c/i2c-6/6-0050/rotate");
+        File file = new File("sys/devices/20072000.i2c/i2c-0/0-0054/rotate");
         if(file.exists()){
             GPIOUtils.writeStringFileFor7(file, degree);
         }
@@ -77,27 +78,38 @@ public class Rk3128_7 extends RK {
 
     @Override
     public void turnOffBackLight() {
-
+        try {
+            GPIOUtils.writeIntFileFor7("0","/sys/class/graphics/fb0/pwr_bl");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOnBackLight() {
-
+        try {
+            GPIOUtils.writeIntFileFor7("1","/sys/class/graphics/fb0/pwr_bl");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public boolean isBackLightOn() {
-        return false;
+        return "1".equals(GPIOUtils.readGpioPG("/sys/class/graphics/fb0/pwr_bl"));
     }
 
     @Override
     public void rebootRecovery() {
-
     }
 
     @Override
     public boolean silentInstallApk(String apkPath) {
-        return false;
+        return Utils.execFor7("pm install -r " + apkPath);
     }
 
     @Override
@@ -108,13 +120,25 @@ public class Rk3128_7 extends RK {
     }
 
     @Override
-    public void turnOnHDMI() {
-
+    public void turnOnHDMI() {///sys/class/display/HDMI/enable
+        try {
+            GPIOUtils.writeIntFileFor7("1","sys/class/display/HDMI/enable");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOffHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileFor7("0","sys/class/display/HDMI/enable");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -61,7 +61,7 @@ public class GPIOUtils {
         String product = VersionUtils.getAndroidModle();
         if ("22".equals(Build.VERSION.SDK))
             file = new File(Constant.HDMI_STATUS_3288);
-        else if (product.contains("rk3399"))
+        else
             file = new File(Constant.HDMI_STATUS_3399);
         String str = "";
         try {
@@ -81,7 +81,7 @@ public class GPIOUtils {
         }
         if  ("22".equals(Build.VERSION.SDK))
             ishdmi = str.equals("1");
-        else if (product.contains("rk3399"))
+        else
             ishdmi = str.equals("connected");
         return ishdmi;
     }

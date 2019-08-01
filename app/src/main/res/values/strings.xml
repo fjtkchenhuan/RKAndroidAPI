@@ -39,7 +39,7 @@
     <string name="install_update">安装升级</string>
     <string name="update_img">升级固件</string>
     <string name="recovery">进入recovery模式</string>
-    <string name="silent_install">静默安装</string>
+    <string name="silent_install">静默安装（根目录放置KeyTest.apk）</string>
 
 
     <string name="net">网络</string>
@@ -71,7 +71,7 @@
     <string name="switch_off_time">关闭自动确定时间</string>
     <string name="switch_on_time">打开自动确定时间</string>
     <string name="is_auto_time">是否开启自动更新时间</string>
-    <string name="su_order">su命令</string>
+    <string name="su_order">su命令是否有效</string>
     <string name="net_type">上网类型</string>
     <string name="screen_num">屏幕数</string>
     <string name="hdmi">是否有hdmi输出</string>

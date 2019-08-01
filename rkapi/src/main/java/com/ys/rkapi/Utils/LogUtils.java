@@ -1,5 +1,7 @@
 package com.ys.rkapi.Utils;
 
+import android.os.Build;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,7 +28,7 @@ public class LogUtils {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Utils.do_exec("logcat -v time  > " + path);
+                    Utils.execFor7("logcat -v time  > " + path);
                 }
             });
             t.start();
@@ -37,7 +39,7 @@ public class LogUtils {
            Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Utils.do_exec("busybox1.11 killall logcat");
+                    Utils.execFor7("busybox1.11 killall logcat");
                 }
             });
             t.start();

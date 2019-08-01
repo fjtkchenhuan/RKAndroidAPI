@@ -249,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.rotateScreen(this,"0");
                 break;
             case R.id.update_img:
-                manager.upgradeSystem("/mnt/media_rw/9260-8749/update.zip"); ///mnt/media_rw/10C0-C930/update.zip
+                manager.upgradeSystem("/mnt/media_rw/9260-8749/update.zip"); ///mnt/media_rw/10C0-C930/update.zip  Environment.getExternalStorageDirectory().getPath() + "/Download/update.zip"
                 Log.d("chenhuan","externalStoragePath = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
 //                ToastUtils.showToast(this,"3399和3328，暂未实现");
                 break;
@@ -257,7 +257,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.rebootRecovery();
                 break;
             case R.id.silent_install:
-                Log.d("chenhuan","ff = " + manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/KeyTest.apk"));// /mnt/sdcard/Download
+                boolean isScuess = manager.silentInstallApk(Environment.getExternalStorageDirectory().getPath() +"/KeyTest.apk");
+                Toast.makeText(this,"静默安装返回值" + isScuess,Toast.LENGTH_LONG).show();// /mnt/sdcard/Download
 //                Log.d("chenhuan","externalStoragePath = " + Environment.getExternalStorageDirectory().getPath() +"/test.apk");
 //                manager.silentInstallApk("/mnt/sdcard/Download/sougoushurufa_831.apk");
                 break;
@@ -377,7 +378,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.set_default_inputmethod:
                 ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
-                        manager.isSetDefaultInputMethodSuccess("com.iflytek.inputmethod/.FlyIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
+                        manager.isSetDefaultInputMethodSuccess("com.google.android.inputmethod.pinyin/.PinyinIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
                 break;
             case R.id.get_default_inputmethod:
                 ToastUtils.showToast(this,"当前输入法是:" + manager.getDefaultInputMethod());
@@ -420,6 +421,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                manager.setNormalMode();
 //                break;
             case R.id.setDefaultLauncher:
+                //
                 manager.setDefaultLauncher("com.android.launcher3/com.android.launcher3.Launcher");
                 break;
             default:

@@ -10,12 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="30sp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textColor="#f20909"
         android:text="RK API Test"
-        />
+        android:textColor="#f20909"
+        android:textSize="30sp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -26,527 +25,526 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/system_info" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/get_api_version"
-            style="@style/TestButton"
-            android:text="@string/get_api_version" />
-
-        <Button
-            android:id="@+id/get_device_type"
-            style="@style/TestButton"
-            android:text="@string/get_device_type" />
-
-        <Button
-            android:id="@+id/get_android_version"
-            style="@style/TestButton"
-            android:text="@string/get_android_version" />
-
-        <Button
-            android:id="@+id/get_firmware_size"
-            style="@style/TestButton"
-            android:text="@string/get_firmware_size" />
-
-        <Button
-            android:id="@+id/get_in_store_size"
-            style="@style/TestButton"
-            android:text="@string/get_in_store_size" />
-
-        <Button
-            android:id="@+id/get_firmware_sdk_version"
-            style="@style/TestButton"
-            android:text="@string/get_firmware_sdk_version" />
-
-        </LinearLayout>
-
-            <Button
-                android:id="@+id/get_firmware_kernel_version"
-                style="@style/TestButton"
-                android:text="@string/get_firmware_kernel_version" />
-
-            <Button
-                android:id="@+id/get_device_firmware_version"
-                style="@style/TestButton"
-                android:text="@string/get_device_firmware_version" />
-
-            <Button
-                android:id="@+id/get_firmware_date"
-                style="@style/TestButton"
-                android:text="@string/get_firmware_date" />
-
-            <Button
-                android:id="@+id/get_cpu_type"
-                style="@style/TestButton"
-                android:text="@string/get_cpu_type" />
-
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
-
-
-
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/shutdown_reboot" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/shutdown"
-            style="@style/TestButton"
-            android:text="@string/shutdown" />
-
-        <Button
-            android:id="@+id/reboot"
-            style="@style/TestButton"
-            android:text="@string/reboot" />
-
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
-
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/display" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/nav_bar_state"
-            style="@style/TestButton"
-            android:text="@string/nav_bar_state" />
-
-        <Button
-            android:id="@+id/nav_bar_hide_show"
-            style="@style/TestButton"
-            android:text="@string/nav_bar_hide_show" />
-
-        <Button
-            android:id="@+id/nav_bar_slide_state"
-            style="@style/TestButton"
-            android:text="@string/nav_bar_slide_state" />
-
-        <Button
-            android:id="@+id/nav_bar_slide"
-            style="@style/TestButton"
-            android:text="@string/nav_bar_slide" />
-
-        <Button
-            android:id="@+id/notification_bar_slide_state"
-            style="@style/TestButton"
-            android:text="@string/notification_bar_slide_state" />
-
-        <Button
-            android:id="@+id/notification_bar_slide"
-            style="@style/TestButton"
-            android:text="@string/notification_bar_slide" />
-
-        </LinearLayout>
-
-
-            <Button
-                android:id="@+id/screen_shot"
-                style="@style/TestButton"
-                android:text="@string/screen_shot" />
-
-            <Button
-                android:id="@+id/get_width_height"
-                style="@style/TestButton"
-                android:text="@string/get_width_height" />
-
-            <Button
-                android:id="@+id/change_screen_bright"
-                style="@style/TestButton"
-                android:text="@string/change_screen_bright" />
-
-            <Button
-                android:id="@+id/open_screen_bright"
-                style="@style/TestButton"
-                android:text="@string/open_screen_bright" />
-
-            <Button
-                android:id="@+id/close_screen_bright"
-                style="@style/TestButton"
-                android:text="@string/close_screen_bright" />
-
-            <Button
-                android:id="@+id/is_screen_light_on"
-                style="@style/TestButton"
-                android:text="@string/is_screen_bright_on" />
-
-            <Button
-                android:id="@+id/get_brightness"
-                style="@style/TestButton"
-                android:text="@string/get_brightness" />
-
-            <Button
-                android:id="@+id/open_hdmi"
-                style="@style/TestButton"
-                android:text="@string/open_hdmi" />
-
-            <Button
-                android:id="@+id/close_hdmi"
-                style="@style/TestButton"
-                android:text="@string/close_hdmi" />
-
-            <Button
-                android:id="@+id/rotate_90"
-                style="@style/TestButton"
-                android:text="@string/rotate_90" />
-
-            <Button
-                android:id="@+id/rotate_0"
-                style="@style/TestButton"
-                android:text="@string/rotate_0" />
-
-
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
-
-
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/install_update" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/update_img"
-            style="@style/TestButton"
-            android:text="@string/update_img"/>
-
-        <Button
-            android:id="@+id/recovery"
-            style="@style/TestButton"
-            android:text="@string/recovery"/>
-
-        <Button
-            android:id="@+id/silent_install"
-            style="@style/TestButton"
-            android:text="@string/silent_install"/>
-
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
-
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/net" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/get_eth_status"
-            style="@style/TestButton"
-            android:text="@string/get_eth_statuse" />
-
-        <Button
-            android:id="@+id/get_eth_mode"
-            style="@style/TestButton"
-            android:text="@string/get_eth_mode"/>
-
-        <Button
-            android:id="@+id/get_eth_mac"
-            style="@style/TestButton"
-            android:text="@string/get_eth_mac"/>
-
-
-
-        <Button
-            android:id="@+id/get_eth_ip"
-            style="@style/TestButton"
-            android:text="@string/get_eth_ip"/>
-
-        <Button
-            android:id="@+id/set_eth_ip"
-            style="@style/TestButton"
-            android:text="@string/set_eth_ip"/>
-
-        <Button
-            android:id="@+id/open_eth"
-            style="@style/TestButton"
-            android:text="@string/open_eth"/>
-
-        <Button
-            android:id="@+id/close_eth"
-            style="@style/TestButton"
-            android:text="@string/close_eth"/>
-
-        <Button
-            android:id="@+id/set_dhcp_eth"
-            style="@style/TestButton"
-            android:text="@string/set_dhcp_eth"/>
-
-
-
-        <Button
-            android:id="@+id/get_gateway"
-            style="@style/TestButton"
-            android:text="@string/get_gateway"/>
-
-        <Button
-            android:id="@+id/get_mask"
-            style="@style/TestButton"
-            android:text="@string/get_mask"/>
-
-        <Button
-            android:id="@+id/get_dns1"
-            style="@style/TestButton"
-            android:text="@string/get_dns1"/>
-
-        <Button
-            android:id="@+id/get_dns2"
-            style="@style/TestButton"
-            android:text="@string/get_dns2"/>
-
-        <Button
-            android:id="@+id/set_eth_mac"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="@string/set_eth_mac" />
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
-
-
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/storage" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/externel_sd_path"
-            style="@style/TestButton"
-            android:text="@string/externel_sd_path"/>
-
-        <Button
-            android:id="@+id/externel_u_path"
-            style="@style/TestButton"
-            android:text="@string/externel_u_path"/>
-
-        <Button
-            android:id="@+id/get_uartPath"
-            style="@style/TestButton"
-            android:text="@string/get_uartPath"/>
-
-        <Button
-            android:id="@+id/uninstall_externel"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="@string/uninstall_externel"/>
-
-        <Button
-            android:id="@+id/mount_externel"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="@string/mount_externel"/>
-
-        <Button
-            android:id="@+id/read_eeprom"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="@string/read_eeprom"/>
-
-        <Button
-            android:id="@+id/write_eeprom"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="@string/write_eeprom"/>
-
-
-
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
-
-    <TextView
-        style="@style/TitleText"
-        android:text="@string/other" />
-
-    <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-        android:id="@+id/set_time"
-        style="@style/TestButton"
-        android:text="@string/set_time"/>
-
-        <Button
-            android:id="@+id/switch_off_time"
-            style="@style/TestButton"
-            android:text="@string/switch_off_time"/>
-
-        <Button
-            android:id="@+id/switch_on_time"
-            style="@style/TestButton"
-            android:text="@string/switch_on_time"/>
-
-        <Button
-            android:id="@+id/is_auto_time"
-            style="@style/TestButton"
-            android:text="@string/is_auto_time"/>
-
-        <Button
-            android:id="@+id/su_order"
-            style="@style/TestButton"
-            android:text="@string/su_order"/>
-
-        <Button
-            android:id="@+id/net_type"
-            style="@style/TestButton"
-            android:text="@string/net_type"/>
-
-        <Button
-            android:id="@+id/screen_num"
-            style="@style/TestButton"
-            android:text="@string/screen_num"/>
-
-        <Button
-            android:id="@+id/hdmi"
-            style="@style/TestButton"
-            android:text="@string/hdmi"/>
-
-        <Button
-            android:id="@+id/open_softkeyboard"
-            style="@style/TestButton"
-            android:text="打开软键盘" />
-
-        <Button
-            android:id="@+id/close_softkeyboard"
-            style="@style/TestButton"
-            android:text="隐藏软键盘" />
-
-        <Button
-            android:id="@+id/set_dormant_interval"
-            style="@style/TestButton"
-            android:text="设置休眠时间15s" />
-
-        <Button
-            android:id="@+id/set_default_inputmethod"
-            style="@style/TestButton"
-            android:text="设置默认输入法（谷歌拼音）" />
-
-        <Button
-            android:id="@+id/get_default_inputmethod"
-            style="@style/TestButton"
-            android:text="获取当前输入法" />
-
-        <Button
-            android:id="@+id/set_language"
-            style="@style/TestButton"
-            android:text="设置语言为英文" />
-
-       <Button
-           android:id="@+id/get_kernel_log"
-           style="@style/TestButton"
-           android:text="获取内核日志" />
-
-        <Button
-            android:id="@+id/get_android_log"
-            style="@style/TestButton"
-            android:text="获取安卓层日志" />
-
-        <Button
-            android:id="@+id/stop_android_log"
-            style="@style/TestButton"
-            android:text="停止获取安卓层日志" />
-
-        <Button
-            android:id="@+id/get_cpu_temp"
-            style="@style/TestButton"
-            android:text="获取CPU温度" />
-
-        <Button
-            android:id="@+id/set_adb_open"
-            style="@style/TestButton"
-            android:text="打开adb" />
-
-        <Button
-            android:id="@+id/set_adb_close"
-            style="@style/TestButton"
-            android:text="关闭adb" />
-
-        <Button
-            android:id="@+id/replaceBootanimation"
-            style="@style/TestButton"
-            android:text="替换开机动画" />
-
-        <Button
-            android:id="@+id/openScreenAndVoice"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="打开背光和声音" />
-
-        <Button
-            android:id="@+id/closeScreenAndVoice"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="关闭背光和声音" />
-
-        <Button
-            android:id="@+id/setStandByMode"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="设置待机模式" />
-
-        <Button
-            android:id="@+id/setNormalMode"
-            style="@style/TestButton"
-            android:visibility="gone"
-            android:text="设置正常模式" />
-
-        <Button
-            android:id="@+id/setDefaultLauncher"
-            style="@style/TestButton"
-            android:text="设置默认Launcher3" />
-
-    </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/system_info" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/get_api_version"
+                        style="@style/TestButton"
+                        android:text="@string/get_api_version" />
+
+                    <Button
+                        android:id="@+id/get_device_type"
+                        style="@style/TestButton"
+                        android:text="@string/get_device_type" />
+
+                    <Button
+                        android:id="@+id/get_android_version"
+                        style="@style/TestButton"
+                        android:text="@string/get_android_version" />
+
+                    <Button
+                        android:id="@+id/get_firmware_size"
+                        style="@style/TestButton"
+                        android:text="@string/get_firmware_size" />
+
+                    <Button
+                        android:id="@+id/get_in_store_size"
+                        style="@style/TestButton"
+                        android:text="@string/get_in_store_size" />
+
+                    <Button
+                        android:id="@+id/get_firmware_sdk_version"
+                        style="@style/TestButton"
+                        android:text="@string/get_firmware_sdk_version" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/get_firmware_kernel_version"
+                    style="@style/TestButton"
+                    android:text="@string/get_firmware_kernel_version" />
+
+                <Button
+                    android:id="@+id/get_device_firmware_version"
+                    style="@style/TestButton"
+                    android:text="@string/get_device_firmware_version" />
+
+                <Button
+                    android:id="@+id/get_firmware_date"
+                    style="@style/TestButton"
+                    android:text="@string/get_firmware_date" />
+
+                <Button
+                    android:id="@+id/get_cpu_type"
+                    style="@style/TestButton"
+                    android:text="@string/get_cpu_type" />
+
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/shutdown_reboot" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/shutdown"
+                    style="@style/TestButton"
+                    android:text="@string/shutdown" />
+
+                <Button
+                    android:id="@+id/reboot"
+                    style="@style/TestButton"
+                    android:text="@string/reboot" />
+
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/display" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/nav_bar_state"
+                        style="@style/TestButton"
+                        android:text="@string/nav_bar_state" />
+
+                    <Button
+                        android:id="@+id/nav_bar_hide_show"
+                        style="@style/TestButton"
+                        android:text="@string/nav_bar_hide_show" />
+
+                    <Button
+                        android:id="@+id/nav_bar_slide_state"
+                        style="@style/TestButton"
+                        android:text="@string/nav_bar_slide_state" />
+
+                    <Button
+                        android:id="@+id/nav_bar_slide"
+                        style="@style/TestButton"
+                        android:text="@string/nav_bar_slide" />
+
+                    <Button
+                        android:id="@+id/notification_bar_slide_state"
+                        style="@style/TestButton"
+                        android:text="@string/notification_bar_slide_state" />
+
+                    <Button
+                        android:id="@+id/notification_bar_slide"
+                        style="@style/TestButton"
+                        android:text="@string/notification_bar_slide" />
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/screen_shot"
+                    style="@style/TestButton"
+                    android:text="@string/screen_shot" />
+
+                <Button
+                    android:id="@+id/get_width_height"
+                    style="@style/TestButton"
+                    android:text="@string/get_width_height" />
+
+                <Button
+                    android:id="@+id/change_screen_bright"
+                    style="@style/TestButton"
+                    android:text="@string/change_screen_bright" />
+
+                <Button
+                    android:id="@+id/open_screen_bright"
+                    style="@style/TestButton"
+                    android:text="@string/open_screen_bright" />
+
+                <Button
+                    android:id="@+id/close_screen_bright"
+                    style="@style/TestButton"
+                    android:text="@string/close_screen_bright" />
+
+                <Button
+                    android:id="@+id/is_screen_light_on"
+                    style="@style/TestButton"
+                    android:text="@string/is_screen_bright_on" />
+
+                <Button
+                    android:id="@+id/get_brightness"
+                    style="@style/TestButton"
+                    android:text="@string/get_brightness" />
+
+                <Button
+                    android:id="@+id/open_hdmi"
+                    style="@style/TestButton"
+                    android:text="@string/open_hdmi" />
+
+                <Button
+                    android:id="@+id/close_hdmi"
+                    style="@style/TestButton"
+                    android:text="@string/close_hdmi" />
+
+                <Button
+                    android:id="@+id/rotate_90"
+                    style="@style/TestButton"
+                    android:text="@string/rotate_90" />
+
+                <Button
+                    android:id="@+id/rotate_0"
+                    style="@style/TestButton"
+                    android:text="@string/rotate_0" />
+
+
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/install_update" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/update_img"
+                    style="@style/TestButton"
+                    android:text="@string/update_img" />
+
+                <Button
+                    android:id="@+id/recovery"
+                    style="@style/TestButton"
+                    android:text="@string/recovery" />
+
+                <Button
+                    android:id="@+id/silent_install"
+                    style="@style/TestButton"
+                    android:text="@string/silent_install" />
+
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/net" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/get_eth_status"
+                    style="@style/TestButton"
+                    android:text="@string/get_eth_statuse" />
+
+                <Button
+                    android:id="@+id/get_eth_mode"
+                    style="@style/TestButton"
+                    android:text="@string/get_eth_mode" />
+
+                <Button
+                    android:id="@+id/get_eth_mac"
+                    style="@style/TestButton"
+                    android:text="@string/get_eth_mac" />
+
+
+                <Button
+                    android:id="@+id/get_eth_ip"
+                    style="@style/TestButton"
+                    android:text="@string/get_eth_ip" />
+
+                <Button
+                    android:id="@+id/set_eth_ip"
+                    style="@style/TestButton"
+                    android:text="@string/set_eth_ip" />
+
+                <Button
+                    android:id="@+id/open_eth"
+                    style="@style/TestButton"
+                    android:text="@string/open_eth" />
+
+                <Button
+                    android:id="@+id/close_eth"
+                    style="@style/TestButton"
+                    android:text="@string/close_eth" />
+
+                <Button
+                    android:id="@+id/set_dhcp_eth"
+                    style="@style/TestButton"
+                    android:text="@string/set_dhcp_eth" />
+
+
+                <Button
+                    android:id="@+id/get_gateway"
+                    style="@style/TestButton"
+                    android:text="@string/get_gateway" />
+
+                <Button
+                    android:id="@+id/get_mask"
+                    style="@style/TestButton"
+                    android:text="@string/get_mask" />
+
+                <Button
+                    android:id="@+id/get_dns1"
+                    style="@style/TestButton"
+                    android:text="@string/get_dns1" />
+
+                <Button
+                    android:id="@+id/get_dns2"
+                    style="@style/TestButton"
+                    android:text="@string/get_dns2" />
+
+                <Button
+                    android:id="@+id/set_eth_mac"
+                    style="@style/TestButton"
+                    android:text="@string/set_eth_mac"
+                    android:visibility="gone" />
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/storage" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/externel_sd_path"
+                    style="@style/TestButton"
+                    android:text="@string/externel_sd_path" />
+
+                <Button
+                    android:id="@+id/externel_u_path"
+                    style="@style/TestButton"
+                    android:text="@string/externel_u_path" />
+
+                <Button
+                    android:id="@+id/get_uartPath"
+                    style="@style/TestButton"
+                    android:text="@string/get_uartPath" />
+
+                <Button
+                    android:id="@+id/uninstall_externel"
+                    style="@style/TestButton"
+                    android:text="@string/uninstall_externel"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/mount_externel"
+                    style="@style/TestButton"
+                    android:text="@string/mount_externel"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/read_eeprom"
+                    style="@style/TestButton"
+                    android:text="@string/read_eeprom"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/write_eeprom"
+                    style="@style/TestButton"
+                    android:text="@string/write_eeprom"
+                    android:visibility="gone" />
+
+
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/other" />
+
+            <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/set_time"
+                    style="@style/TestButton"
+                    android:text="@string/set_time" />
+
+                <Button
+                    android:id="@+id/switch_off_time"
+                    style="@style/TestButton"
+                    android:text="@string/switch_off_time" />
+
+                <Button
+                    android:id="@+id/switch_on_time"
+                    style="@style/TestButton"
+                    android:text="@string/switch_on_time" />
+
+                <Button
+                    android:id="@+id/is_auto_time"
+                    style="@style/TestButton"
+                    android:text="@string/is_auto_time" />
+
+                <Button
+                    android:id="@+id/su_order"
+                    style="@style/TestButton"
+                    android:text="@string/su_order" />
+
+                <Button
+                    android:id="@+id/net_type"
+                    style="@style/TestButton"
+                    android:text="@string/net_type" />
+
+                <Button
+                    android:id="@+id/screen_num"
+                    style="@style/TestButton"
+                    android:text="@string/screen_num" />
+
+                <Button
+                    android:id="@+id/hdmi"
+                    style="@style/TestButton"
+                    android:text="@string/hdmi" />
+
+                <Button
+                    android:id="@+id/open_softkeyboard"
+                    style="@style/TestButton"
+                    android:text="打开软键盘" />
+
+                <Button
+                    android:id="@+id/close_softkeyboard"
+                    style="@style/TestButton"
+                    android:text="隐藏软键盘" />
+
+                <Button
+                    android:id="@+id/set_dormant_interval"
+                    style="@style/TestButton"
+                    android:text="设置休眠时间15s" />
+
+                <Button
+                    android:id="@+id/set_default_inputmethod"
+                    style="@style/TestButton"
+                    android:text="设置默认输入法（谷歌拼音）" />
+
+                <Button
+                    android:id="@+id/get_default_inputmethod"
+                    style="@style/TestButton"
+                    android:text="获取当前输入法" />
+
+                <Button
+                    android:id="@+id/set_language"
+                    style="@style/TestButton"
+                    android:text="设置语言为英文" />
+
+
+                <Button
+                    android:id="@+id/get_cpu_temp"
+                    style="@style/TestButton"
+                    android:text="获取CPU温度" />
+
+                <Button
+                    android:id="@+id/set_adb_open"
+                    style="@style/TestButton"
+                    android:text="打开adb" />
+
+                <Button
+                    android:id="@+id/set_adb_close"
+                    style="@style/TestButton"
+                    android:text="关闭adb" />
+
+                <Button
+                    android:id="@+id/replaceBootanimation"
+                    style="@style/TestButton"
+                    android:text="替换开机动画(放置根目录)" />
+
+                <Button
+                    android:id="@+id/setDefaultLauncher"
+                    style="@style/TestButton"
+                    android:text="设置默认Launcher3" />
+
+                <Button
+                    android:id="@+id/get_kernel_log"
+                    style="@style/TestButton"
+                    android:text="获取内核日志"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/get_android_log"
+                    style="@style/TestButton"
+                    android:text="获取安卓层日志"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/stop_android_log"
+                    style="@style/TestButton"
+                    android:text="停止获取安卓层日志"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/openScreenAndVoice"
+                    style="@style/TestButton"
+                    android:text="打开背光和声音"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/closeScreenAndVoice"
+                    style="@style/TestButton"
+                    android:text="关闭背光和声音"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/setStandByMode"
+                    style="@style/TestButton"
+                    android:text="设置待机模式"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/setNormalMode"
+                    style="@style/TestButton"
+                    android:text="设置正常模式"
+                    android:visibility="gone" />
+
+            </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
         </LinearLayout>
 
     </ScrollView>
 
 
-
     <!--<LinearLayout-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="horizontal">-->
 
     <!--<EditText-->
-        <!--android:id="@+id/volume_value"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="请输入音量值"/>-->
+    <!--android:id="@+id/volume_value"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:hint="请输入音量值"/>-->
 
-        <!--<Button-->
-            <!--android:id="@+id/set_volume"-->
-            <!--style="@style/TestButton"-->
-            <!--android:text="@string/set_volume"/>-->
+    <!--<Button-->
+    <!--android:id="@+id/set_volume"-->
+    <!--style="@style/TestButton"-->
+    <!--android:text="@string/set_volume"/>-->
 
     <!--</LinearLayout>-->
 </LinearLayout>

@@ -16,7 +16,8 @@ interface IgetMessage {
     String getEthDns2();
     String getGateway();
     String getNetMask();
-    boolean isSuccess(String path);
+    String getDhcpIpAddress();
+    boolean isSuccessScreenshot(String path);
     boolean isSetDefaultInputMethodSuccess(String defaultInputMethod);
     String getDefaultInputMethod();
 }

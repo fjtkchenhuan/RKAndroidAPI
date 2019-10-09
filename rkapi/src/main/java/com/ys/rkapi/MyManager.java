@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.pm.PackageManager;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.os.IBinder;
@@ -27,8 +26,7 @@ import com.ys.rkapi.Utils.StorageUtils;
 import com.ys.rkapi.Utils.TimeUtils;
 import com.ys.rkapi.Utils.VersionUtils;
 import com.ys.rkapi.Utils.Utils;
-import com.ys.rkapi.product.RK;
-import com.ys.rkapi.product.RkFactory;
+import com.ys.rkapi.product.YsFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -64,6 +62,7 @@ public class MyManager {
         if (mContext != null) {
             Intent intent = new Intent();
             intent.setAction(action);
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -73,6 +72,7 @@ public class MyManager {
             Intent intent = new Intent();
             intent.setAction(action);
             intent.putExtra(key, value);
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -83,6 +83,7 @@ public class MyManager {
             intent.setAction(action);
             intent.putExtra(key1, value1);
             intent.putExtra(key2, value2);
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -92,6 +93,7 @@ public class MyManager {
             Intent intent = new Intent();
             intent.setAction(action);
             intent.putExtra(key, value);
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -165,7 +167,7 @@ public class MyManager {
         boolean flag = false;
         if (igetMessage != null) {
             try {
-                flag = igetMessage.isSuccess(path);
+                flag = igetMessage.isSuccessScreenshot(path);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -175,60 +177,60 @@ public class MyManager {
 
     // 旋转屏幕
     public void rotateScreen(Context context, String degree) {  /// error
-        RkFactory.getRK().rotateScreen(context,degree);
+        YsFactory.getRK().rotateScreen(context, degree);
     }
 
-    public void setPowerOn(Context context,long powerOnTime) {
+    public void setPowerOn(Context context, long powerOnTime) {
         Intent intent = new Intent("com.ys.setPowerOnTime");
-        intent.putExtra("powerOnTime",powerOnTime);
-        Log.d("chenhuan","powerOnTime = " + powerOnTime);
+        intent.putExtra("powerOnTime", powerOnTime);
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+        Log.d("chenhuan", "powerOnTime = " + powerOnTime);
         context.sendBroadcast(intent);
     }
 
 
-
     public boolean getNavBarHideState() {
-        return RkFactory.getRK().getNavBarHideState(mContext);
+        return YsFactory.getRK().getNavBarHideState(mContext);
     }
 
     //设置显示或隐藏导航
-    public void hideNavBar(boolean hide) {  // ok
-            Intent intent = new Intent();
-            if (!hide) {
-                intent.setAction("android.action.adtv.showNavigationBar");
-                mContext.sendBroadcast(intent);
-            } else {
-                intent.setAction("android.action.adtv.hideNavigationBar");
-                mContext.sendBroadcast(intent);
-            }
-
+    public void hideNavBar(boolean hide) {
+        Intent intent = new Intent();
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+        if (!hide) {
+            intent.setAction("android.action.adtv.showNavigationBar");
+            mContext.sendBroadcast(intent);
+        } else {
+            intent.setAction("android.action.adtv.hideNavigationBar");
+            mContext.sendBroadcast(intent);
+        }
     }
 
     public boolean isSlideShowNavBarOpen() {
-        return RkFactory.getRK().isSlideShowNavBarOpen();
+        return YsFactory.getRK().isSlideShowNavBarOpen();
     }
 
     public void setSlideShowNavBar(boolean flag) {
-        RkFactory.getRK().setSlideShowNavBar(mContext,flag);
+        YsFactory.getRK().setSlideShowNavBar(mContext, flag);
     }
 
     public boolean isSlideShowNotificationBarOpen() {
-        return RkFactory.getRK().isSlideShowNotificationBarOpen();
+        return YsFactory.getRK().isSlideShowNotificationBarOpen();
     }
 
     public void setSlideShowNotificationBar(boolean flag) {
-        RkFactory.getRK().setSlideShowNotificationBar(mContext,flag);
+        YsFactory.getRK().setSlideShowNotificationBar(mContext, flag);
     }
 
-    public  int getDisplayWidth(Context context){
-        WindowManager manager = ((Activity)context).getWindowManager();
+    public int getDisplayWidth(Context context) {
+        WindowManager manager = ((Activity) context).getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.widthPixels;
     }
 
-    public  int getDisplayHeight(Context context){
-        WindowManager manager = ((Activity)context).getWindowManager();
+    public int getDisplayHeight(Context context) {
+        WindowManager manager = ((Activity) context).getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
         return outMetrics.heightPixels;
@@ -237,16 +239,16 @@ public class MyManager {
 
     //关背光
     public void turnOffBackLight() {
-        RkFactory.getRK().turnOffBackLight();
+        YsFactory.getRK().turnOffBackLight();
     }
 
     //开背光
     public void turnOnBackLight() {
-        RkFactory.getRK().turnOnBackLight();
+        YsFactory.getRK().turnOnBackLight();
     }
 
-    public boolean isBacklightOn(){
-        return RkFactory.getRK().isBackLightOn();
+    public boolean isBacklightOn() {
+        return YsFactory.getRK().isBackLightOn();
     }
 
     public int getSystemBrightness() {
@@ -254,7 +256,7 @@ public class MyManager {
         int value = 0;
         try {
             systemBrightness = Settings.System.getInt(mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
-            value =  systemBrightness * 100 / 255;
+            value = systemBrightness * 100 / 255;
         } catch (Settings.SettingNotFoundException e) {
             e.printStackTrace();
         }
@@ -263,34 +265,24 @@ public class MyManager {
 
 
     public void turnOnHDMI() {
-//        Utils.writeFile(new File(Constant.HDMI_STATUS_3399),"on");
-        RkFactory.getRK().turnOnHDMI();
-//        try {
-//            GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3288);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
+        YsFactory.getRK().turnOnHDMI();
     }
 
     public void turnOffHDMI() {
-//        Utils.writeFile(new File(Constant.HDMI_STATUS_3399),"off");
-        RkFactory.getRK().turnOffHDMI();
-//        try {
-//            GPIOUtils.writeIntFileUnder7("0",Constant.HDMI_STATUS_3288);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        YsFactory.getRK().turnOffHDMI();
     }
 
     //升级固件
     // 固件存放的绝对路径
     public void upgradeSystem(String absolutePath) {//  ok
-        sendMyBroadcastWithExtra(Constant.FIRMWARE_UPGRADE_ACTION, Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
+        if (Build.VERSION.SDK.equals("27")) {
+            Intent intent = new Intent();
+            intent.setAction(Constant.FIRMWARE_UPGRADE_ACTION);
+            intent.putExtra(Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
+            intent.setPackage("com.ys.gtupdatezip");
+            mContext.sendBroadcast(intent);
+        }else
+          sendMyBroadcastWithExtra(Constant.FIRMWARE_UPGRADE_ACTION, Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
     }
 
     //重启进入Recovery模式
@@ -298,19 +290,19 @@ public class MyManager {
         if ("25".equals(Build.VERSION.SDK)) {
             Intent intent = new Intent("com.ys.recovery_system");
             mContext.sendBroadcast(intent);
-        }else
-            RkFactory.getRK().rebootRecovery();
+        } else
+            YsFactory.getRK().rebootRecovery(mContext);
     }
 
     //静默安装APK
     //安装成功返回true 否则返回false
     public boolean silentInstallApk(String apkPath) {//////  ok
-        return RkFactory.getRK().silentInstallApk(apkPath);
+        return YsFactory.getRK().silentInstallApk(apkPath);
     }
 
     //设置以太网Mac地址
     public void setEthMacAddress(String val) {
-        RkFactory.getRK().setEthMacAddress(mContext,val);
+        YsFactory.getRK().setEthMacAddress(mContext, val);
     }
 
     //获取以太网MAC地址
@@ -454,27 +446,43 @@ public class MyManager {
     }
 
 
-
     //设置动态获取IP
     public void setDhcpIpAddress(Context context) {
         Intent intent = new Intent("com.ys.set_dhcp");
-        intent.putExtra("useStaticIP",0);
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+        intent.putExtra("useStaticIP", 0);
         context.sendBroadcast(intent);
     }
 
     //获取以太网动态IP地址
-    public String getDhcpIpAddress() {//ok
-        return NetUtils.getDynamicEthIPAddress(mContext);
+    public String getDhcpIpAddress() {
+        String address = "";
+        if ("27".equals(Build.VERSION.SDK)) {
+            if (igetMessage != null) {
+                try {
+                    address = igetMessage.getDhcpIpAddress();
+                } catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else
+            address = NetUtils.getDynamicEthIPAddress(mContext);
+        return address;
     }
 
     //以太网使能 OnOff true 连接 false断开
     public void ethEnabled(boolean enable) {
-        NetUtils.setEthernetEnabled(mContext, enable);
-        Log.d(TAG, "mContext == null:::" + (mContext == null));
+        if ("27".equals(Build.VERSION.SDK)) {
+            Intent intent = new Intent(Constant.SET_ETH_ENABLE_ACTION);
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+            intent.putExtra(Constant.ETH_MODE, enable);
+            mContext.sendBroadcast(intent);
+        } else
+            NetUtils.setEthernetEnabled(mContext, enable);
     }
 
     public void setSoftKeyboardHidden(boolean hidden) {
-        RkFactory.getRK().setSoftKeyboardHidden(hidden);
+        YsFactory.getRK().setSoftKeyboardHidden(hidden);
     }
 
     // 获取外置SD卡的路径
@@ -562,12 +570,12 @@ public class MyManager {
     }
 
     public String getGPIOStatus(String path) {
-         return GPIOUtils.readGpioPG("/sys/devices/misc_power_en.23/" + path);
+        return GPIOUtils.readGpioPG("/sys/devices/misc_power_en.23/" + path);
     }
 
-    public void setGPIOStatus(String value,String path) {
+    public void setGPIOStatus(String value, String path) {
         try {
-            GPIOUtils.writeIntFileUnder7(value,"/sys/devices/misc_power_en.23/" + path);
+            GPIOUtils.writeIntFileUnder7(value, "/sys/devices/misc_power_en.23/" + path);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -598,8 +606,8 @@ public class MyManager {
     }
 
     // 设置时间  24小时制
-    public void setTime(int year, int month, int day, int hour, int minute,int sec) {////// ok
-        sendMyBroadcastWithLongExtra(Constant.UPDATE_TIME_ACTION, Constant.UPDATE_TIME_KEY, TimeUtils.getTimeMills(year, month, day, hour, minute,sec));
+    public void setTime(int year, int month, int day, int hour, int minute, int sec) {////// ok
+        sendMyBroadcastWithLongExtra(Constant.UPDATE_TIME_ACTION, Constant.UPDATE_TIME_KEY, TimeUtils.getTimeMills(year, month, day, hour, minute, sec));
     }
 
     public void setTime(long currentTimeMillis) {///////ok
@@ -704,14 +712,16 @@ public class MyManager {
     //控制自动确定日期和时间的开关
     public void switchAutoTime(boolean open) {
         Intent intent = new Intent("com.ys.switch_auto_set_time");
-        intent.putExtra("switch_auto_time",open);
+        intent.putExtra("switch_auto_time", open);
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         mContext.sendBroadcast(intent);
     }
 
-    public void setLanguage(String language,String country) {
+    public void setLanguage(String language, String country) {
         Intent intent = new Intent("com.ys.set_language");
-        intent.putExtra("language",language);
-        intent.putExtra("country",country);
+        intent.putExtra("language", language);
+        intent.putExtra("country", country);
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         mContext.sendBroadcast(intent);
     }
 
@@ -732,19 +742,19 @@ public class MyManager {
             for (String s : txtLists) {
                 buffer.append(s + "\n");
             }
-            LogUtils.saveToSDCard(path,buffer.toString());
+            LogUtils.saveToSDCard(path, buffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void changeScreenLight(int value) {
-        RkFactory.getRK().changeScreenLight(mContext,value);
+        YsFactory.getRK().changeScreenLight(mContext, value);
 
     }
 
-    public void setDormantInterval(Context context,long time) {
-        RkFactory.getRK().setDormantInterval(context,time);
+    public void setDormantInterval(Context context, long time) {
+        YsFactory.getRK().setDormantInterval(context, time);
     }
 
     //获取设置默认输入法是否成功
@@ -762,7 +772,7 @@ public class MyManager {
     }
 
     //获取当前的输入法
-    public String getDefaultInputMethod(){
+    public String getDefaultInputMethod() {
         String defaultInputMethod = "";
         if (igetMessage != null) {
             try {
@@ -776,23 +786,23 @@ public class MyManager {
 
     //获取CPU温度
     public int getCPUTemperature() {
-        return RkFactory.getRK().getCPUTemperature();
+        return YsFactory.getRK().getCPUTemperature();
     }
 
     public void setADBOpen(boolean open) {
-        RkFactory.getRK().setADBOpen(open);
+        YsFactory.getRK().setADBOpen(open);
     }
 
     public void replaceBootanimation(String path) {
         String[] commands = new String[6];
         commands[0] = "mount -o rw,remount -t ext4 /system";
         commands[1] = "rm -rf system/media/bootanimation.zip";
-        commands[2] = "cp  "+ path + " system/media/bootanimation.zip";
+        commands[2] = "cp  " + path + " system/media/bootanimation.zip";
         commands[3] = "chmod 644 system/media/bootanimation.zip";
         commands[4] = "sync";
         commands[5] = "mount -o ro,remount -t ext4 /system";
-        for (int i = 0;i < commands.length;i ++)
-           Utils.execFor7(commands[i]);
+        for (int i = 0; i < commands.length; i++)
+            Utils.execFor7(commands[i]);
         reboot();
     }
 
@@ -805,19 +815,19 @@ public class MyManager {
                 GPIOUtils.writeStringFileFor7(new File("/sys/class/backlight/backlight/bl_power"), "1");
                 GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"), "1");
             }
-        }else {
+        } else {
             if (open) {
                 try {
-                    GPIOUtils.writeIntFileUnder7("1","/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                    GPIOUtils.writeIntFileUnder7("1", "/sys/devices/fb.8/graphics/fb0/pwr_bl");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }else {
+            } else {
                 try {
-                    GPIOUtils.writeIntFileUnder7("0","/sys/devices/fb.8/graphics/fb0/pwr_bl");
-                    GPIOUtils.writeIntFileUnder7("1","/sys/bus/i2c/devices/2-0010/spkmode");
+                    GPIOUtils.writeIntFileUnder7("0", "/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                    GPIOUtils.writeIntFileUnder7("1", "/sys/bus/i2c/devices/2-0010/spkmode");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -833,12 +843,12 @@ public class MyManager {
             GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/green_led"), "0");
             GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/red_led"), "0");
             GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"), "1");
-        }else {
+        } else {
             try {
-                GPIOUtils.writeIntFileUnder7("0","/sys/devices/fb.8/graphics/fb0/pwr_bl");
-                GPIOUtils.writeIntFileUnder7("1","/sys/bus/i2c/devices/2-0010/spkmode");
-                GPIOUtils.writeIntFileUnder7("0","/sys/devices/misc_power_en.23/green_led");
-                GPIOUtils.writeIntFileUnder7("0","/sys/devices/misc_power_en.23/red_led");
+                GPIOUtils.writeIntFileUnder7("0", "/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                GPIOUtils.writeIntFileUnder7("1", "/sys/bus/i2c/devices/2-0010/spkmode");
+                GPIOUtils.writeIntFileUnder7("0", "/sys/devices/misc_power_en.23/green_led");
+                GPIOUtils.writeIntFileUnder7("0", "/sys/devices/misc_power_en.23/red_led");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -853,12 +863,12 @@ public class MyManager {
             GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/green_led"), "1");
             GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/misc_power_en/red_led"), "1");
 //        GPIOUtils.writeStringFileFor7(new File("/sys/bus/i2c/devices/2-0010/spkmode"),"1");
-        }else {
+        } else {
             try {
-                GPIOUtils.writeIntFileUnder7("1","/sys/devices/fb.8/graphics/fb0/pwr_bl");
+                GPIOUtils.writeIntFileUnder7("1", "/sys/devices/fb.8/graphics/fb0/pwr_bl");
 //                GPIOUtils.writeIntFileUnder7("1","/sys/bus/i2c/devices/2-0010/spkmode");
-                GPIOUtils.writeIntFileUnder7("1","/sys/devices/misc_power_en.23/green_led");
-                GPIOUtils.writeIntFileUnder7("1","/sys/devices/misc_power_en.23/red_led");
+                GPIOUtils.writeIntFileUnder7("1", "/sys/devices/misc_power_en.23/green_led");
+                GPIOUtils.writeIntFileUnder7("1", "/sys/devices/misc_power_en.23/red_led");
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -869,7 +879,8 @@ public class MyManager {
 
     public void setDefaultLauncher(String packageAndClassName) {
         Intent intent = new Intent("com.ys.setDefaultLauncher");
-        intent.putExtra("defaultLauncher",packageAndClassName);
+        intent.putExtra("defaultLauncher", packageAndClassName);
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         mContext.sendBroadcast(intent);
     }
 

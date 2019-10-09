@@ -8,26 +8,28 @@ import com.ys.rkapi.Utils.VersionUtils;
  * Created by Administrator on 2018/4/13.
  */
 
-public class RkFactory {
+public class YsFactory {
 
-    public static RK getRK() {
+    public static YS getRK() {
         String product = VersionUtils.getAndroidModle();
         if (product.contains("rk3328")) {
-            return Rk3328.INSTANCE;
+            return YS3328.INSTANCE;
         }else if (product.contains("rk3399")) {
-            return Rk3399.INSTANCE;
+            return YS3399.INSTANCE;
         }else if (product.contains("rk3368") && ("22".equals(Build.VERSION.SDK))) {
-            return Rk3368_5.INSTANCE;
+            return YS3368_5.INSTANCE;
         } else if (product.contains("rk3288") && "22".equals(Build.VERSION.SDK)) {
-            return Rk3288_5.INSTANCE;
+            return YS3288_5.INSTANCE;
         } else if (product.contains("rk3128") && "19".equals(Build.VERSION.SDK)) {
-            return Rk3128.INSTANCE;
+            return YS3128.INSTANCE;
         } else if (product.contains("rk3288") && "25".equals(Build.VERSION.SDK))
-            return Rk3288_7.INSTANCE;
+            return YS3288_7.INSTANCE;
         else if (product.contains("rk3368") && "25".equals(Build.VERSION.SDK))
-            return Rk3368_7.INSTANCE;
+            return YS3368_7.INSTANCE;
         else if (product.contains("rk3128") && "25".equals(Build.VERSION.SDK))
-            return Rk3128_7.INSTANCE;
-        return Rk3368_5.INSTANCE;
+            return YS3128_7.INSTANCE;
+        else if (product.contains("msm895") && "27".equals(Build.VERSION.SDK))
+            return GT8953_8.INSTANCE;
+        return YS3368_5.INSTANCE;
     }
 }

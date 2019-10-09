@@ -12,19 +12,18 @@ import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.SilentInstallUtils;
 import com.ys.rkapi.Utils.Utils;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
  * Created by Administrator on 2018/4/13.
  */
 
-public class Rk3288_5 extends RK {
+public class YS3288_5 extends YS {
     static final String RTC_PATH = "/sys/devices/ff650000.i2c/i2c-0/0-0051/rtc/rtc0/time";
     static final String[] LED_PATH = new String[]{"/sys/devices/misc_power_en.22/green_led", "/sys/devices/misc_power_en.23/green_led"};
     private static final String BACKLIGHT_IO_PATH = "/sys/class/graphics/fb0/pwr_bl";
-    public final static Rk3288_5 INSTANCE = new Rk3288_5();
-    private Rk3288_5(){}
+    public final static YS3288_5 INSTANCE = new YS3288_5();
+    private YS3288_5(){}
     @Override
     public String getRtcPath() {
         return RTC_PATH;
@@ -115,7 +114,7 @@ public class Rk3288_5 extends RK {
     }
 
     @Override
-    public void rebootRecovery() {
+    public void rebootRecovery(Context context) {
         Utils.do_exec("reboot recovery");
     }
 

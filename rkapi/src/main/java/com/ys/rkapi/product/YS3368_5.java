@@ -2,12 +2,11 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
-import android.util.Log;
-import android.widget.Toast;
+import android.text.TextUtils;
 
 import com.ys.rkapi.Constant;
 import com.ys.rkapi.Utils.GPIOUtils;
+import com.ys.rkapi.Utils.NetUtils;
 import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.SilentInstallUtils;
 import com.ys.rkapi.Utils.Utils;
@@ -18,15 +17,12 @@ import java.io.IOException;
  * Created by Administrator on 2018/4/13.
  */
 
-public class Rk3128 extends RK {
-    static final String[] LED_PATH = new String[]{"/sys/devices/misc_power_en.19/out8", "/sys/devices/misc_power_en.18/out8"};
-    static final String RTC_PATH = "/sys/devices/20072000.i2c/i2c-0/0-0051/rtc/rtc0/time";
-    private final static String BACKLIGHT_IO_PATH = "/sys/devices/fb.9/graphics/fb0/pwr_bl";
-    public static final Rk3128 INSTANCE = new Rk3128();
-
-    private Rk3128() {
-    }
-
+public class YS3368_5 extends YS {
+    static final String RTC_PATH = "/sys/devices/ff150000.i2c/i2c-3/3-0051/rtc/rtc0/time";
+    static final String[] LED_PATH = new String[]{"/sys/devices/misc_power_en.22/green_led", "/sys/devices/misc_power_en.23/green_led"};
+    private static final String BACKLIGHT_IO_PATH = "/sys/class/graphics/fb0/pwr_bl";
+    public static final YS3368_5 INSTANCE =  new YS3368_5();
+    private YS3368_5(){}
     @Override
     public String getRtcPath() {
         return RTC_PATH;
@@ -39,50 +35,54 @@ public class Rk3128 extends RK {
 
     @Override
     public void takeBrightness(Context context) {
-        Intent intent = new Intent("com.ys.show_brightness_dialog");
-        intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-        context.sendBroadcast(intent);
+        context.startActivity(new Intent("android.intent.action.SHOW_BRIGHTNESS_DIALOG"));
     }
 
     @Override
     public void setEthMacAddress(Context context, String val) {
-        Toast.makeText(context, "暂不支持此功能", Toast.LENGTH_LONG).show();
+        NetUtils.setEthMAC(val);
     }
 
     @Override
     public void rotateScreen(Context context, String degree) {
-        ScreenUtils.rotationScreen(context, getDisplayRot(degree));
+        if (!TextUtils.isEmpty(degree)) {
+            if (degree.equals("0") || degree.equals("90")
+                    || degree.equals("180") || degree.equals("270")) {
+                ScreenUtils.rotateScreen(degree);
+                Utils.reboot();
+            }
+        }
     }
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return (Settings.System.getInt(context.getContentResolver(), "hidden_state_bar", 0) == 1);
+        return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
     }
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR_LU).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        Intent intent = new Intent("com.ys.slide.systembar");
-        intent.putExtra("barMode","navigationbar");
-        intent.putExtra("isSlide",flag);
-        context.sendBroadcast(intent);
+        if (!flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
     }
 
     @Override
     public boolean isSlideShowNotificationBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR_LU).equals("0");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR).equals("1");
     }
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-        Intent intent = new Intent("com.ys.slide.systembar");
-        intent.putExtra("barMode","notificationbar");
-        intent.putExtra("isSlide",flag);
-        context.sendBroadcast(intent);
+        if (flag)
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Rk3128 extends RK {
     }
 
     @Override
-    public void rebootRecovery() {
+    public void rebootRecovery(Context context) {
         Utils.do_exec("reboot recovery");
     }
 
@@ -124,27 +124,31 @@ public class Rk3128 extends RK {
 
     @Override
     public void changeScreenLight(Context context, int value) {
+        Intent intent = new Intent("com.ys.set_screen_bright");
+        intent.putExtra("brightValue",value);
+        context.sendBroadcast(intent);
+    }
+
+    @Override
+    public void turnOnHDMI() {
         try {
-            int i = value * 255 /100 ;
-            GPIOUtils.writeScreenBrightFile(String.valueOf(i),"/sys/class/backlight/rk28_bl/brightness");
+            GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3288);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Intent intent = new Intent("com.ys.set_screen_bright");
-        intent.putExtra("brightValue",value);
-        context.sendBroadcast(intent);
-        Log.i("yuanhang","brightValue");
-    }
-
-    @Override
-    public void turnOnHDMI() {
     }
 
     @Override
     public void turnOffHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileUnder7("0",Constant.HDMI_STATUS_3288);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -153,7 +157,7 @@ public class Rk3128 extends RK {
     }
 
     @Override
-    public void setDormantInterval(Context context, long time) {
+    public void setDormantInterval(Context context,long time) {
 
     }
 
@@ -166,24 +170,4 @@ public class Rk3128 extends RK {
     public void setADBOpen(boolean open) {
 
     }
-
-    private int getDisplayRot(String value) {
-        int index = 0;
-        switch (value) {
-            case "0":
-                index = 0;
-                break;
-            case "90":
-                index = 1;
-                break;
-            case "180":
-                index = 2;
-                break;
-            case "270":
-                index = 3;
-                break;
-        }
-        return index;
-    }
-
 }

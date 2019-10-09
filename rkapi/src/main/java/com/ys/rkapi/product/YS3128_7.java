@@ -2,86 +2,84 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.ys.rkapi.Constant;
 import com.ys.rkapi.Utils.GPIOUtils;
-import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Administrator on 2018/4/13.
- */
+public class YS3128_7 extends YS {
 
-public class Rk3328 extends RK {
-    static final String RTC_PATH = "/sys/devices/ff160000.i2c/i2c-1/1-0051/rtc/rtc0/time";
-    static final String[] LED_PATH = new String[]{"/sys/devices/misc_power_en.3/led"};
-    private static final String BACKLIGHT_IO_PATH = "/sys/class/graphics/fb0/pwr_bl";
-    public final static Rk3328 INSTANCE = new Rk3328();
-    private Rk3328(){}
+    public final static YS3128_7 INSTANCE = new YS3128_7();
     @Override
     public String getRtcPath() {
-        return RTC_PATH;
+        return null;
     }
 
     @Override
     public String getLedPath() {
-        return filterPath(LED_PATH);
+        return null;
     }
 
     @Override
     public void takeBrightness(Context context) {
-        context.startActivity(new Intent("android.intent.action.SHOW_BRIGHTNESS_DIALOG"));
+
     }
 
     @Override
     public void setEthMacAddress(Context context, String val) {
-        Toast.makeText(context, "暂不支持此功能", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
     public void rotateScreen(Context context, String degree) {
-        ScreenUtils.rotationScreen("/sys/bus/i2c/devices/1-0054/displayrot",degree);
+        Utils.setValueToProp("persist.sys.displayrot",degree);
+        File file = new File("sys/devices/20072000.i2c/i2c-0/0-0054/rotate");
+        if(file.exists()){
+            GPIOUtils.writeStringFileFor7(file, degree);
+        }
         Utils.reboot();
     }
 
     @Override
     public boolean getNavBarHideState(Context context) {
-       return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_STATUSBAR_STATE_LU).equals("0");
     }
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR_LU).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
         if (flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
         else
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
     }
 
     @Override
     public boolean isSlideShowNotificationBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR_LU).equals("0");
     }
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
+        Log.d("chenhuan","setSlideShowNotificationBar");
         if (flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
         else
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
     }
 
     @Override
     public void turnOffBackLight() {
         try {
-            GPIOUtils.writeIntFileFor7("0",BACKLIGHT_IO_PATH);
+            GPIOUtils.writeIntFileFor7("0","/sys/class/graphics/fb0/pwr_bl");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -92,7 +90,7 @@ public class Rk3328 extends RK {
     @Override
     public void turnOnBackLight() {
         try {
-            GPIOUtils.writeIntFileFor7("1",BACKLIGHT_IO_PATH);
+            GPIOUtils.writeIntFileFor7("1","/sys/class/graphics/fb0/pwr_bl");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -102,12 +100,11 @@ public class Rk3328 extends RK {
 
     @Override
     public boolean isBackLightOn() {
-        return "1".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH));
+        return "1".equals(GPIOUtils.readGpioPG("/sys/class/graphics/fb0/pwr_bl"));
     }
 
     @Override
-    public void rebootRecovery() {
-        Utils.execFor7("reboot recovery");
+    public void rebootRecovery(Context context) {
     }
 
     @Override
@@ -123,13 +120,25 @@ public class Rk3328 extends RK {
     }
 
     @Override
-    public void turnOnHDMI() {
-
+    public void turnOnHDMI() {///sys/class/display/HDMI/enable
+        try {
+            GPIOUtils.writeIntFileFor7("1","sys/class/display/HDMI/enable");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOffHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileFor7("0","sys/class/display/HDMI/enable");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -138,7 +147,7 @@ public class Rk3328 extends RK {
     }
 
     @Override
-    public void setDormantInterval(Context context,long time) {
+    public void setDormantInterval(Context context, long time) {
 
     }
 
@@ -151,4 +160,6 @@ public class Rk3328 extends RK {
     public void setADBOpen(boolean open) {
 
     }
+
+
 }

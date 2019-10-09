@@ -10,7 +10,7 @@ import java.io.File;
  * Created by Administrator on 2018/4/14.
  */
 
-public abstract class RK {
+public abstract class YS {
 
     public abstract String getRtcPath();
 
@@ -38,7 +38,7 @@ public abstract class RK {
 
     public abstract boolean isBackLightOn();
 
-    public abstract void rebootRecovery();
+    public abstract void rebootRecovery(Context context);
 
     public abstract boolean silentInstallApk(String apkPath);
 

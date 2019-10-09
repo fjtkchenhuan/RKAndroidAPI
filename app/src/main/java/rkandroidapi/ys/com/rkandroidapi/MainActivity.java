@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -249,9 +250,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.rotateScreen(this,"0");
                 break;
             case R.id.update_img:
-                manager.upgradeSystem("/mnt/media_rw/9260-8749/update.zip"); ///mnt/media_rw/10C0-C930/update.zip  Environment.getExternalStorageDirectory().getPath() + "/Download/update.zip"
+                manager.upgradeSystem(Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip"); ///mnt/media_rw/10C0-C930/update.zip  Environment.getExternalStorageDirectory().getPath() + "/Download/update.zip"
                 Log.d("chenhuan","externalStoragePath = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
-//                ToastUtils.showToast(this,"3399和3328，暂未实现");
                 break;
             case R.id.recovery:
                 manager.rebootRecovery();
@@ -368,9 +368,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"是否打开自动更新时间开关 = " + manager.isAutoSyncTime());
                 break;
             case R.id.open_softkeyboard:
+                if ("27".equals(Build.VERSION.SDK))
+                    ToastUtils.showToast(this,"暂未实现");
                 manager.setSoftKeyboardHidden(false);
                 break;
             case R.id.close_softkeyboard:
+                if ("27".equals(Build.VERSION.SDK))
+                    ToastUtils.showToast(this,"暂未实现");
                 manager.setSoftKeyboardHidden(true);
                 break;
             case R.id.set_dormant_interval:

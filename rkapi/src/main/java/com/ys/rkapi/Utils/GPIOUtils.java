@@ -79,7 +79,9 @@ public class GPIOUtils {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        if  ("22".equals(Build.VERSION.SDK))
+        if ("27".equals(Build.VERSION.SDK))
+            ishdmi = "1".equals(readGpioPG("/sys/class/hdmi/hdmi/status"));
+        else if ("22".equals(Build.VERSION.SDK))
             ishdmi = str.equals("1");
         else
             ishdmi = str.equals("connected");
@@ -101,7 +103,6 @@ public class GPIOUtils {
 
 
     public static void writeIntFileFor7(String str,String path) throws IOException, InterruptedException {
-        Log.d("chenhuan","path = " + path);
         File file = new File(path);
         file.setExecutable(true);
         file.setReadable(true);//设置可读权限

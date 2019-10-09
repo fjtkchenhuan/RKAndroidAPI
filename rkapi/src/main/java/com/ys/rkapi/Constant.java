@@ -9,6 +9,7 @@ import android.os.Environment;
 public class Constant {
     public final static String NAND_PATH = Environment.getExternalStorageDirectory().getPath();//"/mnt/internal_sd";
     public final static String SD_PATH = "/mnt/external_sd";
+    public static final String YSRECEIVER_PACKAGE_NAME = "com.ys.ys_receiver";
 
     public final static String SHUTDOWN_ACTION = "android.intent.action.shutdown";
     public final static String REBOOT_ACTION = "android.intent.action.reboot";

@@ -24,8 +24,6 @@ import java.util.Scanner;
  */
 
 public class StorageUtils {
-
-
     // 获取存储空间相关
     private static long readBlockSize(String path, int flag) {
         StatFs sf = new StatFs(path);

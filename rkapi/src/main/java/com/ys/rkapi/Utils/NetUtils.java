@@ -80,6 +80,7 @@ public class NetUtils {
     public static void setStaticIP(Context context, String ip, String gateWay, String mask, String dns1, String dns2){
         Log.d("MyManager", "setStaticIP 发送修改IP广播");
         Intent intent = new Intent(Constant.ETH_STATIC_IP_ACTION);
+        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         intent.putExtra("useStaticIP",1);
         intent.putExtra(Constant.ETH_SET_IP, ip);//IP地址
         intent.putExtra(Constant.ETH_SET_GATEWAY, gateWay);//网关

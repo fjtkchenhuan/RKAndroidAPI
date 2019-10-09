@@ -2,13 +2,11 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
 import com.ys.rkapi.Utils.GPIOUtils;
-import com.ys.rkapi.Utils.NetUtils;
 import com.ys.rkapi.Utils.ScreenUtils;
-import com.ys.rkapi.Utils.SilentInstallUtils;
 import com.ys.rkapi.Utils.Utils;
 
 import java.io.IOException;
@@ -17,12 +15,12 @@ import java.io.IOException;
  * Created by Administrator on 2018/4/13.
  */
 
-public class Rk3368_5 extends RK {
-    static final String RTC_PATH = "/sys/devices/ff150000.i2c/i2c-3/3-0051/rtc/rtc0/time";
-    static final String[] LED_PATH = new String[]{"/sys/devices/misc_power_en.22/green_led", "/sys/devices/misc_power_en.23/green_led"};
+public class YS3328 extends YS {
+    static final String RTC_PATH = "/sys/devices/ff160000.i2c/i2c-1/1-0051/rtc/rtc0/time";
+    static final String[] LED_PATH = new String[]{"/sys/devices/misc_power_en.3/led"};
     private static final String BACKLIGHT_IO_PATH = "/sys/class/graphics/fb0/pwr_bl";
-    public static final Rk3368_5 INSTANCE =  new Rk3368_5();
-    private Rk3368_5(){}
+    public final static YS3328 INSTANCE = new YS3328();
+    private YS3328(){}
     @Override
     public String getRtcPath() {
         return RTC_PATH;
@@ -40,23 +38,18 @@ public class Rk3368_5 extends RK {
 
     @Override
     public void setEthMacAddress(Context context, String val) {
-        NetUtils.setEthMAC(val);
+        Toast.makeText(context, "暂不支持此功能", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void rotateScreen(Context context, String degree) {
-        if (!TextUtils.isEmpty(degree)) {
-            if (degree.equals("0") || degree.equals("90")
-                    || degree.equals("180") || degree.equals("270")) {
-                ScreenUtils.rotateScreen(degree);
-                Utils.reboot();
-            }
-        }
+        ScreenUtils.rotationScreen("/sys/bus/i2c/devices/1-0054/displayrot",degree);
+        Utils.reboot();
     }
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
+       return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
     }
 
     @Override
@@ -66,7 +59,7 @@ public class Rk3368_5 extends RK {
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        if (!flag)
+        if (flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
@@ -80,15 +73,15 @@ public class Rk3368_5 extends RK {
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
         if (flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
-        else
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
     }
 
     @Override
     public void turnOffBackLight() {
         try {
-            GPIOUtils.writeIntFileUnder7("0",BACKLIGHT_IO_PATH);
+            GPIOUtils.writeIntFileFor7("0",BACKLIGHT_IO_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -99,7 +92,7 @@ public class Rk3368_5 extends RK {
     @Override
     public void turnOnBackLight() {
         try {
-            GPIOUtils.writeIntFileUnder7("1",BACKLIGHT_IO_PATH);
+            GPIOUtils.writeIntFileFor7("1",BACKLIGHT_IO_PATH);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -113,13 +106,13 @@ public class Rk3368_5 extends RK {
     }
 
     @Override
-    public void rebootRecovery() {
-        Utils.do_exec("reboot recovery");
+    public void rebootRecovery(Context context) {
+        Utils.execFor7("reboot recovery");
     }
 
     @Override
     public boolean silentInstallApk(String apkPath) {
-        return SilentInstallUtils.install(apkPath);
+        return Utils.execFor7("pm install -r " + apkPath);
     }
 
     @Override
@@ -131,24 +124,12 @@ public class Rk3368_5 extends RK {
 
     @Override
     public void turnOnHDMI() {
-        try {
-            GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3288);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override
     public void turnOffHDMI() {
-        try {
-            GPIOUtils.writeIntFileUnder7("0",Constant.HDMI_STATUS_3288);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     @Override

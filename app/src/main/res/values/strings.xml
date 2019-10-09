@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RKAndroidAPI</string>
+    <string name="app_name">YSAndroidAPI</string>
 
     <string name="system_info">系统信息</string>
     <string name="get_api_version">获取API版本</string>
@@ -37,7 +37,7 @@
     <string name="rotate_0">还原0度</string>
 
     <string name="install_update">安装升级</string>
-    <string name="update_img">升级固件</string>
+    <string name="update_img">升级固件(/Download/update.zip)</string>
     <string name="recovery">进入recovery模式</string>
     <string name="silent_install">静默安装（根目录放置KeyTest.apk）</string>
 

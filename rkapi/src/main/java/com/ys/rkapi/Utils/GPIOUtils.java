@@ -80,7 +80,7 @@ public class GPIOUtils {
             e.printStackTrace();
         }
         if ("27".equals(Build.VERSION.SDK))
-            ishdmi = "1".equals(readGpioPG("/sys/class/hdmi/hdmi/status"));
+            ishdmi = "1".equals(readGpioPG("/sys/class/graphics/fb1/connected"));
         else if ("22".equals(Build.VERSION.SDK))
             ishdmi = str.equals("1");
         else

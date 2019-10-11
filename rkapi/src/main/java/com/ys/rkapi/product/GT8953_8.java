@@ -2,6 +2,7 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
@@ -170,7 +171,24 @@ public class GT8953_8 extends YS {
     public void setADBOpen(boolean open) {
         if (open) {
             Utils.setValueToProp("persist.sys.usb.otg.mode","1");
+            try {
+                GPIOUtils.writeIntFileFor7("1","/sys/devices/soc/soc:misc_power_en/otg");
+                SystemClock.sleep(1000);
+                GPIOUtils.writeIntFileFor7("1","/sys/devices/soc/soc:misc_power_en/otg_pwr");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else {
+            try {
+                GPIOUtils.writeIntFileFor7("0","/sys/devices/soc/soc:misc_power_en/otg_pwr");
+                GPIOUtils.writeIntFileFor7("0","/sys/devices/soc/soc:misc_power_en/otg");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             Utils.setValueToProp("persist.sys.usb.otg.mode","0");
         }
     }

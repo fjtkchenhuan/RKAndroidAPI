@@ -101,7 +101,7 @@ public class MyManager {
 
     //获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
     public String getApiVersion() {///ok
-        return "V2.5_20190513";
+        return "V3.0_20191009";
     }
 
     //获取目前设备的型号

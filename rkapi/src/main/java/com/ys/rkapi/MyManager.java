@@ -62,7 +62,8 @@ public class MyManager {
         if (mContext != null) {
             Intent intent = new Intent();
             intent.setAction(action);
-            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+            if (!getAndroidModle().contains("rk"))
+                 intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -72,7 +73,8 @@ public class MyManager {
             Intent intent = new Intent();
             intent.setAction(action);
             intent.putExtra(key, value);
-            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+            if (!getAndroidModle().contains("rk"))
+                intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -83,7 +85,8 @@ public class MyManager {
             intent.setAction(action);
             intent.putExtra(key1, value1);
             intent.putExtra(key2, value2);
-            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+            if (!getAndroidModle().contains("rk"))
+                intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -93,7 +96,8 @@ public class MyManager {
             Intent intent = new Intent();
             intent.setAction(action);
             intent.putExtra(key, value);
-            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+            if (!getAndroidModle().contains("rk"))
+                intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
     }
@@ -164,6 +168,7 @@ public class MyManager {
     // path  存储的绝对路径 如：/mnt/internal_sd/001.jpg
     public boolean takeScreenshot(String path) { // ok
 //        sendMyBroadcastWithExtra(Constant.SCREENSHOOT_ACTION, Constant.SCREENSHOOT_KEY, path);
+        Log.d("sky","takeScreenshot takeScreenshot");
         boolean flag = false;
         if (igetMessage != null) {
             try {
@@ -759,7 +764,7 @@ public class MyManager {
 
     //获取设置默认输入法是否成功
     public boolean isSetDefaultInputMethodSuccess(String defaultInputMethod) {//ok
-        Log.d(TAG, "获取静态IP");
+        Log.d(TAG, "isSetDefaultInputMethodSuccess isSetDefaultInputMethodSuccess");
         boolean isSuccess = false;
         if (igetMessage != null) {
             try {

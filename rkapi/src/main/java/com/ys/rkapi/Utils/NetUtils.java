@@ -61,7 +61,6 @@ public class NetUtils {
             return macSerial.toUpperCase();
         }
             return "";
-
     }
 
 //    public static String getEthIPAddress(){

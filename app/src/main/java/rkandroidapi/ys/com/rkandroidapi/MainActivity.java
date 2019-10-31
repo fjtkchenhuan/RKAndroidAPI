@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 
 import com.ys.rkapi.MyManager;
+
+import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -114,7 +117,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.screen_num).setOnClickListener(this);
         findViewById(R.id.hdmi).setOnClickListener(this);
         //------------------------------------------------------------------
-
         findViewById(R.id.switch_on_time).setOnClickListener(this);
         findViewById(R.id.switch_off_time).setOnClickListener(this);
         findViewById(R.id.is_auto_time).setOnClickListener(this);
@@ -342,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"串口0的绝对路径 = " + manager.getUartPath("TTYS0"));
                 break;
             case R.id.set_time:
-                manager.setTime(2017, 3, 16, 17, 44,55);
+                manager.setTime(2019, 10, 14, 04, 17,20);
                 break;
             case R.id.su_order:
                 manager.execSuCmd("reboot");
@@ -381,6 +383,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setDormantInterval(this,15000);//2147483647
                 break;
             case R.id.set_default_inputmethod:
+                //
                 ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
                         manager.isSetDefaultInputMethodSuccess("com.google.android.inputmethod.pinyin/.PinyinIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
                 break;

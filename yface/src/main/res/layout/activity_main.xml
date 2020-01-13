@@ -16,7 +16,9 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout style="@style/layout1">
+            <LinearLayout
+                android:id="@+id/layout_OTG"
+                style="@style/layout1">
 
                 <TextView
                     style="@style/TextView1"
@@ -361,7 +363,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <LinearLayout style="@style/layout1">
+                <LinearLayout
+                    style="@style/layout1"
+                    android:id="@+id/layout_max_cpu">
 
                     <TextView
                         style="@style/TextView1"
@@ -392,7 +396,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <LinearLayout style="@style/layout1">
+                <LinearLayout style="@style/layout1"
+                    android:id="@+id/layout_min_cpu">
 
                     <TextView
                         style="@style/TextView1"

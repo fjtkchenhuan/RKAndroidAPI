@@ -26,6 +26,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        if (isGt8953()) {
+            findViewById(R.id.layout_OTG).setVisibility(View.GONE);
+            findViewById(R.id.layout_max_cpu).setVisibility(View.GONE);
+            findViewById(R.id.layout_min_cpu).setVisibility(View.GONE);
+        }
         maxEdit = findViewById(R.id.max_freq);
         minEdit = findViewById(R.id.min_freq);
         findViewById(R.id.btn1).setOnClickListener(this);
@@ -234,5 +239,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
 
         }
+    }
+
+    private boolean isGt8953() {
+        return Utils.getValueFromProp("ro.build.description").substring(0,8).contains("msm8953");
     }
 }

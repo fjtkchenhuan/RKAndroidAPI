@@ -26,40 +26,51 @@ public class GPIOManager {
     private static final String USB2_3399 = "/sys/devices/platform/misc_power_en/vbus_drv4";
     private static final String USB3_3399 = "/sys/devices/platform/vcc5v0-sys/usb30_5v_en";// /sys/devices/platform/misc_power_en/usb30_5v_en
 
+    private static final String USB1_8953_450 = "/sys/class/custom_class/custom_dev/host";
+    private static final String USB2_8953_450 = "/sys/class/gpio/gpio20/value";
+    private static final String USB3_8953_450 = "/sys/class/gpio/gpio21/value";
+
     //功放
     private static final String VOICE_3288 = "/sys/bus/i2c/devices/2-0010/spk";
     private static final String VOICE_3368 = "/sys/devices/platform/misc_power_en/spk_ctl";
     private static final String VOICE_3399 = "/sys/class/gpio/gpio1152/value";
+    private static final String VOICE_8953_450 = "/sys/class/gpio/gpio89/value";
 
     //风扇控制
     private static final String FAN_CONTROL_3288 = "/sys/class/custom_class/custom_dev/fan";
     private static final String FAN_CONTROL_3368 = "/sys/devices/platform/misc_power_en/fan_ctl";
     private static final String FAN_CONTROL_3399 = "/sys/devices/platform/misc_power_en/fan_ctl";
+    private static final String FAN_CONTROL_8953_450 = "/sys/class/custom_class/custom_dev/fan";
 
     //红外LED电源
     private static final String INFRARED_LED_3288 = "/sys/class/custom_class/custom_dev/ir";//  /sys/class/custom_class/custom_dev/ir
     private static final String INFRARED_LED_3368 = "/sys/devices/platform/misc_power_en/red_led"; ///sys/devices/platform/misc_power_en/red_led
     private static final String INFRARED_LED_3399 = "/sys/devices/platform/misc_power_en/ir_led";
+    private static final String INFRARED_LED_8953_450 = "/sys/class/custom_class/custom_dev/ir";
 
     //继电器控制
     private static final String RELAY_3288 = "/sys/class/custom_class/custom_dev/relay";
     private static final String RELAY_3368 = "/sys/devices/platform/misc_power_en/rtl_ctl";
     private static final String RELAY_3399 = "/sys/devices/platform/misc_power_en/rtl_ctl";
+    private static final String RELAY_8953_450 = "/sys/class/custom_class/custom_dev/relay";
 
     //绿色补光灯
     private static final String GREEN_LIGHT_3288 = "/sys/class/custom_class/custom_dev/green_led";
     private static final String GREEN_LIGHT_3368 = "/sys/devices/platform/misc_power_en/g_led";
     private static final String GREEN_LIGHT_3399 = "/sys/devices/platform/misc_power_en/g_led";
+    private static final String GREEN_LIGHT_8953_450 = "/sys/class/custom_class/custom_dev/green_led";
 
     //红色补光灯
     private static final String RED_LIGHT_3288 = "/sys/class/custom_class/custom_dev/red_led";
     private static final String RED_LIGHT_3368 = "/sys/devices/platform/misc_power_en/r_led";
     private static final String RED_LIGHT_3399 = "/sys/devices/platform/misc_power_en/r_led";
+    private static final String RED_LIGHT_8953_450 = "/sys/class/custom_class/custom_dev/red_led";
 
     //白色补光灯
     private static final String WHITE_LIGHT_3288 = "/sys/class/custom_class/custom_dev/white_led";
     private static final String WHITE_LIGHT_3368 = "/sys/devices/platform/misc_power_en/w_led";
     private static final String WHITE_LIGHT_3399 = "/sys/devices/platform/misc_power_en/w_led";
+    private static final String WHITE_LIGHT_8953_450 = "/sys/class/custom_class/custom_dev/white_led";
 
     //CPU频率
     private static final String SCALING_MAX_FREQ_3288 = "/sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq";
@@ -69,6 +80,7 @@ public class GPIOManager {
     private boolean isRk3288;
     private boolean isRk3368;
     private boolean isRk3399;
+    private boolean isGt8953;
 
     private Context mContext;
 
@@ -78,6 +90,7 @@ public class GPIOManager {
         isRk3288 = isRk3288();
         isRk3399 = isRk3399();
         isRk3368 = isRk3368();
+        isGt8953 = isGt8953();
 
         GpioUtils.upgradeRootPermissionForExport();
         if (isRk3288()) {
@@ -99,6 +112,11 @@ public class GPIOManager {
             rootGpio(1072);
 
             GpioUtils.upgradeRootPermission(USB3_3399);
+        } else if (isGt8953) {
+            rootGpio(45);
+            rootGpio(43);
+            rootGpio(44);
+            rootGpio(66);
         }
     }
 
@@ -116,7 +134,7 @@ public class GPIOManager {
             return Utils.readGpioPG(USB_OTG_3368);
         }else if (isRk3399) {
             String status = Utils.readGpioPG(USB_OTG_3399);
-            Log.d("chenhuan","status = " + status);
+            Log.d("sky","status = " + status);
             if (status.contains("peripheral"))
                 return "0";
             else if (status.contains("host"))
@@ -150,6 +168,8 @@ public class GPIOManager {
             return Utils.readGpioPG(USB1_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(USB1_3399);
+        }else if (isGt8953) {
+            return Utils.readGpioPG(USB1_8953_450);
         }
         return "";
     }
@@ -163,6 +183,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB1_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(USB1_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(USB1_8953_450),"1");
     }
 
     public void pullDownUSB1() {
@@ -173,6 +195,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB1_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(USB1_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(USB1_8953_450),"0");
     }
 
     public String getUSB2Status() {
@@ -182,6 +206,8 @@ public class GPIOManager {
             return Utils.readGpioPG(USB2_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(USB2_3399);
+        }else if (isGt8953) {
+            return Utils.readGpioPG(USB2_8953_450);
         }
         return "";
     }
@@ -193,6 +219,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB2_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(USB2_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(USB2_8953_450),"1");
     }
 
     public void pullDownUSB2() {
@@ -202,6 +230,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB2_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(USB2_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(USB2_8953_450),"0");
     }
 
     public String getUSB3Status() {
@@ -212,6 +242,8 @@ public class GPIOManager {
             return Utils.readGpioPG(USB3_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(USB3_3399);
+        }else if (isGt8953) {
+            return Utils.readGpioPG(USB3_8953_450);
         }
         return "";
     }
@@ -224,6 +256,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB3_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(USB3_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(USB3_8953_450),"1");
     }
 
     public void pullDownUSB3() {
@@ -234,6 +268,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB3_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(USB3_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(USB3_8953_450),"0");
     }
 
     public String getVoiceStatus() {
@@ -243,6 +279,8 @@ public class GPIOManager {
             return Utils.readGpioPG(VOICE_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(VOICE_3399);
+        }else if (isGt8953) {
+            return Utils.readGpioPG(VOICE_8953_450);
         }
         return "";
     }
@@ -254,6 +292,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(VOICE_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(VOICE_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(VOICE_8953_450),"1");
     }
 
     public void pullDownVoice() {
@@ -263,6 +303,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(VOICE_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(VOICE_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(VOICE_8953_450),"0");
     }
 
     public String getFanStatus() {
@@ -272,6 +314,8 @@ public class GPIOManager {
             return Utils.readGpioPG(FAN_CONTROL_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(FAN_CONTROL_3399);
+        }else if (isGt8953) {
+            return Utils.readGpioPG(FAN_CONTROL_8953_450);
         }
         return "";
     }
@@ -283,6 +327,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(FAN_CONTROL_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(FAN_CONTROL_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(FAN_CONTROL_8953_450),"1");
     }
 
     public void pullDownFan() {
@@ -292,6 +338,9 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(FAN_CONTROL_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(FAN_CONTROL_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(FAN_CONTROL_8953_450),"0");
+
     }
 
     public String getInfraredLedStatus() {
@@ -301,6 +350,8 @@ public class GPIOManager {
             return Utils.readGpioPG(INFRARED_LED_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(INFRARED_LED_3399);
+        }else if (isGt8953) {
+            return Utils.readGpioPG(INFRARED_LED_8953_450);
         }
         return "";
     }
@@ -312,6 +363,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(INFRARED_LED_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(INFRARED_LED_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(INFRARED_LED_8953_450),"1");
     }
 
     public void pullDownInfraredLed() {
@@ -321,6 +374,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(INFRARED_LED_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(INFRARED_LED_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(INFRARED_LED_8953_450),"0");
     }
 
     public String getRelayStatus() {
@@ -330,7 +385,8 @@ public class GPIOManager {
             return Utils.readGpioPG(RELAY_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(RELAY_3399);
-        }
+        }else if (isGt8953)
+            return Utils.readGpioPG(RELAY_8953_450);
         return "";
     }
 
@@ -341,6 +397,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RELAY_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(RELAY_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(RELAY_8953_450),"1");
     }
 
     public void pullDownRelay() {
@@ -350,6 +408,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RELAY_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(RELAY_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(RELAY_8953_450),"0");
     }
 
     public String getGreenLightStatus() {
@@ -359,7 +419,8 @@ public class GPIOManager {
             return Utils.readGpioPG(GREEN_LIGHT_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(GREEN_LIGHT_3399);
-        }
+        }else if (isGt8953)
+            return Utils.readGpioPG(GREEN_LIGHT_8953_450);
         return "";
     }
 
@@ -370,6 +431,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(GREEN_LIGHT_8953_450),"1");
     }
 
     public void pullDownGreenLight() {
@@ -379,6 +442,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(GREEN_LIGHT_8953_450),"0");
     }
 
     public String getRedLightStatus() {
@@ -388,7 +453,8 @@ public class GPIOManager {
             return Utils.readGpioPG(RED_LIGHT_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(RED_LIGHT_3399);
-        }
+        }else if (isGt8953)
+            return Utils.readGpioPG(RED_LIGHT_8953_450);
         return "";
     }
 
@@ -399,6 +465,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RED_LIGHT_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(RED_LIGHT_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(RED_LIGHT_8953_450),"1");
     }
 
     public void pullDownRedLight() {
@@ -408,6 +476,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RED_LIGHT_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(RED_LIGHT_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(RED_LIGHT_8953_450),"0");
     }
 
     public String getWhiteLightStatus() {
@@ -417,7 +487,8 @@ public class GPIOManager {
             return Utils.readGpioPG(WHITE_LIGHT_3368);
         }else if (isRk3399) {
             return Utils.readGpioPG(WHITE_LIGHT_3399);
-        }
+        }else if (isGt8953)
+            return Utils.readGpioPG(WHITE_LIGHT_8953_450);
         return "";
     }
 
@@ -428,6 +499,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_3368),"1");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_3399),"1");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(WHITE_LIGHT_8953_450),"1");
     }
 
     public void pullDownWhiteLight() {
@@ -437,6 +510,8 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_3368),"0");
         else if (isRk3399)
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_3399),"0");
+        else if (isGt8953)
+            Utils.writeStringFileFor7(new File(WHITE_LIGHT_8953_450),"0");
     }
 
     public String getReservedIO1Status() {
@@ -447,6 +522,8 @@ public class GPIOManager {
             status = GpioUtils.getGpioValue(91);
         else if (isRk3399)
             status = GpioUtils.getGpioValue(1067);
+        else if (isGt8953)
+            status = GpioUtils.getGpioValue(45);
         return status;
     }
 
@@ -458,6 +535,8 @@ public class GPIOManager {
             status = GpioUtils.getGpioValue(90);
         else if (isRk3399)
             status = GpioUtils.getGpioValue(1066);
+        else if(isGt8953)
+            status = GpioUtils.getGpioValue(66);
         return status;
     }
 
@@ -469,6 +548,8 @@ public class GPIOManager {
             status = GpioUtils.getGpioValue(111);
         else if (isRk3399)
             status = GpioUtils.getGpioValue(1071);
+        else if (isGt8953)
+            status = GpioUtils.getGpioValue(44);
         return status;
     }
 
@@ -480,6 +561,8 @@ public class GPIOManager {
             status = GpioUtils.getGpioValue(109);
         else if (isRk3399)
             status = GpioUtils.getGpioValue(1072);
+        else if (isGt8953)
+            status = GpioUtils.getGpioValue(43);
         return status;
     }
 
@@ -491,6 +574,8 @@ public class GPIOManager {
             status = GpioUtils.getGpioDirection(109);
         else if (isRk3399)
             status = GpioUtils.getGpioDirection(1072);
+        else if (isGt8953)
+            status = GpioUtils.getGpioDirection(43);
         return status;
     }
 
@@ -501,6 +586,8 @@ public class GPIOManager {
             GpioUtils.setGpioDirection(109,0);
         else if (isRk3399)
             GpioUtils.setGpioDirection(1072,0);
+        else if (isGt8953)
+            GpioUtils.setGpioDirection(43,0);
     }
 
     public void setReservedIO4In() {
@@ -510,6 +597,8 @@ public class GPIOManager {
             GpioUtils.setGpioDirection(109,1);
         else if (isRk3399)
             GpioUtils.setGpioDirection(1072,1);
+        else if (isGt8953)
+            GpioUtils.setGpioDirection(43,1);
     }
 
     public boolean isIO4DirectionOut() {
@@ -521,6 +610,8 @@ public class GPIOManager {
             temp = GpioUtils.getGpioDirection(109);
         else if (isRk3399)
             temp = GpioUtils.getGpioDirection(1072);
+        else if (isGt8953)
+            temp = GpioUtils.getGpioDirection(43);
         return direction.equals(temp);
     }
 
@@ -531,6 +622,8 @@ public class GPIOManager {
             GpioUtils.writeGpioValue(109,"1");
         else if (isRk3399)
             GpioUtils.writeGpioValue(1072,"1");
+        else if (isGt8953)
+            GpioUtils.writeGpioValue(43,"1");
     }
 
     public void pullDownIO4() {
@@ -540,6 +633,8 @@ public class GPIOManager {
             GpioUtils.writeGpioValue(109,"0");
         else if (isRk3399)
             GpioUtils.writeGpioValue(1072,"0");
+        else if (isGt8953)
+            GpioUtils.writeGpioValue(43,"0");
     }
 
     public void setMaxFreq(int value) {
@@ -570,7 +665,7 @@ public class GPIOManager {
 
 
     private  String getVersion() {
-        return getValueFromProp("ro.build.description").substring(0,6);
+        return getValueFromProp("ro.build.description").substring(0,8);
     }
 
     public  String getValueFromProp(String key) {
@@ -596,6 +691,10 @@ public class GPIOManager {
 
     private boolean isRk3399() {
         return getVersion().contains("rk3399");
+    }
+
+    private boolean isGt8953() {
+        return getVersion().contains("msm8953");
     }
 
     private void rootGpio(int index) {

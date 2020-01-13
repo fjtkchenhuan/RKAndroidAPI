@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,6 +45,7 @@ import java.util.List;
 
 public class MyManager {
     private static final String TAG = "MyManager";
+
     private static MyManager myManager;
 
     private Context mContext;
@@ -489,12 +491,8 @@ public class MyManager {
             intent.putExtra(Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
             intent.setPackage("com.ys.gtupdatezip");
             mContext.sendBroadcast(intent);
-        }else if (Build.VERSION.SDK_INT==22){
-            Toast.makeText(mContext,"暂不支持此功能",Toast.LENGTH_SHORT).show();
         }else {
-               String path = absolutePath.replace("sdcard","data/media/0");
-               Log.i("yuanhang","===="+path);
-                sendMyBroadcastWithExtra(Constant.FIRMWARE_UPGRADE_ACTION, Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
+            sendMyBroadcastWithExtra(Constant.FIRMWARE_UPGRADE_ACTION, Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
         }
     }
 
@@ -563,7 +561,6 @@ public class MyManager {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             igetMessage = IgetMessage.Stub.asInterface(iBinder);
-
         }
 
         @Override
@@ -1351,6 +1348,146 @@ public class MyManager {
         intent.putExtra("defaultLauncher", packageAndClassName);
         intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         mContext.sendBroadcast(intent);
+    }
+
+    /**
+     * @method setPowerOnOffWithWeekly(int[] powerOnTime,int[] powerOffTime,int[] weekdays)
+     * @description 周模式设置定时开关机，一天只有一组开关机时间
+     * @date 20200113
+     * @author sky
+     * @param powerOnTime，开机时间，例如{8,30}。powerOffTime，关机时间，例如{18,30}。
+     *        weekdays，周一到周日工作状态,1为开机，0为不开机。例如{1,1,1,1,1,0,0}，是指周一到周五执行开关机
+    */
+    public void setPowerOnOffWithWeekly(int[] powerOnTime,int[] powerOffTime,int[] weekdays) {
+        Intent intent = new Intent("android.intent.action.setyspoweronoff");
+        intent.putExtra("timeon", powerOnTime);
+        intent.putExtra("timeoff", powerOffTime);
+        intent.putExtra("wkdays", weekdays);
+        intent.putExtra("enable", true); //使能开关机功能，设为 false,则为关闭
+        intent.setPackage(Constant.POWER_ON_OFF_PACKAGENAME);
+        mContext.sendBroadcast(intent);
+        Log.d(TAG,"poweron:" + Arrays.toString(powerOnTime) + "/ poweroff:" +Arrays.toString(powerOffTime) + "/weekday:" + Arrays.toString(weekdays));
+    }
+
+    /**
+     * @method setPowerOnOff(int[] powerOnTime,int[] powerOffTime)
+     * @description 设置一组定时开关机时间数据，需要传入年月日时分
+     * @date 20200113
+     * @author sky
+     * @param powerOnTime，开机时间，例如{2020,1,10,20,48}，powerOffTime，关机时间，例如{2020,1,10,20,38}。
+     */
+    public void setPowerOnOff(int[] powerOnTime,int[] powerOffTime) {
+        Intent intent = new Intent(Constant.INTENT_ACTION_POWERONOFF);
+        intent.putExtra("timeon", powerOnTime);
+        intent.putExtra("timeoff", powerOffTime);
+        intent.putExtra("enable", true); //使能开关机功能，设为 false,则为关闭
+        intent.setPackage(Constant.POWER_ON_OFF_PACKAGENAME);
+        mContext.sendBroadcast(intent);
+        Log.d(TAG,"poweron:" + Arrays.toString(powerOnTime) + "/ poweroff:" +Arrays.toString(powerOffTime));
+    }
+
+    /**
+     * @method getPowerOnMode()
+     * @description 获取定时开关机的模式
+     * @date  20200113
+     * @author sky
+     * @return  "本地模式"是指在定时开关机本地设置的开关机时间。"网络周模式"是指用广播的方式调用setPowerOnOffWithWeekly方法。
+     *          "网络每组模式"是指用广播的方式调用setPowerOnOff方法。
+    */
+    public String getPowerOnMode() {
+        String mode = Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONMODE);
+        if ("2".equals(mode))
+            return "网络周模式";
+        else if ("0".equals(mode))
+            return "本地模式";
+        else
+            return "网络每组模式";
+    }
+
+    /**
+     * @method getPowerOnTime()
+     * @description 获取当前设备的开机时间
+     * @date 20200113
+     * @author sky
+     * @return 返回当前设置的开机时间，例如202001132025，是指2020年1月13号20:25开机
+    */
+    public String getPowerOnTime() {
+        String mode = Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONMODE);
+        if ("2".equals(mode))
+            return Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONTIME_2);
+        else
+            return Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONTIME);
+    }
+
+    /**
+     * @method getPowerOffTime()
+     * @description 获取当前设备的关机时间
+     * @date 20200113
+     * @author sky
+     * @return 返回当前设置的关机时间，例如202001132020，是指2020年1月13号20:20关机
+     */
+    public String getPowerOffTime() {
+        String mode = Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONMODE);
+        if ("2".equals(mode))
+            return Utils.getValueFromProp(Constant.PERSIST_SYS_POWEROFFTIME_2);
+        else
+            return Utils.getValueFromProp(Constant.PERSIST_SYS_POWEROFFTIME);
+    }
+
+    /**
+     * @method getLastestPowerOnTime()
+     * @description 获取设备上一次执行过的开机时间
+     * @date 20200113
+     * @author sky
+     * @return 返回设备上一次的开机时间，例如202001132025，是指在2020年1月13号20:25执行了开机操作
+    */
+    public String getLastestPowerOnTime() {
+        return Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONTIMEPER);
+    }
+
+    /**
+     * @method getLastestPowerOffTime()
+     * @description 获取设备上一次执行过的关机时间
+     * @date 20200113
+     * @author sky
+     * @return 返回设备上一次的关机时间，例如202001132020，是指在2020年1月13号20:20执行了关机操作
+     */
+    public String getLastestPowerOffTime() {
+        return Utils.getValueFromProp(Constant.PERSIST_SYS_POWEROFFTIMEPER);
+    }
+
+    /**
+     * @method clearPowerOnOffTime()
+     * @description 清除定时开关机时间
+     * @date  20200113
+     * @author sky
+    */
+    public void clearPowerOnOffTime() {
+        Intent intent = new Intent(Constant.INTENT_ACTION_CLEARONTIME);
+        intent.setPackage(Constant.POWER_ON_OFF_PACKAGENAME);
+        mContext.sendBroadcast(intent);
+    }
+
+    /**
+     * @method isSetPowerOnTime()
+     * @description 获取设备是否设置了定时开关机
+     * @date  20200113
+     * @author sky
+     * @return  设置了定时开关机返回true，否则返回false
+    */
+    public boolean isSetPowerOnTime() {
+        return !"off:on:".equals(getPowerOnTime());
+    }
+
+    /**
+     * @method getVersion()
+     * @description 获取定时开关机版本号
+     * @date  20200113
+     * @author sky
+     * @return 返回定时开关机版本号，例如YS_1.0_20190217
+    */
+    public String getVersion() {
+        return Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONOFF_VERSION);
     }
 
 

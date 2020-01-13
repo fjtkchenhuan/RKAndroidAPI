@@ -1,10 +1,14 @@
 package rkandroidapi.ys.com.rkandroidapi;
 
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.Build;
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
@@ -17,6 +21,12 @@ import android.widget.Toast;
 
 
 import com.ys.rkapi.MyManager;
+import com.ys.rkapi.Utils.Utils;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 import java.util.Locale;
 
@@ -40,8 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         manager = MyManager.getInstance(this);
         manager.bindAIDLService(this);
         externalStoragePath = Environment.getExternalStorageDirectory().getPath();
@@ -114,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.set_time).setOnClickListener(this);
         findViewById(R.id.su_order).setOnClickListener(this);
         findViewById(R.id.net_type).setOnClickListener(this);
-        findViewById(R.id.screen_num).setOnClickListener(this);
+//        findViewById(R.id.screen_num).setOnClickListener(this);
         findViewById(R.id.hdmi).setOnClickListener(this);
         //------------------------------------------------------------------
         findViewById(R.id.switch_on_time).setOnClickListener(this);
@@ -138,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.setStandByMode).setOnClickListener(this);
         findViewById(R.id.setNormalMode).setOnClickListener(this);
         findViewById(R.id.setDefaultLauncher).setOnClickListener(this);
+        findViewById(R.id.poweronoff).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
     }
 
@@ -213,7 +222,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setSlideShowNotificationBar(!manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.screen_shot:
-                manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg");
+                if (manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg"));
                 ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
 //                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
                 break;
@@ -239,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.get_brightness:
                 ToastUtils.showToast(this,"背光亮度 = " + manager.getSystemBrightness());
+                break;
             case R.id.open_hdmi:
                 manager.turnOnHDMI();
                 break;
@@ -352,9 +362,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.net_type:
                 ToastUtils.showToast(this,"上网类型 =" + manager.getCurrentNetType());
                 break;
-            case R.id.screen_num:
-                ToastUtils.showToast(this,"屏幕数" + manager.getScreenNumber());
-                break;
+//            case R.id.screen_num:
+//                ToastUtils.showToast(this,"屏幕数" + manager.getScreenNumber());
+//                break;
             case R.id.hdmi:
                 ToastUtils.showToast(this,"HDMI =" + manager.getHdmiinStatus());
                 break;
@@ -431,12 +441,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //
                 manager.setDefaultLauncher("com.android.launcher3/com.android.launcher3.Launcher");
                 break;
+            case R.id.poweronoff:
+                Intent intent = new Intent(MainActivity.this,PowerOnOffActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
     }
-
-
     @Override
     protected void onDestroy() {
         manager.unBindAIDLService(this);

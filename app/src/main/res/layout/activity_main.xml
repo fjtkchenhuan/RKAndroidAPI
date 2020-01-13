@@ -379,8 +379,17 @@
 
             <TextView
                 style="@style/TitleText"
-                android:text="@string/other" />
+                android:text="@string/poweronoff" />
 
+            <Button
+                android:id="@+id/poweronoff"
+                style="@style/TestButton"
+                android:text="@string/poweronoff"/>
+
+            <TextView
+                style="@style/TitleText"
+                android:text="@string/other" />
+            
             <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

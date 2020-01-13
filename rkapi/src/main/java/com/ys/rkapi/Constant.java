@@ -107,4 +107,21 @@ public class Constant {
 
     public static final String SUCOMMAND_ACTION = "com.ys.execSuCmd";
     public static final String SUCOMMAND_KEY = "execSuCmd";
+
+    public static final String INTENT_ACTION_POWERONTIME = "android.intent.PowerOnTime";
+    public static final String INTENT_ACTION_CLEARONTIME = "android.intent.ClearOnOffTime";
+    public static final String INTENT_ACTION_POWERONOFF = "android.intent.action.setpoweronoff";
+    public static final String PERSIST_SYS_POWERONOFF = "persist.sys.poweronoff";
+    public static final String PERSIST_SYS_POWERONOFFBAK = "persist.sys.poweronoffbak";
+    public final static String POWER_ON_OFF_PACKAGENAME = "com.adtv";
+
+
+    public static final String PERSIST_SYS_POWERONMODE = "persist.sys.poweronmode";
+    public static final String PERSIST_SYS_POWERONTIME = "persist.sys.powerontime";
+    public static final String PERSIST_SYS_POWEROFFTIME = "persist.sys.powerofftime";
+    public static final String PERSIST_SYS_POWERONTIME_2 = "persist.sys.powerontimenum";
+    public static final String PERSIST_SYS_POWEROFFTIME_2 = "persist.sys.powerofftimenum";
+    public static final String PERSIST_SYS_POWERONTIMEPER = "persist.sys.powerontimeper";
+    public static final String PERSIST_SYS_POWEROFFTIMEPER = "persist.sys.powerofftimeper";
+    public static final String PERSIST_SYS_POWERONOFF_VERSION = "persist.sys.poweronoffversion";
 }

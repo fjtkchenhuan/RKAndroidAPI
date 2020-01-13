@@ -77,4 +77,7 @@
     <string name="hdmi">是否有hdmi输出</string>
 
     <string name="set_volume">设置音量</string>
+
+    <string name="poweronoff">定时开关机</string>
+    <string name="gpio">GPIO测试</string>
 </resources>

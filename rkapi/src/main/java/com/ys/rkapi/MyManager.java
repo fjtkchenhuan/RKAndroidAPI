@@ -102,71 +102,158 @@ public class MyManager {
         }
     }
 
-
-    //获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
-    public String getApiVersion() {///ok
-        return "V3.0_20191009";
+    /**
+     * @method getApiVersion()
+     * @description 获取目前API平台-版本-日期信息，如果API发生修改就需要修改此处
+     * @date  20180602
+     * @author sky
+     * @return 当前API的版本信息
+    */
+    public String getApiVersion() {
+        return "V1.0_20180602";
     }
 
-    //获取目前设备的型号
-    public String getAndroidModle() {//ok
+    /**
+     * @method getAndroidModle()
+     * @description 获取目前设备的型号，例如rk3288、rk3399
+     * @date  20180602
+     * @author sky
+     * @return 设备型号
+     *
+    */
+    public String getAndroidModle() {
         return VersionUtils.getAndroidModle();
     }
 
-    //获取目前设备的android系统的版本
-    public String getAndroidVersion() {  //ok
+    //
+    /**
+     * @method getAndroidVersion()
+     * @description 获取目前设备的android系统的版本，例如7.1就返回25
+     * @date  20180602
+     * @author sky
+     * @return android系统的版本
+    */
+    public String getAndroidVersion() {
         return Build.VERSION.SDK;
     }
 
-    //获取设备的硬件内存大小容量。
+    /**
+     * @method getRunningMemory()
+     * @description 获取设备的硬件内存大小容量
+     * @date  20180602
+     * @author sky
+     * @return 内存大小
+    */
     public String getRunningMemory() {//ok
         return StorageUtils.getRealMeoSize();
     }
 
     //获取设备的硬件内部存储大小容量
+    /**
+     * @method getInternalStorageMemory()
+     * @description 获取设备的存储大小容量
+     * @date 20180602
+     * @author sky
+     * @return 设备内部存储大小
+    */
     public String getInternalStorageMemory() {//ok
         return StorageUtils.getRealSizeOfNand();
     }
 
-    //获取设备的固件SDK版本。
-    public String getFirmwareVersion() { // ok
+    /**
+     * @method getFirmwareVersion()
+     * @description 获取设备的固件SDK版本。
+     * @date  20180602
+     * @author sky
+     * @return 设备SDK版本
+    */
+    public String getFirmwareVersion() {
         return "1.0";
     }
 
     //获取设备的固件内核版本。
+    /**
+     * @method getKernelVersion()
+     * @description 获取设备的固件内核版本
+     * @date  20180602
+     * @author sky
+     * @return 内核版本
+    */
     public String getKernelVersion() { // ok
         return VersionUtils.getKernelVersion();
     }
 
     //获取设备的固件系统版本和编译日期。
+    /**
+     * @method  getAndroidDisplay()
+     * @description  获取固件版本号
+     * @date  20180602
+     * @author sky
+     * @return  设备的固件版本号
+    */
     public String getAndroidDisplay() {  //ok
         return VersionUtils.getSystemVersionInfo();
     }
 
     //获取设备CPU型号
+    /**
+     * @method getCPUType()
+     * @description 获取设备CPU型号
+     * @date  20190118
+     * @author sky
+     * @return 设备CPU型号
+    */
     public String getCPUType() {
         return VersionUtils.getCpuInfo()[0];
     }
 
     //获取固件编译的时间
+    /**
+     * @method getFirmwareDate()
+     * @description 固件的编译时间
+     * @date  20180602
+     * @author sky
+     * @return 固件编译的时间，比如20180602
+    */
     public String getFirmwareDate() {  // ok
         return VersionUtils.getFirmwareDate();
     }
 
 
     //关机
+    /**
+     * @method shutdown()
+     * @description 执行关机操作，走安卓标准关机流程
+     * @date  20180602
+     * @author sky
+    */
     public void shutdown() {  // ok
         sendMyBroadcast(Constant.SHUTDOWN_ACTION);
     }
 
     //重启
+    /**
+     * @method reboot()
+     * @description 执行重启操作，走安卓标准重启流程
+     * @date  20180602
+     * @author sky
+    */
     public void reboot() {  // ok
         sendMyBroadcast(Constant.REBOOT_ACTION);
     }
 
     // 截屏
     // path  存储的绝对路径 如：/mnt/internal_sd/001.jpg
-    public boolean takeScreenshot(String path) { // ok
+    /**
+     * @method takeScreenshot
+     * @description 截屏，执行此方法可将系统当前显示画面截图保存在指定路径
+     * @date  20180602
+     * @author sky
+     * @param path，保存图片的路径。例如/mnt/internal_sd/001.jpg
+     * @return 是否截图成功，true成功，false失败
+     *
+    */
+    public boolean takeScreenshot(String path) {
 //        sendMyBroadcastWithExtra(Constant.SCREENSHOOT_ACTION, Constant.SCREENSHOOT_KEY, path);
         Log.d("sky","takeScreenshot takeScreenshot");
         boolean flag = false;
@@ -180,8 +267,14 @@ public class MyManager {
         return flag;
     }
 
-    // 旋转屏幕
-    public void rotateScreen(Context context, String degree) {  /// error
+    /**
+     * @method rotateScreen(Context context, String degree)
+     * @description 旋转屏幕方向，0度、90度、180度和270度
+     * @date 20180602
+     * @author sky
+     * @param context，上下文对象。degree，旋转的角度（0/90/180/270）
+    */
+    public void rotateScreen(Context context, String degree) {
         YsFactory.getRK().rotateScreen(context, degree);
     }
 
@@ -194,11 +287,24 @@ public class MyManager {
     }
 
 
+    /**
+     * @method getNavBarHideState()
+     * @description 获取导航栏的状态
+     * @date  20180602
+     * @author sky
+     * @return 导航栏隐藏返回true，显示则返回false
+    */
     public boolean getNavBarHideState() {
         return YsFactory.getRK().getNavBarHideState(mContext);
     }
 
-    //设置显示或隐藏导航
+    /**
+     * @method hideNavBar(boolean hide)
+     * @description 设置显示或隐藏导航
+     * @date  20180602
+     * @author sky
+     * @param hide，隐藏导航栏传入true，显示传入false
+    */
     public void hideNavBar(boolean hide) {
         Intent intent = new Intent();
         intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
@@ -211,22 +317,58 @@ public class MyManager {
         }
     }
 
+    /**
+     * @method isSlideShowNavBarOpen()
+     * @description 查询滑出导航栏选项是否打开
+     * @date  20180602
+     * @author sky
+     * @return 滑出导航栏打开返回true，关闭返回false
+    */
     public boolean isSlideShowNavBarOpen() {
         return YsFactory.getRK().isSlideShowNavBarOpen();
     }
 
+    /**
+     * @method setSlideShowNavBar(boolean flag)
+     * @description 打开或关闭滑出导航栏
+     * @date 20180602
+     * @author sky
+     * @param flag，打开滑出导航栏传入true，关闭传入false
+    */
     public void setSlideShowNavBar(boolean flag) {
         YsFactory.getRK().setSlideShowNavBar(mContext, flag);
     }
 
+    /**
+     * @method isSlideShowNotificationBarOpen()
+     * @description 查询下拉通知栏是否打开
+     * @date  20180602
+     * @author sky
+     * @return 下拉通知栏打开返回true，否则返回false
+    */
     public boolean isSlideShowNotificationBarOpen() {
         return YsFactory.getRK().isSlideShowNotificationBarOpen();
     }
 
+    /**
+     * @method setSlideShowNotificationBar(boolean flag)
+     * @description 设置 打开或关闭下拉通知栏
+     * @date 20180602
+     * @author sky
+     * @param flag，打开下拉通知栏传入true，禁止下拉通知栏传入false
+    */
     public void setSlideShowNotificationBar(boolean flag) {
         YsFactory.getRK().setSlideShowNotificationBar(mContext, flag);
     }
 
+    /**
+     * @method getDisplayWidth(Context context)
+     * @description 获取屏幕宽
+     * @date 20180602
+     * @author sky
+     * @param context，上下文对象
+     * @return 屏幕宽度
+    */
     public int getDisplayWidth(Context context) {
         WindowManager manager = ((Activity) context).getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -234,6 +376,14 @@ public class MyManager {
         return outMetrics.widthPixels;
     }
 
+    /**
+     * @method getDisplayHeight(Context context)
+     * @description 获取屏幕高
+     * @date  20180602
+     * @author sky
+     * @param context，上下文对象
+     * @return 屏幕高度
+    */
     public int getDisplayHeight(Context context) {
         WindowManager manager = ((Activity) context).getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
@@ -242,20 +392,44 @@ public class MyManager {
     }
 
 
-    //关背光
+    /**
+     * @method turnOffBackLight()
+     * @description 关闭屏幕背光，仅仅是关闭背光，其他系统功能不影响
+     * @date  20180602
+     * @author sky
+    */
     public void turnOffBackLight() {
         YsFactory.getRK().turnOffBackLight();
     }
 
-    //开背光
+    /**
+     * @method turnOnBackLight()
+     * @description 打开屏幕背光，跟turnOffBackLight()方法相对应
+     * @date  20180602
+     * @author sky
+     */
     public void turnOnBackLight() {
         YsFactory.getRK().turnOnBackLight();
     }
 
+    /**
+     * @method isBacklightOn()
+     * @description 获取背光是否打开
+     * @date  20181122
+     * @author sky
+     * @return 当前背光是开返回true，否则返回false
+    */
     public boolean isBacklightOn() {
         return YsFactory.getRK().isBackLightOn();
     }
 
+    /**
+     * @method getSystemBrightness() 
+     * @description 获取当前设备背光亮度
+     * @date  20181122
+     * @author sky
+     * @return int，返回的亮度范围是0-100
+    */
     public int getSystemBrightness() {
         int systemBrightness;
         int value = 0;
@@ -269,17 +443,36 @@ public class MyManager {
     }
 
 
+    /**
+     * @method turnOnHDMI()
+     * @description 打开HDMI输出，与turnOffHDMI()相对应
+     * @date 20180602
+     * @author sky
+    */
     public void turnOnHDMI() {
         YsFactory.getRK().turnOnHDMI();
     }
 
+    /**
+     * @method turnOffHDMI()
+     * @description 关闭HDMI输出，仅仅关闭信号输出，其他系统功能不影响
+     * @date 20180602
+     * @author sky
+     */
     public void turnOffHDMI() {
         YsFactory.getRK().turnOffHDMI();
     }
 
     //升级固件
     // 固件存放的绝对路径
-    public void upgradeSystem(String absolutePath) {//  ok
+    /**
+     * @method upgradeSystem(String absolutePath)
+     * @description 升级固件
+     * @date 20180602
+     * @author sky
+     * @param absolutePath，待升级固件放置的绝对路径
+    */
+    public void upgradeSystem(String absolutePath) {
         if (Build.VERSION.SDK.equals("27")) {
             Intent intent = new Intent();
             intent.setAction(Constant.FIRMWARE_UPGRADE_ACTION);
@@ -291,6 +484,12 @@ public class MyManager {
     }
 
     //重启进入Recovery模式
+    /**
+     * @method rebootRecovery()
+     * @description 恢复出厂设置
+     * @date 20180602
+     * @author sky
+    */
     public void rebootRecovery() { // ok
         if ("25".equals(Build.VERSION.SDK)) {
             Intent intent = new Intent("com.ys.recovery_system");
@@ -301,6 +500,14 @@ public class MyManager {
 
     //静默安装APK
     //安装成功返回true 否则返回false
+    /**
+     * @method silentInstallApk(String apkPath)
+     * @description 静默安装apk，采用的方法是pm install -r
+     * @date 20180602
+     * @author sky
+     * @param apkPath，需要安装的apk的绝对路径
+     * @return 静默安装成功返回true，否则返回false
+    */
     public boolean silentInstallApk(String apkPath) {//////  ok
         return YsFactory.getRK().silentInstallApk(apkPath);
     }
@@ -311,6 +518,13 @@ public class MyManager {
     }
 
     //获取以太网MAC地址
+    /**
+     * @method getEthMacAddress()
+     * @description 获取以太网mac地址
+     * @date 20180602
+     * @author sky
+     * @return 返回以太网mac地址，例如30:1F:9A:61:BA:8F
+    */
     public String getEthMacAddress() {////////  ok
         return NetUtils.getEthMAC();
     }
@@ -343,7 +557,13 @@ public class MyManager {
         }
     };
 
-    //获取当前以太网模式
+    /**
+     * @method  getEthMode()
+     * @description 获取以太网的模式，静态或动态
+     * @date 20180602
+     * @author sky
+     * @return 静态模式返回StaticIp，动态模式返回DHCP
+    */
     public String getEthMode() {
         Log.d(TAG, "获取以太网模式");
         String ethMode = "";
@@ -357,6 +577,13 @@ public class MyManager {
         return ethMode;
     }
 
+    /**
+     * @method getEthStatus()
+     * @description 获取以太网的开关状态
+     * @date  20180806
+     * @author sky
+     * @return 以太网开关打开返回true，开关关闭返回false
+    */
     public boolean getEthStatus() {
         boolean flag = false;
         if (igetMessage != null) {
@@ -369,6 +596,13 @@ public class MyManager {
         return flag;
     }
 
+    /**
+     * @method isAutoSyncTime() 
+     * @description 获取自动确定网络时间的开关状态
+     * @date  20180806
+     * @author sky
+     * @return 返回true说明开启了自动确定网络时间，返回false说明关闭了此开关
+    */
     public boolean isAutoSyncTime() {
         boolean flag = false;
         if (igetMessage != null) {
@@ -381,6 +615,13 @@ public class MyManager {
         return flag;
     }
 
+    /**
+     * @method getGateway()
+     * @description 获取以太网的网关
+     * @date  20180806
+     * @author sky
+     * @return 返回当前设备以太网的网关，例如192.168.1.1
+    */
     public String getGateway() {
         String gateway = "";
         if (igetMessage != null) {
@@ -393,6 +634,13 @@ public class MyManager {
         return gateway;
     }
 
+    /**
+     * @method getNetMask()
+     * @description 获取以太网的子网掩码
+     * @date  20180806
+     * @author sky
+     * @return 返回当前设备以太网的子网掩码，例如255.255.255.0
+    */
     public String getNetMask() {
         String mask = "";
         if (igetMessage != null) {
@@ -405,6 +653,13 @@ public class MyManager {
         return mask;
     }
 
+    /**
+     * @method getEthDns1()
+     * @description 获取以太网的DNS1
+     * @date  20180806
+     * @author sky
+     * @return 返回当前设备以太网的DNS1，例如192.168.1.1
+     */
     public String getEthDns1() {
         String dns1 = "";
         if (igetMessage != null) {
@@ -417,6 +672,13 @@ public class MyManager {
         return dns1;
     }
 
+    /**
+     * @method getEthDns2()
+     * @description 获取以太网的DNS2
+     * @date  20180806
+     * @author sky
+     * @return 返回当前设备以太网的DNS2，例如192.168.1.1
+     */
     public String getEthDns2() {
         String dns2 = "";
         if (igetMessage != null) {
@@ -431,12 +693,26 @@ public class MyManager {
 
 
     //设置静态IP
+    /**
+     * @method setStaticEthIPAddress(String IPaddr, String gateWay, String mask, String dns1, String dns2)
+     * @description 设置以太网的模式为静态，并指定相关参数
+     * @date 20180602
+     * @author sky
+     * @param  IPaddr，设置的IP地址。gateWay，设置的网关。mask，设置的子网掩码。dns1和dns2是设置的dns值
+    */
     public void setStaticEthIPAddress(String IPaddr, String gateWay, String mask, String dns1, String dns2) {//ok
         Log.d(TAG, "setEthIPAddress 修改以太网IP");
         NetUtils.setStaticIP(mContext, IPaddr, gateWay, mask, dns1, dns2);
     }
 
     //获取以太网静态IP
+    /**
+     * @method getStaticEthIPAddress()
+     * @description 获取以太网的静态IP
+     * @date  20180602
+     * @author sky
+     * @return 返回以太网的静态ip地址
+    */
     public String getStaticEthIPAddress() {//ok
         Log.d(TAG, "获取静态IP");
         String staticEthIP = "";
@@ -452,14 +728,31 @@ public class MyManager {
 
 
     //设置动态获取IP
+    /**
+     * @method setDhcpIpAddress(Context context)
+     * @description 设置以太网的模式为动态
+     * @date 20180602
+     * @author sky
+     * @param context，上下文对象
+    */
     public void setDhcpIpAddress(Context context) {
         Intent intent = new Intent("com.ys.set_dhcp");
         intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         intent.putExtra("useStaticIP", 0);
         context.sendBroadcast(intent);
+
+        int f = 1;
+        String d = f + "";
     }
 
     //获取以太网动态IP地址
+    /**
+     * @method getDhcpIpAddress()
+     * @description 获取以太网的动态IP地址
+     * @date  20180602
+     * @author sky
+     * @return 返回以太网动态ip地址
+    */
     public String getDhcpIpAddress() {
         String address = "";
         if ("27".equals(Build.VERSION.SDK)) {
@@ -476,6 +769,13 @@ public class MyManager {
     }
 
     //以太网使能 OnOff true 连接 false断开
+    /**
+     * @method ethEnabled(boolean enable)
+     * @description 控制以太网开关
+     * @date 20180602
+     * @author sky
+     * @param enable，打开以太网开关传入true，关闭以太网开关传入false
+    */
     public void ethEnabled(boolean enable) {
         if ("27".equals(Build.VERSION.SDK)) {
             Intent intent = new Intent(Constant.SET_ETH_ENABLE_ACTION);
@@ -486,11 +786,25 @@ public class MyManager {
             NetUtils.setEthernetEnabled(mContext, enable);
     }
 
+    /**
+     * @method setSoftKeyboardHidden(boolean hidden)
+     * @description 控制软键盘是否弹出（主要是EditText控件）
+     * @date 20181126
+     * @author sky
+     * @param hidden，传入true，说明隐藏软键盘，传入false就是显示软键盘
+    */
     public void setSoftKeyboardHidden(boolean hidden) {
         YsFactory.getRK().setSoftKeyboardHidden(hidden);
     }
 
     // 获取外置SD卡的路径
+    /**
+     * @method getSDcardPath()
+     * @description 获取外置SD卡路径
+     * @date 20180602
+     * @author sky
+     * @return 返回外置SD卡路径
+    */
     public String getSDcardPath() {/////  ok
         return Constant.SD_PATH;
     }
@@ -498,6 +812,14 @@ public class MyManager {
     // 获取外置U盘的路径
     // mum 表示第几个U盘，从0开始。
     // 注意要插入U盘后才能有U盘路径！！！！！
+    /**
+     * @method getUSBStoragePath(int num)
+     * @description 获取外置U盘路径
+     * @date 20180602
+     * @author sky
+     * @param num，从0开始，表示第几个U盘
+     * @return u盘的路径
+    */
     public String getUSBStoragePath(int num) {  // ok
         if (num < StorageUtils.getAllUSBStorageLocations().size())
             return StorageUtils.getAllUSBStorageLocations().get(num);
@@ -537,6 +859,14 @@ public class MyManager {
     }
 
     //获取串口的绝对路径
+    /**
+     * @method getUartPath(String uart)
+     * @description 获取串口的绝对路径
+     * @date 20180602
+     * @author sky
+     * @param uart，传入的是串口的序列号，比如串口0就传入TTYS0
+     * @return 返回指定串口的绝对路径
+    */
     public String getUartPath(String uart) {
         if (!TextUtils.isEmpty(uart)) {
             if (uart.toUpperCase().equals("TTYS0")) {
@@ -611,6 +941,13 @@ public class MyManager {
     }
 
     // 设置时间  24小时制
+    /**
+     * @method setTime(int year, int month, int day, int hour, int minute, int sec)
+     * @description 设置系统时间
+     * @date  20180602
+     * @author sky
+     * @param 传入需要设置的年月日时分秒，其中月份从1-12，时间按照24小时制
+    */
     public void setTime(int year, int month, int day, int hour, int minute, int sec) {////// ok
         sendMyBroadcastWithLongExtra(Constant.UPDATE_TIME_ACTION, Constant.UPDATE_TIME_KEY, TimeUtils.getTimeMills(year, month, day, hour, minute, sec));
     }
@@ -620,12 +957,26 @@ public class MyManager {
     }
 
     // 执行su 命令
+    /**
+     * @method execSuCmd(String command)
+     * @description 在root权限下运行shell命令
+     * @date 20180602
+     * @author sky
+     * @param command，传入需要执行的shell命令，比如reboot
+    */
     public void execSuCmd(String command) {///// ok
         Utils.execFor7(command);
     }
 
     // 获取android logcat
     // path 指定输出logcat 的绝对路径，如 /mnt/internal_sd/logcat.txt
+    /**
+     * @method getAndroidLogcat(String path)
+     * @description 获取安卓层日志
+     * @date 20180602
+     * @author sky
+     * @param path，日志保存的路径
+    */
     public void getAndroidLogcat(String path) {//// ok
         LogUtils.startLog(path);
     }
@@ -640,6 +991,13 @@ public class MyManager {
     //返回值 1表示WIFI
     //返回值 2表示移动网络
     //返回值 -100表示未知网络
+    /**
+     * @method getCurrentNetType()
+     * @description 获取当前网络类型
+     * @date 20180602
+     * @author sky
+     * @return 返回int值，0表示以太网，1表示WIFI，2表示移动网络，-100表示未知网络
+    */
     public int getCurrentNetType() {  // ok
         int realNetType = NetUtils.getNetWorkType(mContext);
         if (realNetType == 9)
@@ -676,6 +1034,13 @@ public class MyManager {
     }
 
     // 获取当前屏幕数，默认返回1，有双屏时返回2
+    /**
+     * @method getScreenNumber()
+     * @description 获取当前设备连接的屏幕数
+     * @date  20180602
+     * @author sky
+     * @return 设备连接几个屏就会返回几
+    */
     public int getScreenNumber() {
         mDisplayManager = (DisplayManager) mContext.getSystemService(
                 Context.DISPLAY_SERVICE);
@@ -685,6 +1050,13 @@ public class MyManager {
 
     // 获取HDMI IN 的状态
     // 返回0没有HDMI输入， 1有HDMI输入
+    /**
+     * @method getHdmiinStatus()
+     * @description 获取HDMI连接情况
+     * @date  20180602
+     * @author sky
+     * @return  HDMI有输出返回true，否则返回false
+    */
     public boolean getHdmiinStatus() {
         return GPIOUtils.isHDMIOut();
     }
@@ -715,6 +1087,13 @@ public class MyManager {
 //    }
 
     //控制自动确定日期和时间的开关
+    /**
+     * @method switchAutoTime(boolean open)
+     * @description 控制自动确定日期和时间的开关
+     * @date 20180602
+     * @author sky
+     * @param open，传入true就是打开开关，false关闭开关
+    */
     public void switchAutoTime(boolean open) {
         Intent intent = new Intent("com.ys.switch_auto_set_time");
         intent.putExtra("switch_auto_time", open);
@@ -722,6 +1101,13 @@ public class MyManager {
         mContext.sendBroadcast(intent);
     }
 
+    /**
+     * @method setLanguage(String language, String country)
+     * @description 设置当前系统默认语言
+     * @date  20190513
+     * @author sky
+     * @param language，语言，如zh。country，国家，如CN
+    */
     public void setLanguage(String language, String country) {
         Intent intent = new Intent("com.ys.set_language");
         intent.putExtra("language", language);
@@ -730,6 +1116,13 @@ public class MyManager {
         mContext.sendBroadcast(intent);
     }
 
+    /**
+     * @method getKmsgLog(String path)
+     * @description 获取kernel层日志
+     * @date 20180602
+     * @author sky
+     * @param path，日志保存的路径
+    */
     public void getKmsgLog(String path) {
         InputStreamReader reader = null;
         BufferedReader bufferedReader = null;
@@ -753,16 +1146,37 @@ public class MyManager {
         }
     }
 
+    /**
+     * @method changeScreenLight(int value)
+     * @description 设置屏幕亮度
+     * @date 20180828
+     * @author sky
+     * @param value，是按照1到100设置的，设置100即代表最大亮度，1代表最小亮度
+    */
     public void changeScreenLight(int value) {
         YsFactory.getRK().changeScreenLight(mContext, value);
-
     }
 
+    /**
+     * @method setDormantInterval(Context context, long time)
+     * @description 休眠时间的控制
+     * @date 20181129
+     * @author sky
+     * @param context，上下文对象。time，间隔时间（在间隔时间内没操作系统进入休眠）
+    */
     public void setDormantInterval(Context context, long time) {
         YsFactory.getRK().setDormantInterval(context, time);
     }
 
     //获取设置默认输入法是否成功
+    /**
+     * @method isSetDefaultInputMethodSuccess(String defaultInputMethod)
+     * @description 设置默认输入法，并判断是否设置成功
+     * @date 20190228
+     * @author sky
+     * @param defaultInputMethod，需要设置的输入法的包名，例如谷歌拼音输入法"com.google.android.inputmethod.pinyin/.PinyinIME"
+     * @return 设置成功返回true，失败返回false
+    */
     public boolean isSetDefaultInputMethodSuccess(String defaultInputMethod) {//ok
         Log.d(TAG, "isSetDefaultInputMethodSuccess isSetDefaultInputMethodSuccess");
         boolean isSuccess = false;
@@ -777,6 +1191,13 @@ public class MyManager {
     }
 
     //获取当前的输入法
+    /**
+     * @method getDefaultInputMethod()
+     * @description 获取当前系统输入法
+     * @date 20190228
+     * @author sky
+     * @return 返回当前输入法的包名，例如com.google.android.inputmethod.pinyin/.PinyinIME
+    */
     public String getDefaultInputMethod() {
         String defaultInputMethod = "";
         if (igetMessage != null) {
@@ -790,14 +1211,35 @@ public class MyManager {
     }
 
     //获取CPU温度
+    /**
+     * @method getCPUTemperature()
+     * @description 获取当前系统CPU温度
+     * @date  20190619
+     * @author sky
+     * @return 返回int值，单位是摄氏度
+    */
     public int getCPUTemperature() {
         return YsFactory.getRK().getCPUTemperature();
     }
 
+    /**
+     * @method setADBOpen(boolean open)
+     * @description 打开或关闭adb连接
+     * @date 20190628
+     * @author sky
+     * @param open，true，打开adb连接开关。false，关闭adb连接
+    */
     public void setADBOpen(boolean open) {
         YsFactory.getRK().setADBOpen(open);
     }
 
+    /**
+     * @method replaceBootanimation(String path)
+     * @description 替换开机动画
+     * @date  20190628
+     * @author sky
+     * @param path，开机动画bootanimation.zip所在的绝对路径
+    */
     public void replaceBootanimation(String path) {
         String[] commands = new String[6];
         commands[0] = "mount -o rw,remount -t ext4 /system";
@@ -882,6 +1324,13 @@ public class MyManager {
         }
     }
 
+    /**
+     * @method setDefaultLauncher(String packageAndClassName)
+     * @description 设置系统默认Launcher
+     * @date  20190719
+     * @author sky
+     * @param packageAndClassName，设置的Launcher的包名和启动类名，例如"com.android.launcher3/com.android.launcher3.Launcher"
+    */
     public void setDefaultLauncher(String packageAndClassName) {
         Intent intent = new Intent("com.ys.setDefaultLauncher");
         intent.putExtra("defaultLauncher", packageAndClassName);

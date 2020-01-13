@@ -36,11 +36,11 @@ public class YS3128_7 extends YS {
 
     @Override
     public void rotateScreen(Context context, String degree) {
-        Utils.setValueToProp("persist.sys.displayrot",degree);
-        File file = new File("sys/devices/20072000.i2c/i2c-0/0-0054/rotate");
-        if(file.exists()){
-            GPIOUtils.writeStringFileFor7(file, degree);
-        }
+        Utils.setValueToProp("persist.sys.displayrot", degree);
+//        File file = new File("sys/devices/20072000.i2c/i2c-0/0-0054/rotate");
+//        if (file.exists()) {
+//            GPIOUtils.writeStringFileFor7(file, degree);
+//        }
         Utils.reboot();
     }
 
@@ -143,12 +143,17 @@ public class YS3128_7 extends YS {
 
     @Override
     public void setSoftKeyboardHidden(boolean hidden) {
-
+        if (hidden)
+            Utils.setValueToProp("persist.sys.softkeyboard", "0");
+        else
+            Utils.setValueToProp("persist.sys.softkeyboard", "1");
     }
 
     @Override
     public void setDormantInterval(Context context, long time) {
-
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval", time);
+        context.sendBroadcast(intent);
     }
 
     @Override
@@ -158,8 +163,13 @@ public class YS3128_7 extends YS {
 
     @Override
     public void setADBOpen(boolean open) {
-
+        if (open) {
+            Utils.setValueToProp("persist.sys.usb.otg.mode", "2");
+            Utils.execFor7("busybox echo 2 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+        } else {
+            Utils.setValueToProp("persist.sys.usb.otg.mode", "1");
+            Utils.execFor7("busybox echo 1 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+        }
     }
-
 
 }

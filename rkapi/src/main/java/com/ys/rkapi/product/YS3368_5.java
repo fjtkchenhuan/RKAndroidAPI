@@ -2,6 +2,7 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.text.TextUtils;
 
 import com.ys.rkapi.Constant;
@@ -56,33 +57,34 @@ public class YS3368_5 extends YS {
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
+//        return Utils.getValueFromProp(Constant.PROP_HIDE_STATUSBAR).equals("1");
+        return (Settings.System.getInt(context.getContentResolver(), "hidden_state_bar", 0) == 1);
     }
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR_LU).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
         if (!flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
         else
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
     }
 
     @Override
     public boolean isSlideShowNotificationBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_NOTIFIBAR_LU).equals("1");
     }
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
         if (flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
         else
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
     }
 
     @Override
@@ -153,12 +155,17 @@ public class YS3368_5 extends YS {
 
     @Override
     public void setSoftKeyboardHidden(boolean hidden) {
-
+        if (hidden)
+            Utils.setValueToProp("persist.sys.softkeyboard","0");
+        else
+            Utils.setValueToProp("persist.sys.softkeyboard","1");
     }
 
     @Override
     public void setDormantInterval(Context context,long time) {
-
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval",time);
+        context.sendBroadcast(intent);
     }
 
     @Override
@@ -168,6 +175,25 @@ public class YS3368_5 extends YS {
 
     @Override
     public void setADBOpen(boolean open) {
-
+        if (open) {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","2");///sys/bus/platform/drivers/usb20_otg/force_usb_mode
+//            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"2");
+            try {
+                GPIOUtils.writeIntFileUnder7("2","/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","1");
+            try {
+                GPIOUtils.writeIntFileUnder7("1","/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

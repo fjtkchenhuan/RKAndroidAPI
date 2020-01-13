@@ -59,7 +59,7 @@ public class YS3328 extends YS {
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
@@ -72,7 +72,7 @@ public class YS3328 extends YS {
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "0");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR, "1");
@@ -144,11 +144,19 @@ public class YS3328 extends YS {
 
     @Override
     public int getCPUTemperature() {
-        return 0;
+        String s = GPIOUtils.readGpioPGForLong("/sys/class/thermal/thermal_zone0/temp");
+        int temp = Integer.parseInt(s.substring(0,5));
+        return (int) (temp/1000);
     }
 
     @Override
     public void setADBOpen(boolean open) {
-
+        if (open) {
+            Utils.setValueToProp("persist.sys.usb.otg.mode", "2");
+            Utils.execFor7("busybox echo 2 > " + "/sys/bus/platform/drivers/usb20_setSlideShowNavBarotg/force_usb_mode");
+        } else {
+            Utils.setValueToProp("persist.sys.usb.otg.mode", "1");
+            Utils.execFor7("busybox echo 1 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+        }
     }
 }

@@ -12,6 +12,7 @@ import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.SilentInstallUtils;
 import com.ys.rkapi.Utils.Utils;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -124,14 +125,15 @@ public class YS3128 extends YS {
 
     @Override
     public void changeScreenLight(Context context, int value) {
-        try {
+//        try {
             int i = value * 255 /100 ;
-            GPIOUtils.writeScreenBrightFile(String.valueOf(i),"/sys/class/backlight/rk28_bl/brightness");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        GPIOUtils.writeStringFileFor7(new File("/sys/class/backlight/rk28_bl/brightness"),String.valueOf(i));
+//            GPIOUtils.writeScreenBrightFile(String.valueOf(i),"/sys/class/backlight/rk28_bl/brightness");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         Intent intent = new Intent("com.ys.set_screen_bright");
         intent.putExtra("brightValue",value);
         context.sendBroadcast(intent);
@@ -140,21 +142,39 @@ public class YS3128 extends YS {
 
     @Override
     public void turnOnHDMI() {
+        try {
+            GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3128);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOffHDMI() {
-
+        try {
+            GPIOUtils.writeIntFileUnder7("0 ",Constant.HDMI_STATUS_3128);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void setSoftKeyboardHidden(boolean hidden) {
-
+        if (hidden)
+            Utils.setValueToProp("persist.sys.softkeyboard", "0");
+        else
+            Utils.setValueToProp("persist.sys.softkeyboard", "1");
     }
 
     @Override
     public void setDormantInterval(Context context, long time) {
-
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval",time);
+        context.sendBroadcast(intent);
     }
 
     @Override
@@ -164,7 +184,27 @@ public class YS3128 extends YS {
 
     @Override
     public void setADBOpen(boolean open) {
-
+        if (open) {
+//            Utils.setValueToProp("persist.sys.usb.otg.mode","2");///sys/bus/platform/drivers/usb20_otg/force_usb_mode
+//            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"2");
+            try {
+                GPIOUtils.writeIntFileUnder7("2","/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+//            Utils.setValueToProp("persist.sys.usb.otg.mode","1");
+//            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"2");
+            try {
+                GPIOUtils.writeIntFileUnder7("1","/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private int getDisplayRot(String value) {

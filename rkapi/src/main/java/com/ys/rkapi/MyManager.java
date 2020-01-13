@@ -5,6 +5,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.hardware.display.DisplayManager;
 import android.os.Build;
 import android.os.IBinder;
@@ -307,7 +310,8 @@ public class MyManager {
     */
     public void hideNavBar(boolean hide) {
         Intent intent = new Intent();
-        intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
+        if (Build.VERSION.SDK_INT>19)
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         if (!hide) {
             intent.setAction("android.action.adtv.showNavigationBar");
             mContext.sendBroadcast(intent);
@@ -369,11 +373,14 @@ public class MyManager {
      * @param context，上下文对象
      * @return 屏幕宽度
     */
-    public int getDisplayWidth(Context context) {
-        WindowManager manager = ((Activity) context).getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.widthPixels;
+    public int getDisplayWidth(Activity context) {
+//        WindowManager manager = ((Activity) context).getWindowManager();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        manager.getDefaultDisplay().getMetrics(outMetrics);
+//        return outMetrics.widthPixels;
+        Point point = new Point();
+        context.getWindowManager().getDefaultDisplay().getRealSize(point);
+        return point.x;
     }
 
     /**
@@ -384,11 +391,14 @@ public class MyManager {
      * @param context，上下文对象
      * @return 屏幕高度
     */
-    public int getDisplayHeight(Context context) {
-        WindowManager manager = ((Activity) context).getWindowManager();
-        DisplayMetrics outMetrics = new DisplayMetrics();
-        manager.getDefaultDisplay().getMetrics(outMetrics);
-        return outMetrics.heightPixels;
+    public int getDisplayHeight(Activity context) {
+//        WindowManager manager = ((Activity) context).getWindowManager();
+//        DisplayMetrics outMetrics = new DisplayMetrics();
+//        manager.getDefaultDisplay().getMetrics(outMetrics);
+//        return outMetrics.heightPixels;
+        Point point = new Point();
+        context.getWindowManager().getDefaultDisplay().getRealSize(point);
+        return point.y;
     }
 
 
@@ -479,8 +489,13 @@ public class MyManager {
             intent.putExtra(Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
             intent.setPackage("com.ys.gtupdatezip");
             mContext.sendBroadcast(intent);
-        }else
-          sendMyBroadcastWithExtra(Constant.FIRMWARE_UPGRADE_ACTION, Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
+        }else if (Build.VERSION.SDK_INT==22){
+            Toast.makeText(mContext,"暂不支持此功能",Toast.LENGTH_SHORT).show();
+        }else {
+               String path = absolutePath.replace("sdcard","data/media/0");
+               Log.i("yuanhang","===="+path);
+                sendMyBroadcastWithExtra(Constant.FIRMWARE_UPGRADE_ACTION, Constant.FIRMWARE_UPGRADE_KEY, absolutePath);
+        }
     }
 
     //重启进入Recovery模式
@@ -740,9 +755,6 @@ public class MyManager {
         intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
         intent.putExtra("useStaticIP", 0);
         context.sendBroadcast(intent);
-
-        int f = 1;
-        String d = f + "";
     }
 
     //获取以太网动态IP地址
@@ -946,7 +958,7 @@ public class MyManager {
      * @description 设置系统时间
      * @date  20180602
      * @author sky
-     * @param 传入需要设置的年月日时分秒，其中月份从1-12，时间按照24小时制
+     * @param year,传入需要设置的年月日时分秒，其中月份从1-12，时间按照24小时制
     */
     public void setTime(int year, int month, int day, int hour, int minute, int sec) {////// ok
         sendMyBroadcastWithLongExtra(Constant.UPDATE_TIME_ACTION, Constant.UPDATE_TIME_KEY, TimeUtils.getTimeMills(year, month, day, hour, minute, sec));
@@ -1219,6 +1231,9 @@ public class MyManager {
      * @return 返回int值，单位是摄氏度
     */
     public int getCPUTemperature() {
+        if (Build.BRAND.contains("312x")||Build.VERSION.SDK_INT==22) {
+            Toast.makeText(mContext, "暂不支持该功能", Toast.LENGTH_SHORT).show();
+        }
         return YsFactory.getRK().getCPUTemperature();
     }
 

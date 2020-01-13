@@ -2,6 +2,9 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
@@ -43,6 +46,11 @@ public class YS3399 extends YS {
     @Override
     public void rotateScreen(Context context, String degree) {
         Utils.setValueToProp("persist.sys.displayrot",degree);
+        String sameOrientation = Utils.getValueFromProp("persist.same.orientation");
+        if(sameOrientation.equals("true")){
+            int value = Integer.parseInt(degree)/90;
+            Utils.setValueToProp("persist.sys.rotation.einit",value+"");
+        }
         File file = new File("/sys/devices/platform/ff150000.i2c/i2c-6/6-0050/rotate");
         if(file.exists()){
             GPIOUtils.writeStringFileFor7(file, degree);
@@ -62,7 +70,7 @@ public class YS3399 extends YS {
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
@@ -75,7 +83,7 @@ public class YS3399 extends YS {
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-        if (flag)
+        if (!flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
         else
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
@@ -115,31 +123,53 @@ public class YS3399 extends YS {
 
     @Override
     public void turnOnHDMI() {
-
+        Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+        GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
     }
 
     @Override
     public void turnOffHDMI() {
-
+        Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+        GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"off");
     }
 
     @Override
     public void setSoftKeyboardHidden(boolean hidden) {
-
+        if (hidden)
+            Utils.setValueToProp("persist.sys.softkeyboard","0");
+        else
+            Utils.setValueToProp("persist.sys.softkeyboard","1");
     }
 
     @Override
     public void setDormantInterval(Context context,long time) {
-
+        Intent intent = new Intent(Constant.DORMANT_INTERVAL);
+        intent.putExtra("time_interval",time);
+        context.sendBroadcast(intent);
     }
 
     @Override
     public int getCPUTemperature() {
-        return 0;
+        String s = GPIOUtils.readGpioPGForLong("/sys/class/thermal/thermal_zone0/temp");
+        int temp = Integer.parseInt(s.substring(0,5));
+        return (int) (temp/1000);
     }
 
     @Override
     public void setADBOpen(boolean open) {
+        if (open) {
+            Utils.setValueToProp("persist.sys.usbdebug","1");
+            if (Build.MODEL.contains("rk3399-all"))
+                GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/usb@fe800000/dwc3_mode"),"peripheral");
+            else
+                GPIOUtils.writeStringFileFor7(new File("/sys/kernel/debug/usb@fe800000/rk_usb_force_mode"),"peripheral");
 
+        } else {
+            Utils.setValueToProp("persist.sys.usbdebug","0");
+            if (Build.MODEL.contains("rk3399-all"))
+                GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/usb@fe800000/dwc3_mode"),"host");
+            else
+                GPIOUtils.writeStringFileFor7(new File("/sys/kernel/debug/usb@fe800000/rk_usb_force_mode"),"host");
+        }
     }
 }

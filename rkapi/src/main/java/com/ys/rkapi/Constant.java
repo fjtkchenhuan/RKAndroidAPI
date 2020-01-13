@@ -27,6 +27,7 @@ public class Constant {
     //3399hdmi
     public static final String HDMI_STATUS_3399 = "/sys/class/drm/card0-HDMI-A-1/status";
     public static final String HDMI_STATUS_3288 = "/sys/class/display/HDMI/enable";
+    public static final String HDMI_STATUS_3128 = "/sys/devices/virtual/display/HDMI/enable";
 
 
     public final static String FIRMWARE_UPGRADE_ACTION = "android.intent.action.YS_UPDATE_FIRMWARE";

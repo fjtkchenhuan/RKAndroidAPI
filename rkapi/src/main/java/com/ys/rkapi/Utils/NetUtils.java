@@ -69,7 +69,8 @@ public class NetUtils {
     public static String getDynamicEthIPAddress(Context context){
         if (VersionUtils.getAndroidModle().equals("rk3288") && Build.VERSION.SDK.equals("25")
                 || VersionUtils.getAndroidModle().equals("rk3368") && Build.VERSION.SDK.equals("25")
-                || VersionUtils.getAndroidModle().equals("rk3128")&& Build.VERSION.SDK.equals("25"))
+                || VersionUtils.getAndroidModle().equals("rk3128")&& Build.VERSION.SDK.equals("25")
+                ||VersionUtils.getAndroidModle().equals("rk3399"))
 //            return Utils.getValueFromProp("net.ppp0.local-ip");
             return Utils.getEthernet(context);
         else

@@ -59,31 +59,37 @@ public class GPIOUtils {
         boolean ishdmi = false;
         File file = null;
         String product = VersionUtils.getAndroidModle();
-        if ("22".equals(Build.VERSION.SDK))
+        if ("22".equals(Build.VERSION.SDK)||product.contains("rk3328")||product.contains("rk3128"))
             file = new File(Constant.HDMI_STATUS_3288);
-        else
+        else if ("25".equals(Build.VERSION.SDK))//product.contains("rk3399")||product.contains("rk3368")&&
             file = new File(Constant.HDMI_STATUS_3399);
+        else if (product.contains("rk3128")&&"25".equals(Build.VERSION.SDK))
+            file = new File(Constant.HDMI_STATUS_3128);
+        else if("27".equals(Build.VERSION.SDK)) {
+            ishdmi = "1".equals(readGpioPG("/sys/class/graphics/fb1/connected"));
+            return ishdmi;
+        }
         String str = "";
         try {
-            FileInputStream in = new FileInputStream(file);
-            byte[] by = new byte[1024];
-            int len = -1;
-            StringBuffer sb = new StringBuffer();
-            while ((len = in.read(by))!=-1) {
-                sb.append(new String(by, 0, len));
+            if (file.exists()) {
+                FileInputStream in = new FileInputStream(file);
+                byte[] by = new byte[1024];
+                int len = -1;
+                StringBuffer sb = new StringBuffer();
+                while ((len = in.read(by)) != -1) {
+                    sb.append(new String(by, 0, len));
+                }
+                in.close();
+                str = new String(sb).replace("\n", "");
+                Log.d("gpioutils", "str=" + str);
             }
-            in.close();
-             str = new String(sb).replace("\n","");
-             Log.d("gpioutils","str=" + str);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        if ("27".equals(Build.VERSION.SDK))
-            ishdmi = "1".equals(readGpioPG("/sys/class/graphics/fb1/connected"));
-        else if ("22".equals(Build.VERSION.SDK))
+        if  ("22".equals(Build.VERSION.SDK)||product.contains("rk3328")||product.contains("rk3128"))
             ishdmi = str.equals("1");
-        else
+        else if ("25".equals(Build.VERSION.SDK))//product.contains("rk3399")
             ishdmi = str.equals("connected");
         return ishdmi;
     }

@@ -39,7 +39,10 @@ public class LogUtils {
            Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Utils.execFor7("busybox1.11 killall logcat");
+                    if (Build.VERSION.SDK_INT>22)
+                    Utils.execFor7("killall logcat");
+                    else
+                        Utils.execFor7("busybox1.11 killall logcat");
                 }
             });
             t.start();

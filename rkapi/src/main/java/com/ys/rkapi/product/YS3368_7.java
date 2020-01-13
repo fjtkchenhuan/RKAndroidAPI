@@ -10,6 +10,7 @@ import com.ys.rkapi.Utils.ScreenUtils;
 import com.ys.rkapi.Utils.Utils;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Administrator on 2018/11/6.
@@ -17,6 +18,7 @@ import java.io.File;
 
 public class YS3368_7 extends YS {
     public final static YS3368_7 INSTANCE = new YS3368_7();
+    private static final String BACKLIGHT_IO_PATH = "/sys/devices/platform/backlight/backlight/backlight/bl_power";
     @Override
     public String getRtcPath() {
         return null;
@@ -45,20 +47,20 @@ public class YS3368_7 extends YS {
 
     @Override
     public boolean getNavBarHideState(Context context) {
-        return com.ys.rkapi.Utils.Utils.getValueFromProp(com.ys.rkapi.Constant.PROP_HIDE_STATUSBAR).equals("1");
+        return com.ys.rkapi.Utils.Utils.getValueFromProp(com.ys.rkapi.Constant.PROP_STATUSBAR_STATE_LU).equals("0");
     }
 
     @Override
     public boolean isSlideShowNavBarOpen() {
-        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR).equals("1");
+        return Utils.getValueFromProp(Constant.PROP_SWIPE_STATUSBAR_LU).equals("1");
     }
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
         if (flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "1");
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
         else
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR, "0");
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
     }
 
     @Override
@@ -76,17 +78,17 @@ public class YS3368_7 extends YS {
 
     @Override
     public void turnOffBackLight() {
-
+        GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"1");
     }
 
     @Override
     public void turnOnBackLight() {
-
+        GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"0");
     }
 
     @Override
     public boolean isBackLightOn() {
-        return false;
+        return "0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH));
     }
 
     @Override
@@ -121,7 +123,10 @@ public class YS3368_7 extends YS {
 
     @Override
     public void setSoftKeyboardHidden(boolean hidden) {
-
+        if (hidden)
+            Utils.setValueToProp("persist.sys.softkeyboard", "0");
+        else
+            Utils.setValueToProp("persist.sys.softkeyboard", "1");
     }
 
     @Override
@@ -133,11 +138,19 @@ public class YS3368_7 extends YS {
 
     @Override
     public int getCPUTemperature() {
-        return 0;
+        String s = GPIOUtils.readGpioPGForLong("/sys/class/thermal/thermal_zone0/temp");
+        int temp = Integer.parseInt(s.substring(0,5));
+        return (int) (temp/1000);
     }
 
     @Override
     public void setADBOpen(boolean open) {
-
+        if (open) {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","2");
+            Utils.execFor7("busybox echo 2 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+        } else {
+            Utils.setValueToProp("persist.sys.usb.otg.mode","1");
+            Utils.execFor7("busybox echo 1 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
+        }
     }
 }

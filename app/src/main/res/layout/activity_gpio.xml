@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GpioActivity">
+
+    <EditText
+        android:id="@+id/gpio_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="请输入gpio索引" />
+
+    <Button
+        android:id="@+id/checkio"
+        android:layout_toRightOf="@+id/gpio_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="检测该索引是否有有效"/>
+
+    <TextView
+        android:id="@+id/invalid"
+        android:layout_toRightOf="@+id/checkio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#f91804"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp" />
+
+    <LinearLayout
+        android:id="@+id/layout_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/gpio_index">
+
+        <Button
+            android:id="@+id/get_io_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取当前io口是输出还是输入"/>
+
+        <Button
+            android:id="@+id/set_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="设置为输入口"/>
+
+        <Button
+            android:id="@+id/set_output"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="设置为输出口"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/layout_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/get_io_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取当前io的值"/>
+
+        <Button
+            android:id="@+id/set_highvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="设置为高电平"/>
+
+        <Button
+            android:id="@+id/set_lowvalue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="设置为低电平"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="只有输出口才可设置高低电平"
+            android:textSize="20sp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_horizontal"
+            android:textColor="#dfe61c" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

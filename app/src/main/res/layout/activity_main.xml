@@ -388,6 +388,15 @@
 
             <TextView
                 style="@style/TitleText"
+                android:text="@string/gpio" />
+
+            <Button
+                android:id="@+id/gpio"
+                style="@style/TestButton"
+                android:text="@string/gpio"/>
+
+            <TextView
+                style="@style/TitleText"
                 android:text="@string/other" />
             
             <rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout

@@ -1490,6 +1490,85 @@ public class MyManager {
         return Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONOFF_VERSION);
     }
 
+    /**
+     * @method upgradeRootPermissionForExport()
+     * @description 给export申请权限，建议在开机广播或应用启动时就执行
+     * @date 20200213
+     * @author sky
+     */
+    public void upgradeRootPermissionForExport() {
+        GPIOUtils.upgradeRootPermissionForExport();
+    }
+
+    /**
+     * @method exportGpio(int gpio)
+     * @description 根据具体的索引值配置export路径，建议在开机广播或应用启动时就执行
+     * @date 20200213
+     * @author sky
+     * @return 配置成功返回true，配置失败返回false
+     */
+    public boolean exportGpio(int gpio) {
+        return GPIOUtils.exportGpio(gpio);
+    }
+
+    /**
+     * @method upgradeRootPermissionForGpio(int gpio)
+     * @description 给配置好的gpio路径申请权限，建议在开机广播或应用启动时就执行，在exportGpio(int gpio)方法后执行
+     * @date 20200213
+     * @author sky
+     */
+    public void upgradeRootPermissionForGpio(int gpio) {
+        GPIOUtils.upgradeRootPermissionForGpio(gpio);
+    }
+
+    /**
+     * @method setGpioDirection(int gpio, int arg)
+     * @description 设置io口的状态是输入或输出
+     * @date 20200213
+     * @author sky
+     * @param gpio，所要操作的gpio索引值。arg，1代表设置为输入口，0代表设置为输出口。
+     * @return 设置成功返回true，失败返回false
+     */
+    public boolean setGpioDirection(int gpio, int arg) {
+        return GPIOUtils.setGpioDirection(gpio,arg);
+    }
+
+    /**
+     * @method getGpioDirection(int gpio)
+     * @description 根据具体的gpio索引值获取当前gpio的状态是输入还是输出
+     * @date 20200213
+     * @author sky
+     * @param gpio，gpio的索引值
+     * @return 输入口返回in，输出口返回out
+     */
+    public String getGpioDirection(int gpio) {
+        return GPIOUtils.getGpioDirection(gpio);
+    }
+
+    /**
+     * @method writeGpioValue(int gpio, String arg)
+     * @description 控制gpio电平，只针对输出口
+     * @date 20200213
+     * @author sky
+     * @param gpio，gpio的索引值。Arg，高电平--1，低电平--0
+     * @return 写入成功返回true，失败返回false
+     */
+    public boolean writeGpioValue(int gpio, String arg) {
+        return GPIOUtils.writeGpioValue(gpio,arg);
+    }
+
+    /**
+     * @method getGpioValue(int gpio)
+     * @description 获取当前gpio的电平
+     * @date 20200213
+     * @author sky
+     * @param gpio，gpio的索引值
+     * @return 高电平返回1，低电平返回0
+     */
+    public String getGpioValue(int gpio) {
+        return GPIOUtils.getGpioValue(gpio);
+    }
+
 
 //获取以太网的IP地址
 //    public String getEthIPAddress() {//ok

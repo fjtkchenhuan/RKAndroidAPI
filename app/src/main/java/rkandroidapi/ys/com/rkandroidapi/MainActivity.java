@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.setNormalMode).setOnClickListener(this);
         findViewById(R.id.setDefaultLauncher).setOnClickListener(this);
         findViewById(R.id.poweronoff).setOnClickListener(this);
+        findViewById(R.id.gpio).setOnClickListener(this);
 //        findViewById(R.id.set_volume).setOnClickListener(this);
     }
 
@@ -444,6 +445,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.poweronoff:
                 Intent intent = new Intent(MainActivity.this,PowerOnOffActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.gpio:
+                Intent intent1 = new Intent(MainActivity.this,GpioActivity.class);
+                startActivity(intent1);
                 break;
             default:
                 break;

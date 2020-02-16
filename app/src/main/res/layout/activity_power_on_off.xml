@@ -206,6 +206,12 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/isSetPowerOnOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="是否设置了定时开关机" />
+
+        <Button
             android:id="@+id/shutdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1476,7 +1476,7 @@ public class MyManager {
      * @return  设置了定时开关机返回true，否则返回false
     */
     public boolean isSetPowerOnTime() {
-        return !"off:on:".equals(getPowerOnTime());
+        return !"0".equals(getPowerOnTime());
     }
 
     /**

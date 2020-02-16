@@ -55,6 +55,7 @@ public class PowerOnOffActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.getPowerOnMode).setOnClickListener(this);
         findViewById(R.id.clearTime).setOnClickListener(this);
         findViewById(R.id.getVersion).setOnClickListener(this);
+        findViewById(R.id.isSetPowerOnOff).setOnClickListener(this);
 
         poweronHour = findViewById(R.id.poweron_hour);
         poweronMinute = findViewById(R.id.poweron_minute);
@@ -143,6 +144,9 @@ public class PowerOnOffActivity extends AppCompatActivity implements View.OnClic
 
                 Log.d(TAG, "关机时间：" + Arrays.toString(timeoffArray) + "，开机时间：" + Arrays.toString(timeonArray));
                 powerOnOffManager.setPowerOnOff(timeonArray, timeoffArray);
+                break;
+            case R.id.isSetPowerOnOff:
+                Toast.makeText(this,"是否设置了定时开关机"+powerOnOffManager.isSetPowerOnTime(),Toast.LENGTH_LONG).show();
                 break;
             case R.id.getPowerOnTime:
                 Toast.makeText(this, "当前开机时间=" + powerOnOffManager.getPowerOnTime(), Toast.LENGTH_LONG).show();

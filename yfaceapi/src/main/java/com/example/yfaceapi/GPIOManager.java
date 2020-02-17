@@ -127,6 +127,13 @@ public class GPIOManager {
         return myManager;
     }
 
+    /**
+     * @method getUSBOTGStatus()
+     * @description 获取当前USB-OTG的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前usb-otg的连接状态。返回0代表已连接，1代表未连接
+    */
     public String getUSBOTGStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(USB_OTG_3288);
@@ -143,6 +150,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpUSBOTG()
+     * @description 拉高当前USB-OTG的状态，即断开otg连接
+     * @date  20190329
+     * @author sky
+    */
     public void pullUpUSBOTG() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(USB_OTG_3288),"1");
@@ -152,6 +165,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB_OTG_3399),"host");
     }
 
+    /**
+     * @method pullDownUSBOTG()
+     * @description 拉低当前USB-OTG的状态，即otg连接
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownUSBOTG() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(USB_OTG_3288),"0");
@@ -161,6 +180,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB_OTG_3399),"peripheral");
     }
 
+    /**
+     * @method getUSB1Status()
+     * @description 获取当前USB1的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前usb1的连接状态。返回1代表已连接，0代表未连接
+     */
     public String getUSB1Status() {
         if (isRk3288) {
             return Utils.readGpioPG(USB1_3288);
@@ -174,6 +200,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpUSB1()
+     * @description 拉高当前USB1的状态，即连接可用
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpUSB1() {
         if (isRk3288) {
             GpioUtils.writeGpioValue(257,"1");
@@ -187,6 +219,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB1_8953_450),"1");
     }
 
+    /**
+     * @method pullDownUSB1()
+     * @description 拉低当前USB1的状态，即断开连接
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownUSB1() {
         if (isRk3288)
             GpioUtils.writeGpioValue(257,"0");
@@ -199,6 +237,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB1_8953_450),"0");
     }
 
+    /**
+     * @method getUSB2Status()
+     * @description 获取当前USB2的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前usb2的连接状态。返回1代表已连接，0代表未连接
+     */
     public String getUSB2Status() {
         if (isRk3288) {
             return Utils.readGpioPG(USB2_3288);
@@ -212,6 +257,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpUSB2()
+     * @description 拉高当前USB2的状态，即连接可用
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpUSB2() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(USB2_3288),"1");
@@ -223,6 +274,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB2_8953_450),"1");
     }
 
+    /**
+     * @method pullDownUSB2()
+     * @description 拉低当前USB2的状态，即断开连接
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownUSB2() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(USB2_3288),"0");
@@ -234,6 +291,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB2_8953_450),"0");
     }
 
+    /**
+     * @method getUSB3Status()
+     * @description 获取当前USB3的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前usb3的连接状态。返回1代表已连接，0代表未连接
+     */
     public String getUSB3Status() {
         if (isRk3288) {
             return Utils.readGpioPG(USB3_3288);
@@ -248,6 +312,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpUSB3()
+     * @description 拉高当前USB3的状态，即连接可用
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpUSB3() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(USB3_3288),"1");
@@ -260,6 +330,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB3_8953_450),"1");
     }
 
+    /**
+     * @method pullDownUSB3()
+     * @description 拉低当前USB3的状态，即断开连接
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownUSB3() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(USB3_3288),"0");
@@ -272,6 +348,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(USB3_8953_450),"0");
     }
 
+    /**
+     * @method getUSB3Status()
+     * @description 获取当前喇叭功放的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前喇叭功放的状态。返回1代表有声音输出，0代表没有声音
+     */
     public String getVoiceStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(VOICE_3288);
@@ -285,6 +368,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpUSB3()
+     * @description 拉高当前喇叭功放的状态，即打开喇叭
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpVoice() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(VOICE_3288),"1");
@@ -296,6 +385,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(VOICE_8953_450),"1");
     }
 
+    /**
+     * @method pullDownVoice()
+     * @description 拉低当前喇叭功放的状态，即关掉喇叭
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownVoice() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(VOICE_3288),"0");
@@ -307,6 +402,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(VOICE_8953_450),"0");
     }
 
+    /**
+     * @method getFanStatus()
+     * @description 获取当前风扇的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前风扇的状态。返回1代表风扇打开，0代表关闭风扇
+     */
     public String getFanStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(FAN_CONTROL_3288);
@@ -320,6 +422,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpFan()
+     * @description 拉高当前风扇的状态，即打开风扇
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpFan() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(FAN_CONTROL_3288),"1");
@@ -331,6 +439,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(FAN_CONTROL_8953_450),"1");
     }
 
+    /**
+     * @method pullDownFan()
+     * @description 拉低当前喇叭功放的状态，即关掉喇叭
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownFan() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(FAN_CONTROL_3288),"0");
@@ -343,6 +457,13 @@ public class GPIOManager {
 
     }
 
+    /**
+     * @method getInfraredLedStatus
+     * @description 获取当前红外LED的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前红外LED的状态。返回1代表打开红外LED，0代表关闭
+     */
     public String getInfraredLedStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(INFRARED_LED_3288);
@@ -356,6 +477,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpInfraredLed()
+     * @description 拉高当前红外LED的状态，即打开红外灯
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpInfraredLed() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(INFRARED_LED_3288),"1");
@@ -367,6 +494,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(INFRARED_LED_8953_450),"1");
     }
 
+    /**
+     * @method pullDownInfraredLed()
+     * @description 拉低当前红外LED的状态，即关掉红外灯
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownInfraredLed() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(INFRARED_LED_3288),"0");
@@ -378,6 +511,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(INFRARED_LED_8953_450),"0");
     }
 
+    /**
+     * @method getRelayStatus
+     * @description 获取当前继电器的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前继电器的状态。返回1代表打开继电器，0代表关闭
+     */
     public String getRelayStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(RELAY_3288);
@@ -390,6 +530,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpRelay()
+     * @description 拉高当前继电器的状态，即打开继电器
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpRelay() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(RELAY_3288),"1");
@@ -401,6 +547,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RELAY_8953_450),"1");
     }
 
+    /**
+     * @method pullDownRelay()
+     * @description 拉低当前继电器的状态，即关掉继电器
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownRelay() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(RELAY_3288),"0");
@@ -412,6 +564,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RELAY_8953_450),"0");
     }
 
+    /**
+     * @method getGreenLightStatus
+     * @description 获取当前绿色补光的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前绿色补光的状态。返回1代表打开绿色补光器，0代表关闭
+     */
     public String getGreenLightStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(GREEN_LIGHT_3288);
@@ -424,6 +583,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpGreenLight()
+     * @description 拉高当前绿色补光的状态，即打开绿色补光
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpGreenLight() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_3288),"1");
@@ -435,6 +600,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_8953_450),"1");
     }
 
+    /**
+     * @method pullDownGreenLight()
+     * @description 拉低当前绿色补光的状态，即关掉绿色补光
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownGreenLight() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_3288),"0");
@@ -446,6 +617,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(GREEN_LIGHT_8953_450),"0");
     }
 
+    /**
+     * @method getRedLightStatus()
+     * @description 获取当前红色补光的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前红色补光的状态。返回1代表打开红色补光器，0代表关闭
+     */
     public String getRedLightStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(RED_LIGHT_3288);
@@ -458,6 +636,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpRedLight()
+     * @description 拉高当前红色补光的状态，即打开红色补光
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpRedLight() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(RED_LIGHT_3288),"1");
@@ -469,6 +653,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RED_LIGHT_8953_450),"1");
     }
 
+    /**
+     * @method pullDownRedLight()
+     * @description 拉低当前红色补光的状态，即关掉红色补光
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownRedLight() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(RED_LIGHT_3288),"0");
@@ -480,6 +670,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(RED_LIGHT_8953_450),"0");
     }
 
+    /**
+     * @method getWhiteLightStatus
+     * @description 获取当前白色补光的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回当前白色补光的状态。返回1代表打开白色补光器，0代表关闭
+     */
     public String getWhiteLightStatus() {
         if (isRk3288) {
             return Utils.readGpioPG(WHITE_LIGHT_3288);
@@ -492,6 +689,12 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method pullUpWhiteLight()
+     * @description 拉高当前白色补光的状态，即打开白色补光
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpWhiteLight() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_3288),"1");
@@ -503,6 +706,12 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_8953_450),"1");
     }
 
+    /**
+     * @method pullDownWhiteLight()
+     * @description 拉低当前白色补光的状态，即关掉白色补光
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownWhiteLight() {
         if (isRk3288)
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_3288),"0");
@@ -514,6 +723,13 @@ public class GPIOManager {
             Utils.writeStringFileFor7(new File(WHITE_LIGHT_8953_450),"0");
     }
 
+    /**
+     * @method getReservedIO1Status()
+     * @description 获取预留io1的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回预留io1的状态。返回1代表高电平，0代表低电平
+     */
     public String getReservedIO1Status() {
         String status = "";
         if (isRk3288)
@@ -527,6 +743,13 @@ public class GPIOManager {
         return status;
     }
 
+    /**
+     * @method getReservedIO2Status()
+     * @description 获取预留io2的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回预留io2的状态。返回1代表高电平，0代表低电平
+     */
     public String getReservedIO2Status() {
         String status = "";
         if (isRk3288)
@@ -540,6 +763,13 @@ public class GPIOManager {
         return status;
     }
 
+    /**
+     * @method getReservedIO3Status()
+     * @description 获取预留io3的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回预留io3的状态。返回1代表高电平，0代表低电平
+     */
     public String getReservedIO3Status() {
         String status = "";
         if (isRk3288)
@@ -553,6 +783,13 @@ public class GPIOManager {
         return status;
     }
 
+    /**
+     * @method getReservedIO4Status()
+     * @description 获取预留io4的状态
+     * @date  20190329
+     * @author sky
+     * @return 返回预留io4的状态。返回1代表高电平，0代表低电平
+     */
     public String getReservedIO4Status() {
         String status = "";
         if (isRk3288)
@@ -566,6 +803,13 @@ public class GPIOManager {
         return status;
     }
 
+    /**
+     * @method getReservedIO4Direction()
+     * @description 获取预留io4是输入口还是输出口
+     * @date  20190329
+     * @author sky
+     * @return 返回预留io4的状态。返回out代表输出口，返回in代表输入口
+     */
     public String getReservedIO4Direction() {
         String status = "";
         if (isRk3288)
@@ -579,6 +823,12 @@ public class GPIOManager {
         return status;
     }
 
+    /**
+     * @method setReservedIO4Out()
+     * @description 设置io4为输出口
+     * @date  20190329
+     * @author sky
+     */
     public void setReservedIO4Out() {
         if (isRk3288)
             GpioUtils.setGpioDirection(171,0);
@@ -590,6 +840,12 @@ public class GPIOManager {
             GpioUtils.setGpioDirection(43,0);
     }
 
+    /**
+     * @method setReservedIO4In()
+     * @description 设置io4为输入口
+     * @date  20190329
+     * @author sky
+     */
     public void setReservedIO4In() {
         if (isRk3288)
             GpioUtils.setGpioDirection(171,1);
@@ -601,6 +857,13 @@ public class GPIOManager {
             GpioUtils.setGpioDirection(43,1);
     }
 
+    /**
+     * @method isIO4DirectionOut
+     * @description 获取预留io4是否是输出口
+     * @date  20190329
+     * @author sky
+     * @return 返回预留io4的状态。返回true代表是输出口，返回false代表不是输出口
+     */
     public boolean isIO4DirectionOut() {
         String direction = "out";
         String temp = "";
@@ -615,6 +878,12 @@ public class GPIOManager {
         return direction.equals(temp);
     }
 
+    /**
+     * @method pullUpIO4()
+     * @description 拉高预留io4的状态，只有在io4是输出口时才可执行
+     * @date  20190329
+     * @author sky
+     */
     public void pullUpIO4() {
         if (isRk3288)
             GpioUtils.writeGpioValue(171,"1");
@@ -626,6 +895,12 @@ public class GPIOManager {
             GpioUtils.writeGpioValue(43,"1");
     }
 
+    /**
+     * @method pullDownIO4()
+     * @description 拉低预留io4的状态，只有在io4是输出口时才可执行
+     * @date  20190329
+     * @author sky
+     */
     public void pullDownIO4() {
         if (isRk3288)
             GpioUtils.writeGpioValue(171,"0");
@@ -637,18 +912,39 @@ public class GPIOManager {
             GpioUtils.writeGpioValue(43,"0");
     }
 
+    /**
+     * @method setMaxFreq(int value)
+     * @description 设置CPU最大频率
+     * @date  20190417
+     * @author sky
+     * @param value，设置的CPU最大频率
+     */
     public void setMaxFreq(int value) {
         if (isRk3288) {
             Utils.writeStringFileFor7(new File(SCALING_MAX_FREQ_3288),(value * 1000) + "");
         }
     }
 
+    /**
+     * @method setMinFreq(int value)
+     * @description 设置CPU最小频率
+     * @date  20190417
+     * @author sky
+     * @param value，设置的CPU最小频率
+     */
     public void setMinFreq(int value) {
         if (isRk3288) {
             Utils.writeStringFileFor7(new File(SCALING_MIN_FREQ_3288),(value * 1000) + "");
         }
     }
 
+    /**
+     * @method getMaxFreq()
+     * @description 获取当前CPU最大频率
+     * @date  20190417
+     * @author sky
+     * @return 返回当前系统CPU的最大频率
+     */
     public String getMaxFreq() {
         if (isRk3288) {
             return Utils.readGpioPG(SCALING_MAX_FREQ_3288);
@@ -656,6 +952,13 @@ public class GPIOManager {
         return "";
     }
 
+    /**
+     * @method getMinFreq()
+     * @description 获取当前CPU最小频率
+     * @date  20190417
+     * @author sky
+     * @return 返回当前系统CPU的最小频率
+     */
     public String getMinFreq() {
         if (isRk3288) {
            return Utils.readGpioPG(SCALING_MIN_FREQ_3288);

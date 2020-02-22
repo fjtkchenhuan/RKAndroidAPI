@@ -1,0 +1,132 @@
+<resources>
+    <string name="app_name">YSAndroidAPI</string>
+
+    <string name="system_info">系统信息</string>
+    <string name="get_api_version">获取API版本</string>
+    <string name="get_device_type">获取当前设备类型</string>
+    <string name="get_android_version">获取安卓版本</string>
+    <string name="get_firmware_size">获取硬件内存大小</string>
+    <string name="get_in_store_size">获取内部存储容量</string>
+    <string name="get_firmware_sdk_version">获取固件SDK版本</string>
+    <string name="get_firmware_kernel_version">获取固件内核版本</string>
+    <string name="get_device_firmware_version">获取设备固件版本号</string>
+    <string name="get_firmware_date">获取固件编译日期</string>
+    <string name="get_cpu_type">获取设备CPU型号</string>
+
+    <string name="shutdown_reboot">关机和重启</string>
+    <string name="shutdown">关机</string>
+    <string name="reboot">重启</string>
+
+    <string name="display">显示</string>
+    <string name="nav_bar_hide_show">隐藏显示导航栏</string>
+    <string name="nav_bar_state">导航栏是否隐藏</string>
+    <string name="nav_bar_slide">打开关闭滑出导航栏</string>
+    <string name="nav_bar_slide_state">滑出导航栏是否打开</string>
+    <string name="notification_bar_slide">打开或关闭滑出通知栏</string>
+    <string name="notification_bar_slide_state">滑出通知栏是否打开</string>
+    <string name="screen_shot">截屏</string>
+    <string name="get_width_height">获取屏幕宽高</string>
+    <string name="change_screen_bright">调节亮度</string>
+    <string name="open_screen_bright">开背光</string>
+    <string name="close_screen_bright">关背光</string>
+    <string name="is_screen_bright_on">背光是否打开</string>
+    <string name="get_brightness">获取背光亮度</string>
+    <string name="open_hdmi">打开HDMI</string>
+    <string name="close_hdmi">关闭HDMI</string>
+    <string name="rotate_90">旋转90度</string>
+    <string name="rotate_0">还原0度</string>
+
+    <string name="install_update">安装升级</string>
+    <string name="update_img">升级固件(/Download/update.zip)</string>
+    <string name="recovery">进入recovery模式</string>
+    <string name="silent_install">静默安装（根目录放置KeyTest.apk）</string>
+
+
+    <string name="net">网络</string>
+    <string name="get_eth_statuse">获取以太网是否打开</string>
+    <string name="get_eth_mode">获取以太网模式</string>
+    <string name="get_eth_mac">获取以太网mac地址</string>
+    <string name="set_eth_mac">设置以太网mac地址</string>
+    <string name="get_eth_ip">获取以太网IP</string>
+    <string name="set_eth_ip">设置以太网静态模式192.168.1.125</string>
+    <string name="set_dhcp_eth">设置以太网为动态</string>
+    <string name="open_eth">开以太网</string>
+    <string name="close_eth">关以太网</string>
+    <string name="get_gateway">获取网关</string>
+    <string name="get_mask">获取子网掩码</string>
+    <string name="get_dns1">获取DNS1</string>
+    <string name="get_dns2">获取DNS2</string>
+
+    <string name="storage">存储</string>
+    <string name="externel_sd_path">外置SD卡路径</string>
+    <string name="externel_u_path">U盘路径</string>
+    <string name="uninstall_externel">卸载外部存储</string>
+    <string name="mount_externel">挂载外部存储</string>
+    <string name="read_eeprom">读eeprom</string>
+    <string name="write_eeprom">写eeprom</string>
+    <string name="get_uartPath">获取串口的绝对路径</string>
+
+    <string name="other">其他</string>
+    <string name="set_time">设置时间 2017.3.16 17:44:55</string>
+    <string name="switch_off_time">关闭自动确定时间</string>
+    <string name="switch_on_time">打开自动确定时间</string>
+    <string name="is_auto_time">是否开启自动更新时间</string>
+    <string name="su_order">su命令是否有效</string>
+    <string name="net_type">上网类型</string>
+    <string name="screen_num">屏幕数</string>
+    <string name="hdmi">是否有hdmi输出</string>
+
+    <string name="set_volume">设置音量</string>
+
+    <string name="poweronoff">定时开关机</string>
+    <string name="gpio">GPIO测试</string>
+
+    <string name="open_soft_keyboard">打开软键盘</string>
+    <string name="hide_soft_keyboard">隐藏软键盘</string>
+    <string name="set_dormant_interval">设置休眠时间15s</string>
+    <string name="set_default_inputmethod">设置默认输入法(谷歌拼音)</string>
+    <string name="get_default_inputmethod">获取当前输入法</string>
+    <string name="set_language">设置语言为英文</string>
+    <string name="get_cpu_temp">获取CPU温度</string>
+    <string name="set_adb_open">打开adb</string>
+    <string name="set_adb_close">关闭adb</string>
+    <string name="replace_bootanimation">替换开机动画（放置根目录）</string>
+    <string name="set_default_launcher">设置默认Launcher3</string>
+
+    <string name="mode_one">模式一</string>
+    <string name="mode_two">模式二</string>
+    <string name="poweroff_time">关机时间</string>
+    <string name="poweron_time">开机时间</string>
+    <string name="year">年份</string>
+    <string name="month">月份</string>
+    <string name="date">日期</string>
+    <string name="hour">小时</string>
+    <string name="minute">分钟</string>
+    <string name="set_a_group_time">设置一组开关机时间（如只想设置开机时间，关机时间输入0即可）</string>
+    <string name="mon">星期一</string>
+    <string name="tue">星期二</string>
+    <string name="wen">星期三</string>
+    <string name="thu">星期四</string>
+    <string name="fri">星期五</string>
+    <string name="sat">星期六</string>
+    <string name="sun">星期天</string>
+    <string name="set_period_poweronoff">设置周期性的开关机时间（时:分）</string>
+    <string name="is_set_PowerOnOff">是否设置了定时开关机</string>
+    <string name="get_current_power_on_time">获取当前开机时间</string>
+    <string name="get_current_power_off_time">获取当前关机时间</string>
+    <string name="get_last_power_on_time">获取上次开机时间</string>
+    <string name="get_last_power_off_time">获取上次关机时间</string>
+    <string name="clear_poweronoff_time">清除开关机时间</string>
+    <string name="get_current_power_mode">获取当前开关机模式</string>
+    <string name="get_poweronoff_version">获取定时开关机版本信息</string>
+    
+    <string name="input_gpio_index">请输入gpio索引</string>
+    <string name="is_gpio_valid">检测该索引是否有有效</string>
+    <string name="is_gpio_out_or_in">获取当前io口是输出还是输入</string>
+    <string name="set_gpio_in">设置为输入口</string>
+    <string name="set_gpio_out">设置为输出口</string>
+    <string name="get_gpio_value">获取当前io的值</string>
+    <string name="set_gpio_high">设置为高电平</string>
+    <string name="set_gpio_low">设置为低电平</string>
+    <string name="gpio_warn">只有输出口才可设置高低电平</string>
+</resources>

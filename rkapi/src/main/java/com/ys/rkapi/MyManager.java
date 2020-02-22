@@ -1396,12 +1396,13 @@ public class MyManager {
     */
     public String getPowerOnMode() {
         String mode = Utils.getValueFromProp(Constant.PERSIST_SYS_POWERONMODE);
-        if ("2".equals(mode))
-            return "网络周模式";
-        else if ("0".equals(mode))
-            return "本地模式";
-        else
-            return "网络每组模式";
+        return mode;
+//        if ("2".equals(mode))
+//            return "网络周模式";
+//        else if ("0".equals(mode))
+//            return "本地模式";
+//        else
+//            return "网络每组模式";
     }
 
     /**

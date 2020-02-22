@@ -447,58 +447,58 @@
                 <Button
                     android:id="@+id/open_softkeyboard"
                     style="@style/TestButton"
-                    android:text="打开软键盘" />
+                    android:text="@string/open_soft_keyboard" />
 
                 <Button
                     android:id="@+id/close_softkeyboard"
                     style="@style/TestButton"
-                    android:text="隐藏软键盘" />
+                    android:text="@string/hide_soft_keyboard" />
 
                 <Button
                     android:id="@+id/set_dormant_interval"
                     style="@style/TestButton"
-                    android:text="设置休眠时间15s" />
+                    android:text="@string/set_dormant_interval" />
 
                 <Button
                     android:id="@+id/set_default_inputmethod"
                     style="@style/TestButton"
-                    android:text="设置默认输入法（谷歌拼音）" />
+                    android:text="@string/set_default_inputmethod" />
 
                 <Button
                     android:id="@+id/get_default_inputmethod"
                     style="@style/TestButton"
-                    android:text="获取当前输入法" />
+                    android:text="@string/get_default_inputmethod" />
 
                 <Button
                     android:id="@+id/set_language"
                     style="@style/TestButton"
-                    android:text="设置语言为英文" />
+                    android:text="@string/set_language" />
 
 
                 <Button
                     android:id="@+id/get_cpu_temp"
                     style="@style/TestButton"
-                    android:text="获取CPU温度" />
+                    android:text="@string/get_cpu_temp" />
 
                 <Button
                     android:id="@+id/set_adb_open"
                     style="@style/TestButton"
-                    android:text="打开adb" />
+                    android:text="@string/set_adb_open" />
 
                 <Button
                     android:id="@+id/set_adb_close"
                     style="@style/TestButton"
-                    android:text="关闭adb" />
+                    android:text="@string/set_adb_close" />
 
                 <Button
                     android:id="@+id/replaceBootanimation"
                     style="@style/TestButton"
-                    android:text="替换开机动画(放置根目录)" />
+                    android:text="@string/replace_bootanimation" />
 
                 <Button
                     android:id="@+id/setDefaultLauncher"
                     style="@style/TestButton"
-                    android:text="设置默认Launcher3" />
+                    android:text="@string/set_default_launcher" />
 
                 <Button
                     android:id="@+id/get_kernel_log"

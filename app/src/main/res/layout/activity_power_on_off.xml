@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="模式一" />
+        android:text="@string/mode_one" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,32 +22,32 @@
             android:textSize="20sp"
             android:layout_gravity="center"
             android:textColor="@color/colorAccent"
-            android:text="关机时间: "/>
+            android:text="@string/poweroff_time"/>
 
         <EditText
             android:id="@+id/poweronoff_off_year"
             style="@style/EditTextStyle"
-            android:hint="年份" />
+            android:hint="@string/year" />
 
         <EditText
             android:id="@+id/poweronoff_off_month"
             style="@style/EditTextStyle"
-            android:hint="月份" />
+            android:hint="@string/month" />
 
         <EditText
             android:id="@+id/poweronoff_off_date"
             style="@style/EditTextStyle"
-            android:hint="日期" />
+            android:hint="@string/date" />
 
         <EditText
             android:id="@+id/poweronoff_off_hour"
             style="@style/EditTextStyle"
-            android:hint="小时" />
+            android:hint="@string/hour" />
 
         <EditText
             android:id="@+id/poweronoff_off_minute"
             style="@style/EditTextStyle"
-            android:hint="分钟" />
+            android:hint="@string/minute" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,45 +56,46 @@
             android:textSize="20sp"
             android:layout_gravity="center"
             android:textColor="@color/colorAccent"
-            android:text="开机时间: "/>
+            android:text="@string/poweron_time"/>
 
         <EditText
             android:id="@+id/poweronoff_on_year"
             style="@style/EditTextStyle"
-            android:hint="年份" />
+            android:hint="@string/year" />
 
         <EditText
             android:id="@+id/poweronoff_on_month"
             style="@style/EditTextStyle"
-            android:hint="月份" />
+            android:hint="@string/month" />
 
         <EditText
             android:id="@+id/poweronoff_on_date"
             style="@style/EditTextStyle"
-            android:hint="日期" />
+            android:hint="@string/date" />
 
         <EditText
             android:id="@+id/poweronoff_on_hour"
             style="@style/EditTextStyle"
-            android:hint="小时" />
+            android:hint="@string/hour" />
 
         <EditText
             android:id="@+id/poweronoff_on_minute"
             style="@style/EditTextStyle"
-            android:hint="分钟" />
+            android:hint="@string/minute" />
     </LinearLayout>
 
     <Button
         android:id="@+id/set_power_on_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="设置一组开关机时间（如只想设置开机时间，关机时间输入0即可）"/>
+        android:textAllCaps="false"
+        android:text="@string/set_a_group_time"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="模式二" />
+        android:text="@string/mode_two" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -107,18 +108,18 @@
             android:textSize="20sp"
             android:layout_gravity="center"
             android:textColor="@color/colorAccent"
-            android:text="开机时间: "/>
+            android:text="@string/poweron_time"/>
 
 
         <EditText
             android:id="@+id/poweron_hour"
             style="@style/EditTextStyle"
-            android:hint="小时" />
+            android:hint="@string/hour" />
 
         <EditText
             android:id="@+id/poweron_minute"
             style="@style/EditTextStyle"
-            android:hint="分钟" />
+            android:hint="@string/minute" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -127,18 +128,18 @@
             android:layout_gravity="center"
             android:textColor="@color/colorAccent"
             android:layout_marginStart="20dp"
-            android:text="关机时间: "/>
+            android:text="@string/poweroff_time"/>
 
 
         <EditText
             android:id="@+id/poweroff_hour"
             style="@style/EditTextStyle"
-            android:hint="小时" />
+            android:hint="@string/hour" />
 
         <EditText
             android:id="@+id/poweroff_minute"
             style="@style/EditTextStyle"
-            android:hint="分钟" />
+            android:hint="@string/minute" />
 
     </LinearLayout>
 
@@ -153,43 +154,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期一"/>
+            android:text="@string/wen"/>
         <CheckBox
             android:id="@+id/tue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期二"/>
+            android:text="@string/tue"/>
         <CheckBox
             android:id="@+id/wen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期三"/>
+            android:text="@string/wen"/>
         <CheckBox
             android:id="@+id/thr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期四"/>
+            android:text="@string/thu"/>
         <CheckBox
             android:id="@+id/fri"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期五"/>
+            android:text="@string/fri"/>
         <CheckBox
             android:id="@+id/sat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期六"/>
+            android:text="@string/sat"/>
         <CheckBox
             android:id="@+id/sun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="星期天"/>
+            android:text="@string/sun"/>
 
     </LinearLayout>
 
@@ -197,7 +198,8 @@
         android:id="@+id/set_power_on_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="设置周期性的开关机时间（时:分）" />
+        android:textAllCaps="false"
+        android:text="@string/set_period_poweronoff" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -209,55 +211,64 @@
             android:id="@+id/isSetPowerOnOff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="是否设置了定时开关机" />
+            android:textAllCaps="false"
+            android:text="@string/is_set_PowerOnOff" />
 
         <Button
             android:id="@+id/shutdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="关机" />
+            android:textAllCaps="false"
+            android:text="@string/shutdown" />
 
         <Button
             android:id="@+id/getPowerOnTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取当前开机时间"/>
+            android:textAllCaps="false"
+            android:text="@string/get_current_power_on_time"/>
 
         <Button
             android:id="@+id/getPowerOffTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取当前关机时间"/>
+            android:textAllCaps="false"
+            android:text="@string/get_current_power_off_time"/>
 
         <Button
             android:id="@+id/getPrePowerOnTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取上次开机时间"/>
+            android:textAllCaps="false"
+            android:text="@string/get_last_power_on_time"/>
 
         <Button
             android:id="@+id/getPrePowerOffTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取上次关机时间"/>
+            android:textAllCaps="false"
+            android:text="@string/get_last_power_off_time"/>
 
         <Button
             android:id="@+id/clearTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="清除开关机时间"/>
+            android:textAllCaps="false"
+            android:text="@string/clear_poweronoff_time"/>
 
         <Button
             android:id="@+id/getPowerOnMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取当前开关机模式"/>
+            android:textAllCaps="false"
+            android:text="@string/get_current_power_mode"/>
 
         <Button
             android:id="@+id/getVersion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="获取定时开关机版本信息"/>
+            android:textAllCaps="false"
+            android:text="@string/get_poweronoff_version"/>
 
     </LinearLayout>
 

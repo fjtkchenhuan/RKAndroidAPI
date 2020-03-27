@@ -1,0 +1,249 @@
+diff --git a/app/libs/ysapi.jar b/app/libs/ysapi.jar
+index a085811..2e2261d 100644
+Binary files a/app/libs/ysapi.jar and b/app/libs/ysapi.jar differ
+diff --git a/app/src/main/java/rkandroidapi/ys/com/rkandroidapi/MainActivity.java b/app/src/main/java/rkandroidapi/ys/com/rkandroidapi/MainActivity.java
+index 39be342..f0fe44c 100644
+--- a/app/src/main/java/rkandroidapi/ys/com/rkandroidapi/MainActivity.java
++++ b/app/src/main/java/rkandroidapi/ys/com/rkandroidapi/MainActivity.java
+@@ -141,10 +141,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
+         findViewById(R.id.set_adb_open).setOnClickListener(this);
+         findViewById(R.id.set_adb_close).setOnClickListener(this);
+         findViewById(R.id.replaceBootanimation).setOnClickListener(this);
+-        findViewById(R.id.openScreenAndVoice).setOnClickListener(this);
+-        findViewById(R.id.closeScreenAndVoice).setOnClickListener(this);
+-        findViewById(R.id.setStandByMode).setOnClickListener(this);
+-        findViewById(R.id.setNormalMode).setOnClickListener(this);
++        findViewById(R.id.openMainScreen).setOnClickListener(this);
++        findViewById(R.id.closeMainScreen).setOnClickListener(this);
++        findViewById(R.id.openSecondScreen).setOnClickListener(this);
++        findViewById(R.id.closeSecondScreen).setOnClickListener(this);
++        findViewById(R.id.openVoice).setOnClickListener(this);
++        findViewById(R.id.closeVoice).setOnClickListener(this);
+         findViewById(R.id.setDefaultLauncher).setOnClickListener(this);
+         findViewById(R.id.poweronoff).setOnClickListener(this);
+         findViewById(R.id.gpio).setOnClickListener(this);
+@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
+     public void onClick(View v) {
+         switch (v.getId()) {
+             case R.id.get_api_version :
+-                ToastUtils.showToast(this,manager.getApiVersion());
++            ToastUtils.showToast(this,manager.getApiVersion());
+                 break;
+             case R.id.get_device_type :
+                 ToastUtils.showToast(this,manager.getAndroidModle());
+@@ -426,18 +428,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
+             case R.id.replaceBootanimation:
+                 manager.replaceBootanimation(externalStoragePath + "/bootanimation.zip");
+                 break;
+-//            case R.id.openScreenAndVoice:
+-//                manager.setScreenAndVoiceOpen(true);
+-//                break;
+-//            case R.id.closeScreenAndVoice:
+-//                manager.setScreenAndVoiceOpen(false);
+-//                break;
+-//            case R.id.setStandByMode:
+-//                manager.setStandByMode();
+-//                break;
+-//            case R.id.setNormalMode:
+-//                manager.setNormalMode();
+-//                break;
++            case R.id.openMainScreen:
++                manager.controlMainScreenBright(true);
++                break;
++            case R.id.closeMainScreen:
++                manager.controlMainScreenBright(false);
++                break;
++            case R.id.openSecondScreen:
++                manager.controlSecondScreenBright(true);
++                break;
++            case R.id.closeSecondScreen:
++                manager.controlSecondScreenBright(false);
++                break;
++            case R.id.openVoice:
++                manager.controlVoice(true);
++                break;
++            case R.id.closeVoice:
++                manager.controlVoice(false);
++                break;
+             case R.id.setDefaultLauncher:
+                 //
+                 manager.setDefaultLauncher("com.android.launcher3/com.android.launcher3.Launcher");
+diff --git a/app/src/main/res/layout/activity_main.xml b/app/src/main/res/layout/activity_main.xml
+index 76f1de6..880fa9f 100644
+--- a/app/src/main/res/layout/activity_main.xml
++++ b/app/src/main/res/layout/activity_main.xml
+@@ -519,28 +519,40 @@
+                     android:visibility="invisible" />
+ 
+                 <Button
+-                    android:id="@+id/openScreenAndVoice"
++                    android:id="@+id/openMainScreen"
+                     style="@style/TestButton"
+-                    android:text="打开背光和声音"
+-                    android:visibility="gone" />
++                    android:text="打开主屏"
++                    />
+ 
+                 <Button
+-                    android:id="@+id/closeScreenAndVoice"
++                    android:id="@+id/closeMainScreen"
+                     style="@style/TestButton"
+-                    android:text="关闭背光和声音"
+-                    android:visibility="gone" />
++                    android:text="关闭主屏"
++                    />
+ 
+                 <Button
+-                    android:id="@+id/setStandByMode"
++                    android:id="@+id/openSecondScreen"
+                     style="@style/TestButton"
+-                    android:text="设置待机模式"
+-                    android:visibility="gone" />
++                    android:text="打开副屏"
++                    />
+ 
+                 <Button
+-                    android:id="@+id/setNormalMode"
++                    android:id="@+id/closeSecondScreen"
+                     style="@style/TestButton"
+-                    android:text="设置正常模式"
+-                    android:visibility="gone" />
++                    android:text="关闭副屏"
++                    />
++
++                <Button
++                    android:id="@+id/openVoice"
++                    style="@style/TestButton"
++                    android:text="打开声音"
++                    />
++
++                <Button
++                    android:id="@+id/closeVoice"
++                    style="@style/TestButton"
++                    android:text="关闭声音"
++                    />
+ 
+             </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
+         </LinearLayout>
+diff --git a/rkapi/src/main/java/com/ys/rkapi/MyManager.java b/rkapi/src/main/java/com/ys/rkapi/MyManager.java
+index 47166b9..1bf9a87 100644
+--- a/rkapi/src/main/java/com/ys/rkapi/MyManager.java
++++ b/rkapi/src/main/java/com/ys/rkapi/MyManager.java
+@@ -32,6 +32,7 @@ import com.ys.rkapi.Utils.Utils;
+ import com.ys.rkapi.product.YsFactory;
+ 
+ import java.io.BufferedReader;
++import java.io.DataOutputStream;
+ import java.io.File;
+ import java.io.IOException;
+ import java.io.InputStreamReader;
+@@ -1336,6 +1337,59 @@ public class MyManager {
+         }
+     }
+ 
++    public void controlMainScreenBright(boolean isOpen) {
++        upgradeRootPermission("/sys/class/gpio/gpio13/value");
++        if (isOpen)
++            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio13/value"),"1");
++        else
++            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio13/value"),"0");
++    }
++
++    public void controlSecondScreenBright(boolean isOpen) {
++        upgradeRootPermission("/sys/class/gpio/gpio230/value");
++        if (isOpen)
++            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio230/value"),"1");
++        else
++            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio230/value"),"0");
++    }
++
++    public void controlVoice(boolean isOpen) {
++        if (isOpen)
++            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio226/value"),"0");
++        else
++            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio226/value"),"1");
++    }
++
++    private  boolean upgradeRootPermission(String path) {
++        Process process = null;
++        DataOutputStream os = null;
++        try {
++            String cmd="chmod 777 " + path;
++            process = Runtime.getRuntime().exec("su"); //切换到root帐号
++            os = new DataOutputStream(process.getOutputStream());
++            os.writeBytes(cmd + "\n");
++            os.writeBytes("exit\n");
++            os.flush();
++            process.waitFor();
++        } catch (Exception e) {
++        } finally {
++            try {
++                if (os != null) {
++                    os.close();
++                }
++                process.destroy();
++            } catch (Exception e) {
++            }
++        }
++        try {
++            return process.waitFor()==0;
++        } catch (InterruptedException e) {
++            e.printStackTrace();
++        }
++        return false;
++    }
++
++
+     /**
+      * @method setDefaultLauncher(String packageAndClassName)
+      * @description 设置系统默认Launcher
+diff --git a/rkapi/src/main/java/com/ys/rkapi/Utils/Utils.java b/rkapi/src/main/java/com/ys/rkapi/Utils/Utils.java
+index 0610c47..bce60f7 100644
+--- a/rkapi/src/main/java/com/ys/rkapi/Utils/Utils.java
++++ b/rkapi/src/main/java/com/ys/rkapi/Utils/Utils.java
+@@ -249,45 +249,6 @@ public class Utils {
+         //return bitmap;
+     }
+ 
+-
+-    public static void hideBar() {
+-        Class<?> classType;
+-        try {
+-            classType = Class.forName("com.android.internal.statusbar.IStatusBarService$Stub");
+-            Method asInterface = classType.getDeclaredMethod("asInterface", IBinder.class);
+-            Object IStatusBarService = asInterface.invoke(null,getService("statusbar"));
+-            Method hideNavigationBar = IStatusBarService.getClass().getDeclaredMethod("hideBar",null);
+-            hideNavigationBar.invoke(IStatusBarService,null);
+-        } catch (ClassNotFoundException e) {
+-            e.printStackTrace();
+-        } catch (NoSuchMethodException e) {
+-            e.printStackTrace();
+-        } catch (InvocationTargetException e) {
+-            e.printStackTrace();
+-        } catch (Exception e) {
+-            e.printStackTrace();
+-        }
+-    }
+-
+-    public static void hideNavigationBar() {
+-        Class<?> classType;
+-        try {
+-            classType = Class.forName("com.android.internal.statusbar.IStatusBarService$Stub");
+-            Method asInterface = classType.getDeclaredMethod("asInterface", IBinder.class);
+-            Object IStatusBarService = asInterface.invoke(null,getService("statusbar"));
+-            Method hideNavigationBar = IStatusBarService.getClass().getDeclaredMethod("hideNavigationBar",null);
+-            hideNavigationBar.invoke(IStatusBarService,null);
+-        } catch (ClassNotFoundException e) {
+-            e.printStackTrace();
+-        } catch (NoSuchMethodException e) {
+-            e.printStackTrace();
+-        } catch (InvocationTargetException e) {
+-            e.printStackTrace();
+-        } catch (Exception e) {
+-            e.printStackTrace();
+-        }
+-    }
+-
+     private static IBinder getService(String name){
+         IBinder iBinder = null;
+         try{

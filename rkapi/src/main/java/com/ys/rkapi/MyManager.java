@@ -754,6 +754,13 @@ public class MyManager {
         context.sendBroadcast(intent);
     }
 
+    public void setPppoeDial(Context context,String userName,String password) {
+        Intent intent = new Intent("com.ys.set_pppoe_dial");
+        intent.putExtra("userName",userName);
+        intent.putExtra("password",password);
+        context.sendBroadcast(intent);
+    }
+
     //获取以太网动态IP地址
     /**
      * @method getDhcpIpAddress()
@@ -1050,12 +1057,12 @@ public class MyManager {
      * @author sky
      * @return 设备连接几个屏就会返回几
     */
-    public int getScreenNumber() {
-        mDisplayManager = (DisplayManager) mContext.getSystemService(
-                Context.DISPLAY_SERVICE);
-        Display[] displays = mDisplayManager.getDisplays();
-        return displays.length;
-    }
+//    public int getScreenNumber() {
+//        mDisplayManager = (DisplayManager) mContext.getSystemService(
+//                Context.DISPLAY_SERVICE);
+//        Display[] displays = mDisplayManager.getDisplays();
+//        return displays.length;
+//    }
 
     // 获取HDMI IN 的状态
     // 返回0没有HDMI输入， 1有HDMI输入
@@ -1228,7 +1235,7 @@ public class MyManager {
      * @return 返回int值，单位是摄氏度
     */
     public int getCPUTemperature() {
-        if (Build.BRAND.contains("312x")||Build.VERSION.SDK_INT==22) {
+        if (Build.MODEL.contains("312")||Build.VERSION.SDK_INT==22) {
             Toast.makeText(mContext, "暂不支持该功能", Toast.LENGTH_SHORT).show();
         }
         return YsFactory.getRK().getCPUTemperature();

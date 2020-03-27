@@ -319,6 +319,11 @@
                     android:text="@string/get_dns2" />
 
                 <Button
+                    android:id="@+id/set_pppoe_dial"
+                    style="@style/TestButton"
+                    android:text="@string/set_pppoe_dial" />
+
+                <Button
                     android:id="@+id/set_eth_mac"
                     style="@style/TestButton"
                     android:text="@string/set_eth_mac"
@@ -435,11 +440,6 @@
                     android:text="@string/net_type" />
 
                 <Button
-                    android:id="@+id/screen_num"
-                    style="@style/TestButton"
-                    android:text="@string/screen_num" />
-
-                <Button
                     android:id="@+id/hdmi"
                     style="@style/TestButton"
                     android:text="@string/hdmi" />
@@ -541,6 +541,12 @@
                     style="@style/TestButton"
                     android:text="设置正常模式"
                     android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/screen_num"
+                    style="@style/TestButton"
+                    android:text="@string/screen_num"
+                    android:visibility="gone"/>
 
             </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
         </LinearLayout>

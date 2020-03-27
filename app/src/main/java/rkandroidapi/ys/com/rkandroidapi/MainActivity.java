@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.get_gateway).setOnClickListener(this);
         findViewById(R.id.get_dns1).setOnClickListener(this);
         findViewById(R.id.get_dns2).setOnClickListener(this);
+        findViewById(R.id.set_pppoe_dial).setOnClickListener(this);
         //-----------------------------------------------------------------
         findViewById(R.id.externel_sd_path).setOnClickListener(this);
         findViewById(R.id.externel_u_path).setOnClickListener(this);
@@ -263,7 +264,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.rotateScreen(this,"0");
                 break;
             case R.id.update_img:
-                manager.upgradeSystem(Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip"); ///mnt/media_rw/10C0-C930/update.zip  Environment.getExternalStorageDirectory().getPath() + "/Download/update.zip"
+                if (!"25".equals(Build.VERSION.SDK)) {
+                    if (new File(Environment.getExternalStorageDirectory().getPath() +"/Download/update.img").exists())
+                        manager.upgradeSystem(Environment.getExternalStorageDirectory().getPath() +"/Download/update.img");
+                    else
+                        ToastUtils.showToast(this,"请在内置存储Download下放置img升级包");
+                } else {
+                    if (new File(Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip").exists())
+                        manager.upgradeSystem(Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
+                    else
+                        ToastUtils.showToast(this,"请在内置存储Download下放置zip升级包");
+                }
                 Log.d("chenhuan","externalStoragePath = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
                 break;
             case R.id.recovery:
@@ -320,6 +331,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.get_dns2:
                 ToastUtils.showToast(this,"dns2 = " + manager.getEthDns2());
+                break;
+            case R.id.set_pppoe_dial:
+                manager.setPppoeDial(this,"ddddddg","1111222");
                 break;
             case R.id.externel_sd_path:
                 ToastUtils.showToast(this,"外置SD卡路径 = " + manager.getSDcardPath());
@@ -394,7 +408,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setDormantInterval(this,15000);//2147483647
                 break;
             case R.id.set_default_inputmethod:
-                //
                 ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
                         manager.isSetDefaultInputMethodSuccess("com.google.android.inputmethod.pinyin/.PinyinIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
                 break;

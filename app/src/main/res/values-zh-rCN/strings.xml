@@ -56,6 +56,7 @@
     <string name="get_mask">获取子网掩码</string>
     <string name="get_dns1">获取DNS1</string>
     <string name="get_dns2">获取DNS2</string>
+    <string name="set_pppoe_dial">PPPOE拨号上网</string>
 
     <string name="storage">存储</string>
     <string name="externel_sd_path">外置SD卡路径</string>

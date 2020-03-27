@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RKAndroidAPI.iml" filepath="$PROJECT_DIR$/RKAndroidAPI.iml" />
-      <module fileurl="file://$PROJECT_DIR$/api3399/api3399.iml" filepath="$PROJECT_DIR$/api3399/api3399.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RKAndroidAPI.iml" filepath="$PROJECT_DIR$/RKAndroidAPI.iml" group="RKAndroidAPI" />
+      <module fileurl="file://$PROJECT_DIR$/api3399/api3399.iml" filepath="$PROJECT_DIR$/api3399/api3399.iml" group="RKAndroidAPI/api3399" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="RKAndroidAPI/app" />
       <module fileurl="file://$PROJECT_DIR$/gtapi/gtapi.iml" filepath="$PROJECT_DIR$/gtapi/gtapi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/rkapi/rkapi.iml" filepath="$PROJECT_DIR$/rkapi/rkapi.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yface/yface.iml" filepath="$PROJECT_DIR$/yface/yface.iml" />
-      <module fileurl="file://$PROJECT_DIR$/yfaceapi/yfaceapi.iml" filepath="$PROJECT_DIR$/yfaceapi/yfaceapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rkapi/rkapi.iml" filepath="$PROJECT_DIR$/rkapi/rkapi.iml" group="RKAndroidAPI/rkapi" />
+      <module fileurl="file://$PROJECT_DIR$/yface/yface.iml" filepath="$PROJECT_DIR$/yface/yface.iml" group="RKAndroidAPI/yface" />
+      <module fileurl="file://$PROJECT_DIR$/yfaceapi/yfaceapi.iml" filepath="$PROJECT_DIR$/yfaceapi/yfaceapi.iml" group="RKAndroidAPI/yfaceapi" />
     </modules>
   </component>
 </project>

@@ -40,6 +40,10 @@
     <string name="update_img">update img(/Download/update.zip)</string>
     <string name="recovery">recovery</string>
     <string name="silent_install">silent install（root directory places KeyTest.apk）</string>
+    <string name="update_img_show_dialog">update firmware show dialog</string>
+    <string name="update_img_not_show_dialog">update firmware not show dialog</string>
+    <string name="update_img_delete_file">update firmware delete file</string>
+    <string name="update_img_not_delete_file">update firmware not delete file</string>
 
 
     <string name="net">network</string>

@@ -236,6 +236,16 @@
                     android:text="@string/update_img" />
 
                 <Button
+                    android:id="@+id/update_img_show_dialog"
+                    style="@style/TestButton"
+                    android:text="@string/update_img_show_dialog" />
+
+                <Button
+                    android:id="@+id/update_img_not_show_dialog"
+                    style="@style/TestButton"
+                    android:text="@string/update_img_not_show_dialog" />
+
+                <Button
                     android:id="@+id/recovery"
                     style="@style/TestButton"
                     android:text="@string/recovery" />
@@ -244,6 +254,18 @@
                     android:id="@+id/silent_install"
                     style="@style/TestButton"
                     android:text="@string/silent_install" />
+
+                <Button
+                    android:id="@+id/update_img_delete_file"
+                    style="@style/TestButton"
+                    android:text="@string/update_img_delete_file"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/update_img_not_delete_file"
+                    style="@style/TestButton"
+                    android:text="@string/update_img_not_delete_file"
+                    android:visibility="gone"/>
 
             </rkandroidapi.ys.com.rkandroidapi.FlexBoxLayout>
 
@@ -296,7 +318,6 @@
                     android:id="@+id/set_dhcp_eth"
                     style="@style/TestButton"
                     android:text="@string/set_dhcp_eth" />
-
 
                 <Button
                     android:id="@+id/get_gateway"

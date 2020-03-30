@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.update_img).setOnClickListener(this);
         findViewById(R.id.recovery).setOnClickListener(this);
         findViewById(R.id.silent_install).setOnClickListener(this);
+        findViewById(R.id.update_img_show_dialog).setOnClickListener(this);
+        findViewById(R.id.update_img_not_show_dialog).setOnClickListener(this);
+        findViewById(R.id.update_img_delete_file).setOnClickListener(this);
+        findViewById(R.id.update_img_not_delete_file).setOnClickListener(this);
         //-----------------------------------------------------------------
         findViewById(R.id.get_eth_status).setOnClickListener(this);
         findViewById(R.id.get_eth_mode).setOnClickListener(this);
@@ -276,6 +280,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         ToastUtils.showToast(this,"请在内置存储Download下放置zip升级包");
                 }
                 Log.d("chenhuan","externalStoragePath = " +Environment.getExternalStorageDirectory().getPath() +"/Download/update.zip");
+                break;
+            case R.id.update_img_show_dialog:
+                manager.setUpdateSystemWithDialog(true);
+                ToastUtils.showToast(this,"升级固件显示对话框");
+                break;
+            case R.id.update_img_not_show_dialog:
+                manager.setUpdateSystemWithDialog(false);
+                ToastUtils.showToast(this,"升级固件显示不对话框");
+                break;
+            case R.id.update_img_delete_file:
+//                manager.setUpdateSystemDelete(true);
+//                ToastUtils.showToast(this,"升级固件删除固件原文件");
+                break;
+            case R.id.update_img_not_delete_file:
+//                manager.setUpdateSystemDelete(false);
+//                ToastUtils.showToast(this,"升级固件不删除固件原文件");
                 break;
             case R.id.recovery:
                 manager.rebootRecovery();

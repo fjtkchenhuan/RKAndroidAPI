@@ -496,6 +496,36 @@ public class MyManager {
         }
     }
 
+    /**
+     * @method setUpdateSystemWithDialog(boolean flag)
+     * @description 设置升级固件时是否弹窗提示
+     * @date  20200327
+     * @author sky
+     * @param flag，true，弹窗提示，false，不弹窗直接升级
+    */
+    public void setUpdateSystemWithDialog(boolean flag) {
+        Utils.setValueToProp("persist.sys.ota.customdefine","true");
+        if (flag)
+            Utils.setValueToProp("persist.sys.ota.noclick","0");
+        else
+            Utils.setValueToProp("persist.sys.ota.noclick","1");
+    }
+
+    /**
+     * @method setUpdateSystemDelete(boolean flag)
+     * @description 设置升级固件时后，固件包是否从文件中删除
+     * @date  20200327
+     * @author sky
+     * @param flag，true，删除，false，不删除
+     */
+    private void setUpdateSystemDelete(boolean flag) {
+        Utils.setValueToProp("persist.sys.ota.customdefine","true");
+        if (flag)
+            Utils.setValueToProp("persist.sys.ota.delete","1");
+        else
+            Utils.setValueToProp("persist.sys.ota.delete","0");
+    }
+
     //重启进入Recovery模式
     /**
      * @method rebootRecovery()

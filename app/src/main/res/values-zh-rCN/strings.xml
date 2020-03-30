@@ -40,7 +40,10 @@
     <string name="update_img">升级固件(/Download/update.zip)</string>
     <string name="recovery">进入recovery模式</string>
     <string name="silent_install">静默安装（根目录放置KeyTest.apk）</string>
-
+    <string name="update_img_show_dialog">升级固件弹窗</string>
+    <string name="update_img_not_show_dialog">升级固件不弹窗</string>
+    <string name="update_img_delete_file">升级固件删除固件文件</string>
+    <string name="update_img_not_delete_file">升级固件不删除原固件文件</string>
 
     <string name="net">网络</string>
     <string name="get_eth_statuse">获取以太网是否打开</string>

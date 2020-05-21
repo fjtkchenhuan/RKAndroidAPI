@@ -89,6 +89,7 @@
     <string name="open_soft_keyboard">Open soft keyboard</string>
     <string name="hide_soft_keyboard">Hide soft keyboard</string>
     <string name="set_dormant_interval">set dormant interval 15s</string>
+    <string name="awaken">awaken</string>
     <string name="set_default_inputmethod">set default inputmethod(Google pinyin)</string>
     <string name="get_default_inputmethod">get default inputmethod</string>
     <string name="set_language">set language english</string>

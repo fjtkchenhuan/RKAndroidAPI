@@ -56,6 +56,8 @@ public abstract class YS {
 
     public abstract void setADBOpen(boolean open);
 
+    public abstract void awaken();
+
     /**
      * 过滤文件路径
      *

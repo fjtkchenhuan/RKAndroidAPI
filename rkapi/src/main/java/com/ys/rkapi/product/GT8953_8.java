@@ -192,4 +192,19 @@ public class GT8953_8 extends YS {
             Utils.setValueToProp("persist.sys.usb.otg.mode","0");
         }
     }
+
+    @Override
+    public void awaken() {
+        if ("0".equals(GPIOUtils.readGpioPG("/sys/class/backlight/backlight/bl_power"))) {
+            try {
+                GPIOUtils.writeIntFileFor7("1", "/sys/class/hdmi/hdmi/status");
+                GPIOUtils.writeIntFileFor7("1", "/sys/class/backlight/backlight/bl_power");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }

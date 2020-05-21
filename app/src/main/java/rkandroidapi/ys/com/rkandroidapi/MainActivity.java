@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.get_default_inputmethod).setOnClickListener(this);
         findViewById(R.id.close_softkeyboard).setOnClickListener(this);
         findViewById(R.id.set_dormant_interval).setOnClickListener(this);
+        findViewById(R.id.awaken).setOnClickListener(this);
         findViewById(R.id.set_language).setOnClickListener(this);
         findViewById(R.id.get_cpu_temp).setOnClickListener(this);
         findViewById(R.id.set_adb_open).setOnClickListener(this);
@@ -322,7 +324,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ToastUtils.showToast(this,"设置以太网mac地址为ee4e592090cf");
                 break;
             case R.id.get_eth_ip:
-//                ToastUtils.showToast(this,"动态IP地址：" + manager.getDhcpIpAddress());
                 if (DHCP.equals(manager.getEthMode()))
                     ToastUtils.showToast(this,"动态IP地址：" + manager.getDhcpIpAddress());
                 else if (STATICIP.equals(manager.getEthMode()))
@@ -427,6 +428,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.set_dormant_interval:
                 manager.setDormantInterval(this,15000);//2147483647
                 break;
+            case R.id.awaken:
+                Handler handler = new Handler();
+                handler.postDelayed(awakeRunnable,20000);
+                Toast.makeText(this,"20s后唤醒屏幕",Toast.LENGTH_LONG).show();
+                break;
             case R.id.set_default_inputmethod:
                 ToastUtils.showToast(this,"是否成功设置默认输入法为谷歌拼音输入法:" +
                         manager.isSetDefaultInputMethodSuccess("com.google.android.inputmethod.pinyin/.PinyinIME"));//  com.xinshuru.inputmethod/.FTInputService com.sohu.inputmethod.sogou  com.google.android.inputmethod.pinyin
@@ -487,6 +493,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    private Runnable awakeRunnable = new Runnable() {
+        @Override
+        public void run() {
+            manager.awaken();
+            Log.d("sky","awaken");
+        }
+    };
+
     @Override
     protected void onDestroy() {
         manager.unBindAIDLService(this);

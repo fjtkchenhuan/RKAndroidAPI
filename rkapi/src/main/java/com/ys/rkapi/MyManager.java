@@ -115,7 +115,7 @@ public class MyManager {
      * @return 当前API的版本信息
     */
     public String getApiVersion() {
-        return "V1.0_20180602";
+        return "V4.3-20200521";
     }
 
     /**
@@ -552,7 +552,15 @@ public class MyManager {
      * @return 静默安装成功返回true，否则返回false
     */
     public boolean silentInstallApk(String apkPath) {//////  ok
-        return YsFactory.getRK().silentInstallApk(apkPath);
+        if (Utils.isRoot())
+            return YsFactory.getRK().silentInstallApk(apkPath);
+        else {
+            Intent intent = new Intent("com.ys.silent_install");
+            intent.putExtra("isStartApk", false);
+            intent.putExtra("path", apkPath);
+            mContext.sendBroadcast(intent);
+            return true;
+        }
     }
 
     //设置以太网Mac地址
@@ -1002,6 +1010,7 @@ public class MyManager {
         sendMyBroadcastWithExtra(Constant.UPDATE_TIME_ACTION, Constant.UPDATE_TIME_KEY, currentTimeMillis + "");
     }
 
+
     // 执行su 命令
     /**
      * @method execSuCmd(String command)
@@ -1212,6 +1221,10 @@ public class MyManager {
     */
     public void setDormantInterval(Context context, long time) {
         YsFactory.getRK().setDormantInterval(context, time);
+    }
+
+    public void awaken() {
+        YsFactory.getRK().awaken();
     }
 
     //获取设置默认输入法是否成功
@@ -1607,6 +1620,28 @@ public class MyManager {
         return GPIOUtils.getGpioValue(gpio);
     }
 
+//    private void controlMainScreenBright(boolean isOpen) {
+////        upgradeRootPermission("/sys/class/gpio/gpio13/value");
+//        if (isOpen)
+//            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio13/value"),"1");
+//        else
+//            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio13/value"),"0");
+//    }
+//
+//    private void controlSecondScreenBright(boolean isOpen) {
+////        upgradeRootPermission("/sys/class/gpio/gpio230/value");
+//        if (isOpen)
+//            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio230/value"),"1");
+//        else
+//            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio230/value"),"0");
+//    }
+//
+//    private void controlVoice(boolean isOpen) {
+//        if (isOpen)
+//            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio226/value"),"0");
+//        else
+//            GPIOUtils.writeStringFileFor7(new File("/sys/class/gpio/gpio226/value"),"1");
+//    }
 
 //获取以太网的IP地址
 //    public String getEthIPAddress() {//ok

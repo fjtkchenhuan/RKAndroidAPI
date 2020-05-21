@@ -196,4 +196,19 @@ public class YS3288_5 extends YS {
         }
     }
 
+    @Override
+    public void awaken() {
+        if ("0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
+            try {
+                GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3288);
+                GPIOUtils.writeIntFileUnder7("1",BACKLIGHT_IO_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }

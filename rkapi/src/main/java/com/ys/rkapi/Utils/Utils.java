@@ -250,44 +250,6 @@ public class Utils {
     }
 
 
-    public static void hideBar() {
-        Class<?> classType;
-        try {
-            classType = Class.forName("com.android.internal.statusbar.IStatusBarService$Stub");
-            Method asInterface = classType.getDeclaredMethod("asInterface", IBinder.class);
-            Object IStatusBarService = asInterface.invoke(null,getService("statusbar"));
-            Method hideNavigationBar = IStatusBarService.getClass().getDeclaredMethod("hideBar",null);
-            hideNavigationBar.invoke(IStatusBarService,null);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void hideNavigationBar() {
-        Class<?> classType;
-        try {
-            classType = Class.forName("com.android.internal.statusbar.IStatusBarService$Stub");
-            Method asInterface = classType.getDeclaredMethod("asInterface", IBinder.class);
-            Object IStatusBarService = asInterface.invoke(null,getService("statusbar"));
-            Method hideNavigationBar = IStatusBarService.getClass().getDeclaredMethod("hideNavigationBar",null);
-            hideNavigationBar.invoke(IStatusBarService,null);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     private static IBinder getService(String name){
         IBinder iBinder = null;
         try{
@@ -297,5 +259,24 @@ public class Utils {
         }
         catch(Exception e) {}
         return iBinder;
+    }
+
+   public static boolean isRoot() {
+        Process process = null;
+        DataOutputStream os = null;
+        try {
+            process = Runtime.getRuntime().exec("su");
+            os = new DataOutputStream(process.getOutputStream());
+            os.writeBytes("exit\n");
+            os.flush();
+            int exitValue = process.waitFor();
+            return exitValue == 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

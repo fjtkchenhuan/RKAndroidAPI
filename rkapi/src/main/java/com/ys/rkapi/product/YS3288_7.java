@@ -171,4 +171,14 @@ public class YS3288_7 extends YS {
         }
 
     }
+
+    @Override
+    public void awaken() {
+        if ("1".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
+            Utils.setValueToProp("persist.sys.sleep_mode","false");
+            GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"0");
+            Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
+        }
+    }
 }

@@ -172,4 +172,19 @@ public class YS3128_7 extends YS {
         }
     }
 
+    @Override
+    public void awaken() {
+        if ("1".equals(GPIOUtils.readGpioPG("/sys/class/graphics/fb0/pwr_bl"))) {
+            try {
+                GPIOUtils.writeIntFileFor7("1","sys/class/display/HDMI/enable");
+                GPIOUtils.writeIntFileFor7("0","/sys/class/graphics/fb0/pwr_bl");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 }

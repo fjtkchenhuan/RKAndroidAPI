@@ -207,6 +207,20 @@ public class YS3128 extends YS {
         }
     }
 
+    @Override
+    public void awaken() {
+        if ("0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
+            try {
+                GPIOUtils.writeIntFileUnder7("1",Constant.HDMI_STATUS_3128);
+                GPIOUtils.writeIntFileUnder7("1",BACKLIGHT_IO_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private int getDisplayRot(String value) {
         int index = 0;
         switch (value) {

@@ -159,4 +159,18 @@ public class YS3328 extends YS {
             Utils.execFor7("busybox echo 1 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
         }
     }
+
+    @Override
+    public void awaken() {
+        if ("0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
+            try {
+                GPIOUtils.writeIntFileFor7("1",BACKLIGHT_IO_PATH);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 }

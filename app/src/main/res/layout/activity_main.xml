@@ -481,6 +481,11 @@
                     android:text="@string/set_dormant_interval" />
 
                 <Button
+                    android:id="@+id/awaken"
+                    style="@style/TestButton"
+                    android:text="@string/awaken" />
+
+                <Button
                     android:id="@+id/set_default_inputmethod"
                     style="@style/TestButton"
                     android:text="@string/set_default_inputmethod" />

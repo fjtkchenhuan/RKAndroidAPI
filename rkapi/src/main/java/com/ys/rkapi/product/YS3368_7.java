@@ -153,4 +153,14 @@ public class YS3368_7 extends YS {
             Utils.execFor7("busybox echo 1 > " + "/sys/bus/platform/drivers/usb20_otg/force_usb_mode");
         }
     }
+
+    @Override
+    public void awaken() {
+        if ("1".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
+            Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
+            GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"0");
+        }
+
+    }
 }

@@ -41,7 +41,7 @@
     <string name="recovery">进入recovery模式</string>
     <string name="silent_install">静默安装（根目录放置KeyTest.apk）</string>
     <string name="update_img_show_dialog">升级固件弹窗</string>
-    <string name="update_img_not_show_dialog">升级固件不弹窗</string>
+    <string name="update_img_not_show_dialog">取消升级确认弹窗</string>
     <string name="update_img_delete_file">升级固件删除固件文件</string>
     <string name="update_img_not_delete_file">升级固件不删除原固件文件</string>
 
@@ -88,6 +88,7 @@
     <string name="open_soft_keyboard">打开软键盘</string>
     <string name="hide_soft_keyboard">隐藏软键盘</string>
     <string name="set_dormant_interval">设置休眠时间15s</string>
+    <string name="awaken">休眠后唤醒</string>
     <string name="set_default_inputmethod">设置默认输入法(谷歌拼音)</string>
     <string name="get_default_inputmethod">获取当前输入法</string>
     <string name="set_language">设置语言为英文</string>

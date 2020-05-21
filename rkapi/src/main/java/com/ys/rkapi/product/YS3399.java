@@ -172,4 +172,14 @@ public class YS3399 extends YS {
                 GPIOUtils.writeStringFileFor7(new File("/sys/kernel/debug/usb@fe800000/rk_usb_force_mode"),"host");
         }
     }
+
+    @Override
+    public void awaken() {
+        if ("1".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
+            Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"off");
+            GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"0");
+        }
+
+    }
 }

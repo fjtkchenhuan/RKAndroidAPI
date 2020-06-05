@@ -54,15 +54,10 @@ public class Utils {
 
     public static void do_exec(String cmd) {
         try {
-            /* Missing read/write permission, trying to chmod the file */
             Process su;
             su = Runtime.getRuntime().exec("su");
             String str = cmd + "\n" + "exit\n";
             su.getOutputStream().write(str.getBytes());
-
-            Log.d("chenhuan","cmd=" + cmd);
-
-            Log.d("zhang chenhuan","su.waitFor() = " + su.waitFor());
 
             if ((su.waitFor() != 0)) {
                 System.out.println("cmd=" + cmd + " error!");

@@ -16,20 +16,12 @@ import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
 
 
 import com.ys.rkapi.MyManager;
-import com.ys.rkapi.Utils.Utils;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -230,8 +222,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 manager.setSlideShowNotificationBar(!manager.isSlideShowNotificationBarOpen());
                 break;
             case R.id.screen_shot:
-                if (manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg"));
-                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
+                if (manager.takeScreenshot(Environment.getExternalStorageDirectory().getPath() +"/001.jpg"))
+                      ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
 //                ToastUtils.showToast(this,"截图存储在 /mnt/sdcard/001.jpg");
                 break;
             case R.id.get_width_height:

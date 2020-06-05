@@ -3,8 +3,6 @@ package com.ys.rkapi.product;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.provider.Settings;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
@@ -17,12 +15,12 @@ import java.io.File;
  * Created by Administrator on 2018/4/13.
  */
 
-public class YS3399 extends YS {
+public class YS3399_7 extends YS {
     static final String RTC_PATH = "/sys/devices/platform/ff120000.i2c/i2c-2/2-0051/rtc/rtc0/time";
     static final String[] LED_PATH = new String[]{"/sys/devices/platform/misc_power_en/red_led"};
     private static final String BACKLIGHT_IO_PATH = "/sys/devices/platform/backlight/backlight/backlight/bl_power";
-    public static final YS3399 INSTANCE = new YS3399();
-    private YS3399(){}
+    public static final YS3399_7 INSTANCE = new YS3399_7();
+    private YS3399_7(){}
     @Override
     public String getRtcPath() {
         return RTC_PATH;

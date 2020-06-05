@@ -14,8 +14,8 @@ public class YsFactory {
         String product = VersionUtils.getAndroidModle();
         if (product.contains("rk3328")) {
             return YS3328.INSTANCE;
-        }else if (product.contains("rk3399")) {
-            return YS3399.INSTANCE;
+        }else if (product.contains("rk3399") && "25".equals(Build.VERSION.SDK)) {
+            return YS3399_7.INSTANCE;
         }else if (product.contains("rk3368") && ("22".equals(Build.VERSION.SDK))) {
             return YS3368_5.INSTANCE;
         } else if (product.contains("rk3288") && "22".equals(Build.VERSION.SDK)) {
@@ -30,6 +30,8 @@ public class YsFactory {
             return YS3128_7.INSTANCE;
         else if (product.contains("msm895") && "27".equals(Build.VERSION.SDK))
             return GT8953_8.INSTANCE;
+        else if (product.contains("rk3399") && "28".equals(Build.VERSION.SDK))
+            return YS3399_9.INSTANCE;
         return YS3368_5.INSTANCE;
     }
 }

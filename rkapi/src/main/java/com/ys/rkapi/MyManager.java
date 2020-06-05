@@ -67,7 +67,7 @@ public class MyManager {
         if (mContext != null) {
             Intent intent = new Intent();
             intent.setAction(action);
-            if (!getAndroidModle().contains("rk"))
+            if (Integer.parseInt(Build.VERSION.SDK) > 25)
                  intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
@@ -78,7 +78,7 @@ public class MyManager {
             Intent intent = new Intent();
             intent.setAction(action);
             intent.putExtra(key, value);
-            if (!getAndroidModle().contains("rk"))
+            if (Integer.parseInt(Build.VERSION.SDK) > 25)
                 intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
@@ -90,7 +90,7 @@ public class MyManager {
             intent.setAction(action);
             intent.putExtra(key1, value1);
             intent.putExtra(key2, value2);
-            if (!getAndroidModle().contains("rk"))
+            if (Integer.parseInt(Build.VERSION.SDK) > 25)
                 intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
@@ -101,7 +101,7 @@ public class MyManager {
             Intent intent = new Intent();
             intent.setAction(action);
             intent.putExtra(key, value);
-            if (!getAndroidModle().contains("rk"))
+            if (Integer.parseInt(Build.VERSION.SDK) > 25)
                 intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         }
@@ -115,7 +115,7 @@ public class MyManager {
      * @return 当前API的版本信息
     */
     public String getApiVersion() {
-        return "V4.3-20200521";
+        return "V5.0-20200529";
     }
 
     /**
@@ -534,8 +534,9 @@ public class MyManager {
      * @author sky
     */
     public void rebootRecovery() { // ok
-        if ("25".equals(Build.VERSION.SDK)) {
+        if (Build.VERSION.SDK_INT >= 25) {
             Intent intent = new Intent("com.ys.recovery_system");
+            intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             mContext.sendBroadcast(intent);
         } else
             YsFactory.getRK().rebootRecovery(mContext);
@@ -751,7 +752,6 @@ public class MyManager {
      * @param  IPaddr，设置的IP地址。gateWay，设置的网关。mask，设置的子网掩码。dns1和dns2是设置的dns值
     */
     public void setStaticEthIPAddress(String IPaddr, String gateWay, String mask, String dns1, String dns2) {//ok
-        Log.d(TAG, "setEthIPAddress 修改以太网IP");
         NetUtils.setStaticIP(mContext, IPaddr, gateWay, mask, dns1, dns2);
     }
 
@@ -809,7 +809,7 @@ public class MyManager {
     */
     public String getDhcpIpAddress() {
         String address = "";
-        if ("27".equals(Build.VERSION.SDK)) {
+        if (Build.VERSION.SDK_INT >= 27) {
             if (igetMessage != null) {
                 try {
                     address = igetMessage.getDhcpIpAddress();
@@ -831,7 +831,7 @@ public class MyManager {
      * @param enable，打开以太网开关传入true，关闭以太网开关传入false
     */
     public void ethEnabled(boolean enable) {
-        if ("27".equals(Build.VERSION.SDK)) {
+        if (Build.VERSION.SDK_INT >= 27) {
             Intent intent = new Intent(Constant.SET_ETH_ENABLE_ACTION);
             intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
             intent.putExtra(Constant.ETH_MODE, enable);
@@ -1303,16 +1303,16 @@ public class MyManager {
      * @param path，开机动画bootanimation.zip所在的绝对路径
     */
     public void replaceBootanimation(String path) {
-        String[] commands = new String[6];
+        String[] commands = new String[7];
         commands[0] = "mount -o rw,remount -t ext4 /system";
         commands[1] = "rm -rf system/media/bootanimation.zip";
         commands[2] = "cp  " + path + " system/media/bootanimation.zip";
         commands[3] = "chmod 644 system/media/bootanimation.zip";
         commands[4] = "sync";
         commands[5] = "mount -o ro,remount -t ext4 /system";
+        commands[6] = "reboot";
         for (int i = 0; i < commands.length; i++)
             Utils.execFor7(commands[i]);
-        reboot();
     }
 
     private void setScreenAndVoiceOpen(boolean open) {

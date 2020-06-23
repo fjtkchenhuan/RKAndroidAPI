@@ -2,7 +2,6 @@ package com.ys.rkapi.product;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.widget.Toast;
 
 import com.ys.rkapi.Constant;
@@ -10,30 +9,29 @@ import com.ys.rkapi.Utils.GPIOUtils;
 import com.ys.rkapi.Utils.Utils;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
- * Created by Administrator on 2018/4/13.
+ * Created by Administrator on 2018/11/6.
  */
 
-public class YS3399_9 extends YS {
-    static final String RTC_PATH = "/sys/devices/platform/ff120000.i2c/i2c-2/2-0051/rtc/rtc0/time";
-    static final String[] LED_PATH = new String[]{"/sys/devices/platform/misc_power_en/red_led"};
+public class YS3288_9 extends YS {
+    public final static YS3288_9 INSTANCE = new YS3288_9();
     private static final String BACKLIGHT_IO_PATH = "/sys/devices/platform/backlight/backlight/backlight/bl_power";
-    public static final YS3399_9 INSTANCE = new YS3399_9();
-    private YS3399_9(){}
+
     @Override
     public String getRtcPath() {
-        return RTC_PATH;
+        return null;
     }
 
     @Override
     public String getLedPath() {
-        return filterPath(LED_PATH);
+        return null;
     }
 
     @Override
     public void takeBrightness(Context context) {
-        context.startActivity(new Intent("android.intent.action.SHOW_BRIGHTNESS_DIALOG"));
+
     }
 
     @Override
@@ -44,11 +42,6 @@ public class YS3399_9 extends YS {
     @Override
     public void rotateScreen(Context context, String degree) {
         Utils.setValueToProp("persist.sys.displayrot",degree);
-        String sameOrientation = Utils.getValueFromProp("persist.same.orientation");
-        if(sameOrientation.equals("true")){
-            int value = Integer.parseInt(degree)/90;
-            Utils.setValueToProp("persist.sys.rotation.einit",value+"");
-        }
         File file = new File("/sys/devices/platform/ff150000.i2c/i2c-6/6-0050/rotate");
         if(file.exists()){
             GPIOUtils.writeStringFileFor7(file, degree);
@@ -68,10 +61,10 @@ public class YS3399_9 extends YS {
 
     @Override
     public void setSlideShowNavBar(Context context, boolean flag) {
-        if (!flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
-        else
+        if (flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "1");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_STATUSBAR_LU, "0");
     }
 
     @Override
@@ -81,29 +74,42 @@ public class YS3399_9 extends YS {
 
     @Override
     public void setSlideShowNotificationBar(Context context, boolean flag) {
-        if (!flag)
-            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
-        else
+        if (flag)
             Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "0");
+        else
+            Utils.setValueToProp(Constant.PROP_SWIPE_NOTIFIBAR_LU, "1");
     }
 
     @Override
     public void turnOffBackLight() {
-        GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"1");
+        try {
+            GPIOUtils.writeIntFileFor7("1",BACKLIGHT_IO_PATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void turnOnBackLight() {
-        GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"0");
+        try {
+            GPIOUtils.writeIntFileFor7("0",BACKLIGHT_IO_PATH);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public boolean isBackLightOn() {
-        return "0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH));
+         return "0".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH));
     }
 
     @Override
     public void rebootRecovery(Context context) {
+        Utils.execFor7("reboot recovery");
     }
 
     @Override
@@ -121,6 +127,7 @@ public class YS3399_9 extends YS {
 
     @Override
     public void turnOnHDMI() {
+       // Utils.execFor7("busybox echo 0 > " + path);
         Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
         GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
     }
@@ -148,6 +155,7 @@ public class YS3399_9 extends YS {
 
     @Override
     public int getCPUTemperature() {
+        ///sys/class/thermal/thermal_zone0/temp
         String s = GPIOUtils.readGpioPGForLong("/sys/class/thermal/thermal_zone0/temp");
         int temp = Integer.parseInt(s.substring(0,5));
         return (int) (temp/1000);
@@ -157,20 +165,21 @@ public class YS3399_9 extends YS {
     public void setADBOpen(boolean open) {
         if (open) {
             Utils.setValueToProp("persist.sys.usb.otg.mode","2");
-            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/usb0/dwc3_mode"),"peripheral");
+            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"2");
         } else {
             Utils.setValueToProp("persist.sys.usb.otg.mode","1");
-            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/usb0/dwc3_mode"),"host");
+            GPIOUtils.writeStringFileFor7(new File("/sys/bus/platform/drivers/usb20_otg/force_usb_mode"),"1");
         }
+
     }
 
     @Override
     public void awaken() {
         if ("1".equals(GPIOUtils.readGpioPG(BACKLIGHT_IO_PATH))) {
-            Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
-            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"off");
+            Utils.setValueToProp("persist.sys.sleep_mode","false");
             GPIOUtils.writeStringFileFor7(new File(BACKLIGHT_IO_PATH),"0");
+            Utils.execFor7("chmod 777 /sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status");
+            GPIOUtils.writeStringFileFor7(new File("/sys/devices/platform/display-subsystem/drm/card0/card0-HDMI-A-1/status"),"on");
         }
-
     }
 }

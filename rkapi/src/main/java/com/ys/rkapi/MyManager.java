@@ -1303,16 +1303,29 @@ public class MyManager {
      * @param path，开机动画bootanimation.zip所在的绝对路径
     */
     public void replaceBootanimation(String path) {
-        String[] commands = new String[7];
-        commands[0] = "mount -o rw,remount -t ext4 /system";
-        commands[1] = "rm -rf system/media/bootanimation.zip";
-        commands[2] = "cp  " + path + " system/media/bootanimation.zip";
-        commands[3] = "chmod 644 system/media/bootanimation.zip";
-        commands[4] = "sync";
-        commands[5] = "mount -o ro,remount -t ext4 /system";
-        commands[6] = "reboot";
-        for (int i = 0; i < commands.length; i++)
-            Utils.execFor7(commands[i]);
+        if (Build.VERSION.SDK_INT <= 27) {
+            String[] commands = new String[7];
+            commands[0] = "mount -o rw,remount -t ext4 /system";
+            commands[1] = "rm -rf system/media/bootanimation.zip";
+            commands[2] = "cp  " + path + " system/media/bootanimation.zip";
+            commands[3] = "chmod 644 system/media/bootanimation.zip";
+            commands[4] = "sync";
+            commands[5] = "mount -o ro,remount -t ext4 /system";
+            commands[6] = "reboot";
+            for (int i = 0; i < commands.length; i++)
+                Utils.execFor7(commands[i]);
+        } else {
+            String[] commands = new String[7];
+            commands[0] = "mount -o rw,remount -t ext4 /oem";
+            commands[1] = "rm -rf oem/media/bootanimation.zip";
+            commands[2] = "cp  " + path + " oem/media/bootanimation.zip";
+            commands[3] = "chmod 644 oem/media/bootanimation.zip";
+            commands[4] = "sync";
+            commands[5] = "mount -o ro,remount -t ext4 /oem";
+            commands[6] = "reboot";
+            for (int i = 0; i < commands.length; i++)
+                Utils.execFor7(commands[i]);
+        }
     }
 
     private void setScreenAndVoiceOpen(boolean open) {

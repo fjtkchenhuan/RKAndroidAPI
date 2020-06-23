@@ -67,7 +67,7 @@ public class GPIOUtils {
         String product = VersionUtils.getAndroidModle();
         if ("22".equals(Build.VERSION.SDK)||product.contains("rk3328")||product.contains("rk3128"))
             file = new File(Constant.HDMI_STATUS_3288);
-        else if ("25".equals(Build.VERSION.SDK) || product.contains("rk3399"))//product.contains("rk3399")||product.contains("rk3368")&&
+        else if ("25".equals(Build.VERSION.SDK) || product.contains("rk3399") || product.contains("rk3288"))//product.contains("rk3399")||product.contains("rk3368")&&
             file = new File(Constant.HDMI_STATUS_3399);
         else if (product.contains("rk3128")&&"25".equals(Build.VERSION.SDK))
             file = new File(Constant.HDMI_STATUS_3128);

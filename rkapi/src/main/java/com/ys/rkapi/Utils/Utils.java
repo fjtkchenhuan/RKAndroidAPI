@@ -47,7 +47,6 @@ public class Utils {
             value = (String) getMethod.invoke(classType, new Object[]{key});
         } catch (Exception e) {
         }
-//        Log.i("yuanhang",value);
         return value;
     }
 

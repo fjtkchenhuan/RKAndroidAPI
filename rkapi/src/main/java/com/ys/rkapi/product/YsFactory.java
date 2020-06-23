@@ -32,6 +32,8 @@ public class YsFactory {
             return GT8953_8.INSTANCE;
         else if (product.contains("rk3399") && "28".equals(Build.VERSION.SDK))
             return YS3399_9.INSTANCE;
+        else if (product.contains("rk3288") && "28".equals(Build.VERSION.SDK))
+            return YS3288_9.INSTANCE;
         return YS3368_5.INSTANCE;
     }
 }

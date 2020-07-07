@@ -11,6 +11,8 @@ import android.util.Log;
 
 import com.ys.rkapi.Constant;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;
@@ -23,6 +25,7 @@ import java.lang.reflect.Method;
 
 public class NetUtils {
     public static String staticIP;
+
     public static void setEthMAC(String val) {
         Class<?> classType;
         try {
@@ -41,47 +44,51 @@ public class NetUtils {
     }
 
     public static String getEthMAC() {
-        String macSerial = null;
-        String str = "";
-        try {
-            Process pp = Runtime.getRuntime().exec("cat /sys/class/net/eth0/address ");
-            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
-            LineNumberReader input = new LineNumberReader(ir);
-            for (; null != str;) {
-                str = input.readLine();
-                if (str != null) {
-                    macSerial = str.trim();
-                    break;
+        if ("msm895".equals(VersionUtils.getAndroidModle())) {
+            return getMac();
+        } else {
+            String macSerial = null;
+            String str = "";
+            try {
+                Process pp = Runtime.getRuntime().exec("cat /sys/class/net/eth0/address ");
+                InputStreamReader ir = new InputStreamReader(pp.getInputStream());
+                LineNumberReader input = new LineNumberReader(ir);
+                for (; null != str; ) {
+                    str = input.readLine();
+                    if (str != null) {
+                        macSerial = str.trim();
+                        break;
+                    }
                 }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            if (macSerial != null && !macSerial.equals("") && macSerial.length() == 17) {
+                return macSerial.toUpperCase();
+            }
         }
-        if (macSerial != null && !macSerial.equals("") && macSerial.length() == 17) {
-            return macSerial.toUpperCase();
-        }
-            return "";
+        return "";
     }
 
-//    public static String getEthIPAddress(){
+    //    public static String getEthIPAddress(){
 //        return ScreenUtils.getValueFromProp(Constant.ETH_IP_ADDRESS_PROP);
 //    }
-    public static String getDynamicEthIPAddress(Context context){
+    public static String getDynamicEthIPAddress(Context context) {
         if (VersionUtils.getAndroidModle().equals("rk3288") && Build.VERSION.SDK.equals("25")
                 || VersionUtils.getAndroidModle().equals("rk3368") && Build.VERSION.SDK.equals("25")
-                || VersionUtils.getAndroidModle().equals("rk3128")&& Build.VERSION.SDK.equals("25")
-                ||VersionUtils.getAndroidModle().equals("rk3399"))
+                || VersionUtils.getAndroidModle().equals("rk3128") && Build.VERSION.SDK.equals("25")
+                || VersionUtils.getAndroidModle().equals("rk3399"))
 //            return Utils.getValueFromProp("net.ppp0.local-ip");
             return Utils.getEthernet(context);
         else
             return Utils.getValueFromProp(Constant.ETH_IP_ADDRESS_PROP);
     }
 
-    public static void setStaticIP(Context context, String ip, String gateWay, String mask, String dns1, String dns2){
+    public static void setStaticIP(Context context, String ip, String gateWay, String mask, String dns1, String dns2) {
         Log.d("MyManager", "setStaticIP 发送修改IP广播");
         Intent intent = new Intent(Constant.ETH_STATIC_IP_ACTION);
         intent.setPackage(Constant.YSRECEIVER_PACKAGE_NAME);
-        intent.putExtra("useStaticIP",1);
+        intent.putExtra("useStaticIP", 1);
         intent.putExtra(Constant.ETH_SET_IP, ip);//IP地址
         intent.putExtra(Constant.ETH_SET_GATEWAY, gateWay);//网关
         intent.putExtra(Constant.ETH_SET_MASK, mask);//子网掩码
@@ -104,9 +111,9 @@ public class NetUtils {
         return netWorkType;
     }
 
-    public static void setEthernetEnabled(Context context,boolean enable){
+    public static void setEthernetEnabled(Context context, boolean enable) {
 //        EthernetManager mEthManager;
-        Log.d("Ethernet","发送Ethernet开关广播");
+        Log.d("Ethernet", "发送Ethernet开关广播");
         Intent intent = new Intent(Constant.SET_ETH_ENABLE_ACTION);
         intent.putExtra(Constant.ETH_MODE, enable);
         context.sendBroadcast(intent);
@@ -121,6 +128,50 @@ public class NetUtils {
         } catch (Exception e) {
         }
         return value;
+    }
+
+    private static String execCmd(String command) {
+        Process process = null;
+        DataOutputStream os = null;
+        StringBuffer stringBuffer = new StringBuffer();
+        try {
+            process = Runtime.getRuntime().exec("su");
+            os = new DataOutputStream(process.getOutputStream());
+            os.writeBytes(command + "\n");
+            os.writeBytes("exit\n");
+            os.flush();
+            process.waitFor();
+            if (process.waitFor() != 0) {
+                System.err.println("exit value = " + process.exitValue());
+            }
+            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                stringBuffer.append(line + " ");
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            try {
+                if (os != null) {
+                    os.close();
+                }
+                if (process != null) {
+                    process.destroy();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return stringBuffer.toString();
+    }
+
+
+    private static String getMac() {
+        String mac = execCmd("busybox hexdump -e '16/1 \"%02x:\"' /sys/bus/i2c/devices/i2c-3/3-0054/mac");
+        if (mac == null) return null;
+        if (mac.length() < 17) return null;
+        return mac.substring(0, 17);
     }
 
 }
